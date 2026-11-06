@@ -61,7 +61,7 @@
     if (!email.value.trim() || !email.checkValidity()) { email.reportValidity(); return; }
     window.akhTrack('checklist_request');
     document.dispatchEvent(new CustomEvent('akh:lead', { detail: { type: 'checklist', email: email.value.trim() } }));
-    out.innerHTML = `Thanks — it’s yours. <a href="${ROOT}website/downloads/digital-project-scoping-checklist.pdf" download>Download the checklist (PDF) ↓</a>`;
+    out.innerHTML = `Thanks, it’s yours. <a href="${ROOT}website/downloads/digital-project-scoping-checklist.pdf" download>Download the checklist (PDF) ↓</a>`;
     out.querySelector('a')?.focus();
   });
 

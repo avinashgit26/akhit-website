@@ -175,3 +175,8 @@ Title "Find out what we could save you" · subtitle "3 taps. Under a minute. No 
 
 - **Greeting on Home:** "Hi there. Want to know more about working at AKH?" becomes "Hi. Want to know what we could build for you, what it costs or how long it takes?" Prompts: Estimate my project · What does it cost? · See your work.
 - **Answers:** every reply now gives the outcome first, then the next step, and never says "in this preview".
+
+
+## Round 4 update
+
+All long dashes were removed from the site and replaced with commas, full stops, colons or brackets. RetailWeave band: "Launching soon · RetailWeave is coming. Run your whole retail business from one screen: orders, stock, returns and finance." Client stories heading: "Trusted by teams that move faster and stay in control." Careers: "Ship real products for brands in every industry from your first month."

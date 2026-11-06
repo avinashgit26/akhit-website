@@ -570,3 +570,27 @@ html body.careers-page .lc-hero-inner .lc-hero-copy:not(#akh-x) { margin-left: a
 html body.careers-page .lc-hero-actions:not(#akh-x) { justify-content: center !important; }
 html body .launch-bar .launch-mascot:not(#akh-x) { padding: 4px !important; border-radius: 10px !important; background: var(--akh-charcoal) !important; box-sizing: border-box; object-fit: contain; }
 .work-card--inhouse > a img[src*="retailweave-logo"] { width: 34% !important; padding: 10% 0 !important; }
+
+/* ---------- Round 4 ---------- */
+html body .launch-bar .launch-copy strong:not(#akh-x) { font-size: 21px !important; font-weight: 900 !important; letter-spacing: -0.02em !important; }
+html body .launch-bar .launch-description:not(#akh-x) { font-size: 15px !important; font-weight: 650 !important; }
+@media (max-width: 640px) { html body .launch-bar .launch-copy strong:not(#akh-x) { font-size: 16px !important; } }
+html body .launch-bar .launch-mascot:not(#akh-x) { background: #fff !important; padding: 3px !important; }
+.work-card--inhouse > a:has(img[src*="retailweave-logo"]) { background: #fff !important; }
+/* Client stories: heading + quote on top, awards as a compact ribbon below */
+html body.homepage-page .testimonial-layout--ribbon:not(#akh-x) { display: grid !important; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr) !important; gap: clamp(28px, 4vw, 64px) !important; align-items: center !important; }
+@media (max-width: 860px) { html body.homepage-page .testimonial-layout--ribbon:not(#akh-x) { grid-template-columns: 1fr !important; } }
+html body.homepage-page .testimonial-copy h2:not(#akh-x) { font-size: clamp(32px, 3.6vw, 52px) !important; line-height: 1.06 !important; }
+.akh-awards--ribbon { margin-top: clamp(28px, 3.5vw, 44px) !important; padding-top: 0 !important; border-top: 0 !important; }
+.akh-awards--ribbon .akh-awards-head { display: none; }
+.akh-awards--ribbon .akh-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 14px; }
+.akh-awards--ribbon .akh-award { padding: 14px 16px; }
+.akh-awards--ribbon .akh-award-badge { margin-bottom: 8px; }
+.akh-awards--ribbon .akh-award h4 { font-size: 16px; }
+.akh-awards--ribbon .akh-award p { margin-bottom: 4px; font-size: 13px; }
+.akh-awards--ribbon .akh-award::before { top: 12px; right: 12px; font-size: 18px; }
+@media (max-width: 760px) { .akh-awards--ribbon .akh-grid { grid-template-columns: 1fr !important; } }
+/* Services stats match Home */
+html body.services-page .services-proof-value:not(#akh-x) { color: #b8f27a !important; }
+html body.services-page .services-proof-item span:not(#akh-x) { color: #fff !important; }
+html body.services-page .services-hero .services-proof .services-proof-value:not(#akh-x):not(.x1):not(.x2):not(.x3) { color: #b8f27a !important; -webkit-text-fill-color: #b8f27a; }

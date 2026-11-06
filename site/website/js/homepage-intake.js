@@ -62,7 +62,7 @@
   };
   const D_CARDS = {
     'Answer customers 24/7': { fix: 'An assistant that answers customers day and night and hands tricky cases to a person.', proof: 'goddiva' },
-    'Write product content': { fix: 'Product descriptions written in your brand voice — hundreds of listings in hours, not weeks.', proof: 'work' },
+    'Write product content': { fix: 'Product descriptions written in your brand voice: hundreds of listings in hours, not weeks.', proof: 'work' },
     'Make sense of our data': { fix: 'Plain-English answers and weekly summaries from the data you already have.', proof: 'work' },
     'Handle emails and documents': { fix: 'Emails sorted and documents read automatically, with your team approving anything important.', proof: 'invoice' }
   };
@@ -77,7 +77,7 @@
     'Our team': { title: 'Give your team everything they need in their pocket.', fix: 'A staff app that replaces paper, calls and chasing.' },
     'Both': { title: 'An app keeps you on their home screen, not your competitor’s.', fix: 'One iOS and Android app for customers, with a staff view that replaces paper, calls and chasing.' }
   };
-  const E_CARD = { title: 'Let’s get your idea in front of real users — fast, without overbuilding.', fix: 'A lean first version, built to test, then grow.' };
+  const E_CARD = { title: 'Let’s get your idea in front of real users, fast, without overbuilding.', fix: 'A lean first version, built to test, then grow.' };
 
   /* Typed input is matched to the nearest path, whole words only (so "hair" never reads as "ai"). */
   const KEYWORDS = {
@@ -267,10 +267,10 @@
       let card;
       if (path === 'A') {
         const c = A_CARDS[a2]; const s = SAVINGS[a3];
-        card = { title: `That’s ${s.hours} — ${s.money} — spent on manual ${c.area} work.`, math: true, fix: c.fix, proof: PROOF[c.proof] };
+        card = { title: `That’s ${s.hours} (${s.money}) spent on manual ${c.area} work.`, math: true, fix: c.fix, proof: PROOF[c.proof] };
       } else if (path === 'D') {
         const c = D_CARDS[a2]; const s = SAVINGS[a3];
-        card = { title: `That’s ${s.moneyShort} a year AI could take off your team’s plate.`, saving: `You told us ${a3.toLowerCase()} hours a week — <strong>${s.hours}</strong> a year.`, math: true, fix: `${c.fix} One focused AI tool, working prototype in 2 weeks.`, proof: PROOF[c.proof] };
+        card = { title: `That’s ${s.moneyShort} a year AI could take off your team’s plate.`, saving: `You told us ${a3.toLowerCase()} hours a week: <strong>${s.hours}</strong> a year.`, math: true, fix: `${c.fix} One focused AI tool, working prototype in 2 weeks.`, proof: PROOF[c.proof] };
       } else if (path === 'B') {
         const c = B_CARDS[a2];
         card = { title: c.title, fix: c.fix, proof: PROOF.marketplace };
@@ -362,7 +362,7 @@
       const path = matchPath(text);
       setTyping(false);
       if (path) {
-        bubble('Thanks — that sounds like this. Let’s size it up.');
+        bubble('Thanks, that sounds like this. Let’s size it up.');
         choosePath(path);
       } else {
         bubble('Thanks. Which of these is closest?');
