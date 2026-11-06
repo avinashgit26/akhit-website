@@ -1,0 +1,281 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap");
+
+/* Shared ribbon and header geometry, aligned to the Services page reference. */
+body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) .launch-bar {
+  position: relative !important;
+  z-index: 12 !important;
+  box-sizing: border-box !important;
+  height: 65px !important;
+  min-height: 65px !important;
+  border-bottom: 3px solid #b8f27a !important;
+  background: #26292c !important;
+  color: #f4f5f6 !important;
+}
+body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) .launch-inner {
+  display: flex !important;
+  box-sizing: border-box !important;
+  width: min(1380px, calc(100% - 9vw)) !important;
+  max-width: none !important;
+  height: 62px !important;
+  min-height: 62px !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 14px !important;
+  margin: auto !important;
+  padding: 0 !important;
+}
+body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) .launch-mascot {
+  width: 38px !important;
+  height: 38px !important;
+  flex: none !important;
+}
+body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) .launch-copy {
+  display: block !important;
+  min-width: 0 !important;
+  flex: 1 !important;
+  margin: 0 !important;
+  color: #f4f5f6 !important;
+  font-size: 13px !important;
+  line-height: 1.35 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) .launch-copy strong {
+  display: inline-block !important;
+  margin-right: 9px !important;
+  color: #b8f27a !important;
+  font-size: 12px !important;
+  letter-spacing: .075em !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+}
+body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) .launch-description { white-space: nowrap !important; }
+body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) .launch-button {
+  min-height: 40px !important;
+  flex: none !important;
+  padding: 0 16px !important;
+  border: 1px solid #b8f27a !important;
+  border-radius: 5px !important;
+  background: #b8f27a !important;
+  color: #26292c !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+  white-space: nowrap !important;
+}
+body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) header.header {
+  position: sticky !important;
+  z-index: 20 !important;
+  top: 0 !important;
+  box-sizing: border-box !important;
+  display: block !important;
+  height: 77px !important;
+  min-height: 77px !important;
+  margin-block: 0 !important;
+  padding: 0 !important;
+  transform: none !important;
+  border-bottom: 1px solid #d9dcdf !important;
+  border-bottom-width: 1px !important;
+  border-bottom-style: solid !important;
+  background: rgb(244 245 246 / 96%) !important;
+  color: #1a1d1f !important;
+  backdrop-filter: blur(10px) !important;
+  transition: background-color .18s ease, color .18s ease, border-color .18s ease !important;
+}
+body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) header.header .nav {
+  display: flex !important;
+  box-sizing: border-box !important;
+  width: min(1380px, calc(100% - 9vw)) !important;
+  max-width: none !important;
+  height: 76px !important;
+  min-height: 76px !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 22px !important;
+  margin: auto !important;
+}
+body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) header.header .brand {
+  flex: none !important;
+  color: #1a1d1f !important;
+  font-size: 23px !important;
+  font-weight: 800 !important;
+  letter-spacing: -.065em !important;
+  white-space: nowrap !important;
+}
+body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) header.header .brand b { color: #237a38 !important; }
+body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) header.header .links {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: clamp(16px, 2.5vw, 36px) !important;
+  font-size: 13px !important;
+  font-weight: 650 !important;
+}
+body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) header.header .links a { color: #1a1d1f !important; text-decoration: none !important; }
+body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) header.header .links a:hover,
+body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) header.header .links a[aria-current="page"] { color: #237a38 !important; }
+body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) header.header .cta {
+  min-height: 48px !important;
+  flex: none !important;
+  border: 0 !important;
+  border-radius: 5px !important;
+  background: #237a38 !important;
+  color: #fff !important;
+}
+body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) header.header.is-ribbon-gone {
+  height: 77px !important;
+  min-height: 77px !important;
+  border-bottom-width: 1px !important;
+  border-bottom-style: solid !important;
+  border-color: #3e4246 !important;
+  background: #26292c !important;
+  color: #f4f5f6 !important;
+}
+body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) header.header.is-ribbon-gone .brand,
+body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) header.header.is-ribbon-gone .links a { color: #f4f5f6 !important; }
+body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) header.header.is-ribbon-gone .brand b,
+body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) header.header.is-ribbon-gone .links a:hover,
+body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) header.header.is-ribbon-gone .links a[aria-current="page"] { color: #b8f27a !important; }
+body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) header.header.is-ribbon-gone .cta {
+  background: #b8f27a !important;
+  color: #26292c !important;
+}
+body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) .mobile-menu { display: none !important; }
+body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) .mobile-menu summary::-webkit-details-marker { display: none; }
+body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) .mobile-menu nav {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  z-index: 15;
+  width: min(290px, calc(100vw - 40px));
+  display: grid;
+  padding: 10px;
+  border: 1px solid #d9dcdf;
+  border-radius: 5px;
+  background: #fff;
+  box-shadow: 0 16px 38px rgb(26 29 31 / 12%);
+}
+body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) .mobile-menu nav a {
+  padding: 12px 14px;
+  color: #1a1d1f;
+  text-decoration: none;
+}
+body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) .mobile-menu nav a:hover,
+body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) .mobile-menu nav a[aria-current="page"] { color: #237a38; background: #eaf6ec; }
+body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) header.header.is-ribbon-gone .mobile-menu nav { border-color: #6b7076; background: #26292c; }
+body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) header.header.is-ribbon-gone .mobile-menu nav a { color: #f4f5f6; }
+body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) header.header.is-ribbon-gone .mobile-menu nav a:hover,
+body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) header.header.is-ribbon-gone .mobile-menu nav a[aria-current="page"] { color: #b8f27a; background: #2c3034; }
+
+@media (max-width: 900px) {
+  body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) .launch-inner {
+    display: flex !important;
+    width: calc(100% - 40px) !important;
+    align-items: center !important;
+    gap: 10px !important;
+  }
+  body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) .launch-mascot { width: 32px !important; height: 32px !important; }
+  body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) .launch-copy { font-size: 11px !important; }
+  body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) .launch-copy strong { display: inline-block !important; margin: 0 7px 0 0 !important; font-size: 10px !important; }
+  body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) .launch-button { min-height: 36px !important; padding-inline: 12px !important; }
+  body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) header.header { height: 73px !important; min-height: 73px !important; }
+  body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) header.header .nav { width: calc(100% - 40px) !important; height: 72px !important; min-height: 72px !important; gap: 12px !important; }
+  body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) header.header .links { display: none !important; }
+  body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) .mobile-menu { display: block !important; position: relative !important; margin-left: auto !important; }
+  body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) .mobile-menu summary { width: 46px; height: 46px; display: grid; place-items: center; border: 1px solid #d9dcdf; border-radius: 4px; color: #1a1d1f; background: #fff; cursor: pointer; list-style: none; }
+  body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) header.header.is-ribbon-gone {
+    height: 73px !important;
+    min-height: 73px !important;
+    border-bottom-width: 1px !important;
+    border-bottom-style: solid !important;
+  }
+  body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) header.header.is-ribbon-gone .mobile-menu summary { border-color: #6b7076; color: #f4f5f6; background: #2c3034; }
+}
+@media (max-width: 600px) {
+  body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) .launch-bar { height: 50px !important; min-height: 50px !important; }
+  body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) .launch-inner,
+  body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) header.header .nav { width: calc(100% - 28px) !important; }
+  body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) .launch-inner { height: 47px !important; min-height: 47px !important; gap: 8px !important; }
+  body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) .launch-mascot,
+  body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) .launch-description { display: none !important; }
+  body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) .launch-copy { font-size: 9px !important; line-height: 1 !important; }
+  body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) .launch-copy strong { margin: 0 !important; font-size: 9px !important; letter-spacing: .025em !important; }
+  body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) .launch-button { min-height: 34px !important; padding-inline: 9px !important; font-size: 9px !important; }
+  body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) header.header { height: 73px !important; min-height: 73px !important; }
+  body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) header.header .nav { height: 72px !important; min-height: 72px !important; gap: 10px !important; }
+  body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) header.header .brand { font-size: 20px !important; }
+  body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) header.header .cta { min-height: 44px !important; padding-inline: 12px !important; gap: 8px !important; font-size: 12px !important; }
+}
+@media (max-width: 360px) {
+  body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) .launch-copy strong { font-size: 7.6px !important; }
+  body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) .launch-button { padding-inline: 7px !important; font-size: 8px !important; }
+}
+@media (max-width: 450px) {
+  body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) header.header .nav { width: calc(100% - 28px) !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) .launch-button,
+  body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) header.header { transition: none !important; }
+}
+
+/* The same type, palette, and footer treatment carry across each primary page. */
+:root {
+  --akh-home-blue: #237a38;
+  --akh-home-lime: #b8f27a;
+  --akh-home-ground: #f4f5f6;
+  --akh-home-surface: #FFFFFF;
+  --akh-home-ink: #1a1d1f;
+  --akh-home-muted: #5f6469;
+  --akh-home-line: #d9dcdf;
+  --akh-home-font: "DM Sans", Arial, Helvetica, sans-serif;
+  --sans: "DM Sans", Arial, Helvetica, sans-serif;
+  --display: "DM Sans", Arial, Helvetica, sans-serif;
+  --font: "DM Sans", Arial, Helvetica, sans-serif;
+}
+body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) {
+  font-family: "DM Sans", Arial, Helvetica, sans-serif !important;
+}
+body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) :not(code):not(pre):not(.proof-value):not(.lc-careers-metric-value) {
+  font-family: "DM Sans", Arial, Helvetica, sans-serif !important;
+}
+body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) :is(.proof-value,.lc-careers-metric-value) {
+  font-family: Georgia, "Times New Roman", serif !important;
+}
+body.services-page .services-proof-item strong { font-family: Georgia, "Times New Roman", serif !important; }
+body:is(.homepage-page,.ai-hub-page,.learn-with-us-page,.careers-page,.services-page) :is(pre,pre *,code,code *) {
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace !important;
+}
+body.homepage-page .footer,
+body.ai-hub-page .ai-footer,
+body.learn-with-us-page .lc-footer,
+body.careers-page .lc-footer,
+body.services-page .lc-footer {
+  color: #f4f5f6 !important;
+  background: #26292c !important;
+}
+body.homepage-page .footer :is(.footer-cta,.footer-bottom),
+body.ai-hub-page .ai-footer :is(.ai-footer-top,.ai-footer-bottom),
+body.learn-with-us-page .lc-footer :is(.lc-footer-top,.lc-footer-bottom),
+body.careers-page .lc-footer :is(.lc-footer-top,.lc-footer-bottom),
+body.services-page .lc-footer :is(.lc-footer-top,.lc-footer-bottom) { border-color: rgb(244 245 246 / 24%) !important; }
+body.homepage-page .footer :is(h2,h3,.footer-brand .brand),
+body.ai-hub-page .ai-footer :is(h2,h3,.ai-footer-brand),
+body.learn-with-us-page .lc-footer :is(h2,h3,.lc-footer-brand),
+body.careers-page .lc-footer :is(h2,h3,.lc-footer-brand),
+body.services-page .lc-footer :is(h2,h3,.lc-footer-brand) { color: #f4f5f6 !important; }
+body.homepage-page .footer :is(p,.footer-contact,.footer-nav,.footer-social,.footer-bottom),
+body.ai-hub-page .ai-footer :is(p,.ai-footer-contact,.ai-footer-nav,.ai-footer-social,.ai-footer-bottom),
+body.learn-with-us-page .lc-footer :is(p,.lc-footer-links,.lc-footer-bottom),
+body.careers-page .lc-footer :is(p,.lc-footer-links,.lc-footer-bottom),
+body.services-page .lc-footer :is(p,.lc-footer-links,.lc-footer-bottom) { color: #d3d6d9 !important; }
+body.homepage-page .footer :is(.footer-brand .brand b,.footer-cta .eyebrow),
+body.ai-hub-page .ai-footer :is(.ai-footer-brand b,.ai-footer-top .ai-eyebrow),
+body.learn-with-us-page .lc-footer :is(.lc-footer-brand b,.lc-footer-top .lc-eyebrow),
+body.careers-page .lc-footer :is(.lc-footer-brand b,.lc-footer-top .lc-eyebrow),
+body.services-page .lc-footer :is(.lc-footer-brand b,.lc-footer-top .lc-eyebrow) { color: #b8f27a !important; }
+body.homepage-page .footer a:hover,
+body.ai-hub-page .ai-footer a:hover,
+body.learn-with-us-page .lc-footer a:hover,
+body.careers-page .lc-footer a:hover,
+body.services-page .lc-footer a:hover { color: #b8f27a !important; }

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" fill="none" role="img" aria-label="RetailWeave">
+  <rect width="96" height="96" rx="24" fill="#26292c"/>
+  <!-- stem -->
+  <path d="M34 22v52" stroke="#3dbe5a" stroke-width="14" stroke-linecap="round"/>
+  <!-- bowl, woven over the stem -->
+  <path d="M34 28h17a14 14 0 0 1 0 28H34" stroke="#26292c" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M34 28h17a14 14 0 0 1 0 28H34" stroke="#b8f27a" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- stem passes back over the bowl's lower strand -->
+  <path d="M34 50v24" stroke="#26292c" stroke-width="20" stroke-linecap="round"/>
+  <path d="M34 50v24" stroke="#3dbe5a" stroke-width="14" stroke-linecap="round"/>
+  <!-- leg -->
+  <path d="M50 58l16 16" stroke="#26292c" stroke-width="20" stroke-linecap="round"/>
+  <path d="M50 58l16 16" stroke="#b8f27a" stroke-width="12" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,44 @@
+/* AI Hub only: separate adjacent sections and keep the AI-step label legible. */
+body.ai-hub-page #main-content > .ai-process {
+  border-block: 1px solid #e0e2e3;
+  background: #f4f5f6 !important;
+}
+
+body.ai-hub-page #main-content > .ai-control {
+  border-block: 1px solid #d8dadb;
+  background: #e6e8ea !important;
+}
+
+body.ai-hub-page .ai-fit-tag--ai {
+  padding: 5px 10px;
+  border: 1px solid #8fec36 !important;
+  border-radius: 999px;
+  color: #26292c !important;
+  background: #b8f27a !important;
+  font-size: 12px !important;
+  font-weight: 800;
+  letter-spacing: .02em;
+  line-height: 1.3;
+}
+
+/* Keep the From idea to useful process cards readable at normal zoom. */
+body.ai-hub-page .ai-process .ai-step h3 {
+  font-size: clamp(18px, 1.1vw, 20px) !important;
+  line-height: 1.3;
+}
+
+body.ai-hub-page .ai-process .ai-step p {
+  font-size: clamp(14px, .9vw, 16px) !important;
+  line-height: 1.6;
+}
+
+/* Match the Designed with care list to the same readable type scale. */
+body.ai-hub-page .ai-control .ai-control-item h3 {
+  font-size: clamp(18px, 1.1vw, 20px) !important;
+  line-height: 1.3;
+}
+
+body.ai-hub-page .ai-control .ai-control-item p {
+  font-size: clamp(15px, .9vw, 16px) !important;
+  line-height: 1.6 !important;
+}

@@ -1,0 +1,27 @@
+/* Shared section surfaces for the five primary routes. */
+body.homepage-page #main-content > .proof-band { background: #e6e8ea; }
+body.homepage-page #main-content > #impact { background: #e7f4ea; }
+body.homepage-page #main-content > #selected-work { background: #FFFFFF; }
+body.homepage-page #main-content > .clients { background: #e6e8ea; }
+body.homepage-page #main-content > .testimonials { background: #f4f5f6; }
+
+body.ai-hub-page #main-content > .ai-promise { background: #f4f5f6; }
+body.ai-hub-page #main-content > .ai-capabilities { background: #FFFFFF; }
+body.ai-hub-page #main-content > .ai-process { background: #e6e8ea; }
+body.ai-hub-page #main-content > .ai-control { background: #FFFFFF; }
+
+body.services-page #main-content > .services-offerings { background: #e6e8ea; }
+body.services-page #main-content > .services-engineering { background: #26292c; }
+body.services-page #main-content > .services-process { background: #f4f5f6; }
+body.services-page #main-content > .services-faq { background: #FFFFFF; }
+body.services-page #main-content > .services-scoping { background: #e6e8ea; }
+
+body.learn-with-us-page #main-content > #learning-paths { background: #e6e8ea; }
+body.learn-with-us-page #main-content > section[aria-labelledby="approach-title"] { background: #FFFFFF; }
+body.learn-with-us-page #main-content > .lc-partnership { background: linear-gradient(130deg, #26292c, #3f4347 72%, #237a38); }
+body.learn-with-us-page #main-content > section[aria-labelledby="opportunity-title"] { background: #f4f5f6; }
+body.learn-with-us-page #main-content > section:last-child { background: #e6e8ea; }
+
+body.careers-page #main-content > .lc-careers-culture { background: #FFFFFF; }
+body.careers-page #main-content > .lc-jobs { background: #e6e8ea; }
+body.careers-page #main-content > section:last-child { background: #f4f5f6; }

@@ -1,0 +1,8 @@
+.taste-skill/
+.DS_Store
+Thumbs.db
+
+# Local-only pages (not published)
+site/about-us.html
+site/portfolio.html
+.claude/
