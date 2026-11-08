@@ -180,3 +180,28 @@ Title "Find out what we could save you" · subtitle "3 taps. Under a minute. No 
 ## Round 4 update
 
 All long dashes were removed from the site and replaced with commas, full stops, colons or brackets. RetailWeave band: "Launching soon · RetailWeave is coming. Run your whole retail business from one screen: orders, stock, returns and finance." Client stories heading: "Trusted by teams that move faster and stay in control." Careers: "Ship real products for brands in every industry from your first month."
+
+
+## Round 5 update
+
+- **Header (every page):** Home · AI Hub · Services · Learn with us · Careers.
+- **Floating assistant:** the label "Ask AKH" is now "AI". The Home and Services FAQ lines now say "Ask our AI from the corner of the page".
+- **Learn with us, prices.** These are based on the UK market in November 2026: 6-week university AI programmes cost £1,700–£2,450, intro AI courses about £149, full bootcamps £7,500–£9,600, and course subscriptions about £35–£49 a month. ⚑ Confirm all of these:
+
+  | Path | Length | Self-paced from | Guided cohort |
+  |---|---|---|---|
+  | AI and intelligent workflows | 6 weeks | £295 | £895 per learner |
+  | Websites and apps | 12 weeks | £495 | £1,950 per learner |
+  | Data science and analytics | 10 weeks | £395 | £1,450 per learner |
+  | Marketing and transformation | 6 weeks | £245 | £795 per learner |
+
+  Ways to learn: Self-paced "From £245", Guided cohort "From £795 per learner", Teams "Custom quote".
+- **Learn with us, dates:** cohort dates now read "Next cohort: coming soon" on the path cards and "Next cohort: opening soon" on the hero card.
+- **Learn with us, providers:** "Course providers we plan to work with": Coursera, Google Career Certificates, Microsoft Learn, AWS Skill Builder, IBM SkillsBuild and HubSpot Academy. ⚑ Swap these for confirmed partners once agreements are signed.
+- **Careers, below the hero (rewritten):**
+  - Why AKH: "Do the best work of your career, and see it used." with 4 cards.
+  - How we work together: "Clear goals, weekly demos, tidy code."
+  - Open roles: "Two roles open now."
+  - How hiring works: "Three steps, and an answer either way." It includes the line ⚑ "Applications take about five minutes".
+  - What you can expect: ⚑ includes "Access to our Learn with us courses".
+- **Client stories:** the Goddiva awards now show only while the City Goddess quote is on screen. Tradegala and Kugans have no published awards, so none are shown for them.

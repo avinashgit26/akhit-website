@@ -85,3 +85,126 @@
     });
   }
 })();
+
+/* Round 5: client awards follow the testimonial on screen. */
+(function () {
+  const track = document.querySelector('.testimonials .quote-track');
+  const groups = [...document.querySelectorAll('[data-awards-for]')];
+  if (!track || !groups.length) return;
+  const sync = () => {
+    const current = track.querySelector('.quote-card.is-current');
+    const client = current ? current.dataset.client : '';
+    groups.forEach((group) => {
+      const show = group.dataset.awardsFor === client;
+      group.classList.toggle('is-awards-hidden', !show);
+      group.setAttribute('aria-hidden', String(!show));
+    });
+  };
+  new MutationObserver(sync).observe(track, { subtree: true, attributes: true, attributeFilter: ['class'] });
+  sync();
+})();
+
+/* Round 5b: careers role panel (details + apply form, front-end only). */
+(function () {
+  const drawer = document.getElementById('role-drawer');
+  if (!drawer) return;
+  const panel = drawer.querySelector('.akh-role-panel');
+  const roles = [...drawer.querySelectorAll('.akh-role')];
+  let lastFocus = null;
+
+  const open = (slug, fromHash) => {
+    const role = roles.find((r) => r.dataset.role === slug);
+    if (!role) return;
+    lastFocus = document.activeElement;
+    roles.forEach((r) => { r.hidden = r !== role; });
+    drawer.hidden = false;
+    document.documentElement.classList.add('akh-role-open');
+    panel.setAttribute('aria-labelledby', `${slug}-title`);
+    panel.scrollTop = 0;
+    if (!fromHash && location.hash !== `#${slug}`) history.pushState(null, '', `#${slug}`);
+    requestAnimationFrame(() => role.querySelector('h2').setAttribute('tabindex', '-1') || role.querySelector('h2').focus());
+    if (window.akhTrack) window.akhTrack('careers_role_open', { role: slug });
+  };
+  const close = (fromHash) => {
+    if (drawer.hidden) return;
+    drawer.hidden = true;
+    document.documentElement.classList.remove('akh-role-open');
+    if (!fromHash && roles.some((r) => location.hash === `#${r.dataset.role}`)) history.pushState(null, '', location.pathname + location.search);
+    if (lastFocus) lastFocus.focus();
+  };
+  const fromHash = () => {
+    const slug = location.hash.slice(1);
+    if (roles.some((r) => r.dataset.role === slug)) open(slug, true); else close(true);
+  };
+
+  document.addEventListener('click', (event) => {
+    const opener = event.target.closest('[data-role-open]');
+    if (opener) { event.preventDefault(); open(opener.dataset.roleOpen); return; }
+    if (event.target.closest('[data-role-close]')) { event.preventDefault(); close(); return; }
+    const jump = event.target.closest('.akh-role-jump');
+    if (jump) {
+      event.preventDefault();
+      const form = document.querySelector(jump.getAttribute('href'));
+      if (form) { form.scrollIntoView({ behavior: 'smooth', block: 'start' }); const first = form.querySelector('input'); if (first) first.focus({ preventScroll: true }); }
+    }
+  });
+  document.addEventListener('keydown', (event) => {
+    if (drawer.hidden) return;
+    if (event.key === 'Escape') { close(); return; }
+    if (event.key !== 'Tab') return;
+    const focusable = [...panel.querySelectorAll('a[href], button, input, textarea, summary, [tabindex="-1"]')].filter((el) => el.offsetParent !== null && !el.closest('[hidden]'));
+    if (!focusable.length) return;
+    const first = focusable[0], last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+  });
+  window.addEventListener('hashchange', fromHash);
+  window.addEventListener('popstate', fromHash);
+  fromHash();
+
+  const MAX = 5 * 1024 * 1024;
+  const okType = (name) => /\.(pdf|docx?|DOCX?|PDF)$/.test(name);
+  drawer.querySelectorAll('.akh-role-form').forEach((form) => {
+    const error = form.querySelector('.akh-role-error');
+    const file = form.querySelector('input[type="file"]');
+    const fileName = form.querySelector('.akh-role-file-name');
+    const checkFile = () => {
+      const f = file.files[0];
+      file.setCustomValidity('');
+      if (!f) { fileName.textContent = 'No file chosen'; return true; }
+      fileName.textContent = f.name;
+      if (!okType(f.name)) file.setCustomValidity('Please upload a PDF, DOC or DOCX file.');
+      else if (f.size > MAX) file.setCustomValidity('Please upload a file under 5 MB.');
+      return file.checkValidity();
+    };
+    file.addEventListener('change', () => { checkFile(); error.textContent = file.validationMessage; });
+    form.querySelectorAll('input:not([type="file"]), textarea').forEach((input) => {
+      input.addEventListener('blur', () => input.classList.toggle('is-invalid', !input.checkValidity()));
+      input.addEventListener('input', () => { if (input.checkValidity()) input.classList.remove('is-invalid'); });
+    });
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      checkFile();
+      const invalid = [...form.elements].filter((el) => el.willValidate && !el.checkValidity());
+      invalid.forEach((el) => el.classList.add('is-invalid'));
+      if (invalid.length) {
+        const el = invalid[0];
+        error.textContent = el.type === 'file' ? el.validationMessage
+          : el.type === 'email' && el.value ? 'Please enter a valid email address.'
+          : el.name === 'mobile' && el.value ? 'Please enter a valid mobile number.'
+          : 'Please fill in the required fields marked *.';
+        el.focus();
+        return;
+      }
+      error.textContent = '';
+      const data = Object.fromEntries([...new FormData(form)].filter(([k]) => k !== 'cv'));
+      data.role = form.dataset.roleTitle;
+      if (typeof window.submitLead === 'function') window.submitLead({ type: 'job_application', ...data });
+      if (window.akhTrack) window.akhTrack('careers_apply', { role: data.role });
+      const done = form.parentElement.querySelector('.akh-role-done');
+      form.hidden = true;
+      done.hidden = false;
+      done.focus();
+    });
+  });
+})();

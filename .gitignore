@@ -6,3 +6,8 @@ Thumbs.db
 site/about-us.html
 site/portfolio.html
 .claude/
+
+# Original 2 MB renders; the site uses the .jpg copies
+site/website/images/home/results-marketplace
+site/website/images/home/results-goddiva-ai
+site/website/images/home/results-retailweave

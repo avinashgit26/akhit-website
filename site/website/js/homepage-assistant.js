@@ -1,7 +1,7 @@
 (() => {
   const orbLauncher = document.getElementById('assistant-launcher');
   if (orbLauncher) {
-    orbLauncher.setAttribute('aria-label', 'Ask AKH');
+    orbLauncher.setAttribute('aria-label', 'Ask our AI');
     const firstTouchReveal = new WeakSet();
     orbLauncher.addEventListener('pointerdown', event => {
       if (event.pointerType !== 'touch' || orbLauncher.classList.contains('is-label-visible')) return;
