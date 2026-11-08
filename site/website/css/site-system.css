@@ -758,3 +758,11 @@ html.akh-role-open, html.akh-role-open body { overflow: hidden; }
 .akh-role-error:empty { min-height: 0; }
 .akh-role-done { margin-top: 28px; padding: 24px; border-radius: var(--card-radius); background: var(--akh-tint); outline: none; }
 .akh-role-done p { margin: 8px 0 0; color: #3d4246; }
+/* Home hero: the four quick-start buttons on one line (wide screens) */
+@media (min-width: 1240px) {
+  html body.homepage-page .hero-copy .hero-answers:not(#akh-x):not(#akh-y) { display: flex !important; flex-wrap: nowrap !important; gap: 10px !important; margin-top: -2px !important; }
+  html body.homepage-page .hero-copy .hero-answer:not(#akh-x):not(#akh-y) { flex: 1 1 auto; min-width: 0; padding: 8px 14px !important; font-size: 13.5px !important; white-space: nowrap !important; }
+}
+@media (min-width: 1240px) and (max-width: 1300px) {
+  html body.homepage-page .hero-copy .hero-answer:not(#akh-x):not(#akh-y) { padding: 8px 11px !important; font-size: 12.5px !important; }
+}
