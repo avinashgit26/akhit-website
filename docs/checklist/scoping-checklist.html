@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Project scoping checklist | AKH IT Solutions</title>
+<!-- Source for site/website/downloads/digital-project-scoping-checklist.pdf
+     Render: chrome --headless=new --no-pdf-header-footer --print-to-pdf=<out.pdf> <this file> -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700;9..40,800&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 0; }
+  :root { --charcoal: #26292c; --ink: #1a1d1f; --muted: #5f6469; --line: #d9dcdf; --green: #237a38; --lime: #b8f27a; --tint: #eaf6ec; --stone: #faf8f5; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: "DM Sans", Arial, Helvetica, sans-serif; color: var(--ink); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page { position: relative; width: 210mm; height: 297mm; padding: 12mm 13mm 16mm; overflow: hidden; page-break-after: always; }
+  .page:last-child { page-break-after: auto; }
+  .band { position: absolute; inset: 0 0 auto 0; height: 7mm; background: var(--charcoal); }
+  .band::after { content: ""; position: absolute; left: 0; bottom: 0; width: 38%; height: 1.4mm; background: var(--lime); }
+  .top { display: flex; justify-content: space-between; align-items: center; margin-top: 4mm; font-size: 8.5pt; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--green); }
+  .top b { color: var(--ink); letter-spacing: .02em; text-transform: none; font-size: 10pt; }
+  .top b span { color: var(--green); }
+  h1 { margin: 4mm 0 2mm; font-size: 23pt; line-height: 1.04; letter-spacing: -0.04em; font-weight: 800; }
+  .lead { margin: 0 0 3.5mm; max-width: 175mm; color: var(--muted); font-size: 9.6pt; line-height: 1.4; }
+  .how { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.6mm; margin-bottom: 3.5mm; }
+  .how div { padding: 2.4mm 3mm; border-radius: 2.6mm; background: var(--tint); font-size: 7.9pt; line-height: 1.35; color: #2f3336; }
+  .how b { display: block; margin-bottom: .8mm; color: var(--green); font-size: 8pt; letter-spacing: .08em; text-transform: uppercase; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.6mm; }
+  .sec { padding: 2.6mm 3.2mm 2.4mm; border: .3mm solid var(--line); border-radius: 3mm; background: #fff; break-inside: avoid; }
+  .sec h2 { display: flex; align-items: baseline; gap: 2mm; margin: 0 0 1mm; font-size: 10pt; letter-spacing: -0.01em; }
+  .sec h2 span { color: var(--green); font-size: 8.5pt; font-weight: 800; letter-spacing: .06em; }
+  .q { display: grid; grid-template-columns: 1fr auto; gap: 1.6mm; align-items: center; padding: .9mm 0; border-bottom: .2mm dashed #e3e5e7; font-size: 7.7pt; line-height: 1.3; }
+  .q:last-of-type { border-bottom: 0; }
+  .ticks { display: flex; gap: 1.2mm; white-space: nowrap; color: var(--muted); font-size: 6.2pt; font-weight: 700; letter-spacing: .02em; }
+  .ticks i { display: inline-block; width: 2.4mm; height: 2.4mm; margin-right: .5mm; border: .3mm solid #9aa0a5; border-radius: .6mm; vertical-align: -.5mm; }
+  .decision { display: flex; gap: 1.6mm; align-items: flex-end; margin-top: 1.2mm; padding: 1.5mm 2.2mm; border-radius: 2mm; background: var(--stone); font-size: 7.4pt; font-weight: 800; color: var(--green); }
+  .decision em { font-style: normal; color: var(--muted); font-weight: 600; white-space: nowrap; }
+  .decision .line { flex: 1; height: 3.6mm; border-bottom: .3mm solid #b9bec3; }
+  .foot { position: absolute; left: 14mm; right: 14mm; bottom: 8mm; display: flex; justify-content: space-between; padding-top: 2.5mm; border-top: .3mm solid var(--line); font-size: 7.6pt; color: var(--muted); }
+  .foot b { color: var(--green); }
+  /* Page 2 */
+  h3 { margin: 0 0 2.5mm; font-size: 14pt; letter-spacing: -0.02em; }
+  .sub { margin: 0 0 4mm; color: var(--muted); font-size: 9.5pt; line-height: 1.45; }
+  .summary { padding: 3.5mm 4.5mm; border: .4mm solid var(--charcoal); border-radius: 3.5mm; }
+  .row { display: grid; grid-template-columns: 44mm 1fr; gap: 3mm; align-items: end; padding: 1.5mm 0; border-bottom: .2mm solid #e3e5e7; font-size: 8.8pt; }
+  .row:last-of-type { border-bottom: 0; }
+  .row b { font-size: 8.8pt; }
+  .row:has(.lines) { align-items: start; }
+  .row b small { display: block; color: var(--muted); font-weight: 500; font-size: 7.4pt; line-height: 1.3; }
+  .row .line { height: 4.4mm; border-bottom: .3mm solid #b9bec3; }
+  .row .lines { display: grid; gap: 1.6mm; }
+  .rule { margin-top: 1.5mm; padding: 2.6mm 3mm; border-radius: 2mm; background: var(--tint); font-size: 8.4pt; line-height: 1.45; color: #2f3336; }
+  .rule b { color: var(--green); }
+  .sign { display: grid; grid-template-columns: 1fr 1fr; gap: 8mm; margin-top: 2mm; font-size: 8pt; color: var(--muted); }
+  .sign div { padding-top: 7mm; border-bottom: .3mm solid #9aa0a5; }
+  .sign span { display: block; margin-top: 1.2mm; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5mm; margin-top: 3.5mm; }
+  .flags { padding: 3.2mm 4mm; border-radius: 3mm; background: #fff4e5; border: .3mm solid #f2d2a6; }
+  .flags h4, .next h4 { margin: 0 0 2mm; font-size: 10.5pt; }
+  .flags ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 1.2mm; font-size: 7.8pt; line-height: 1.32; }
+  .flags li { padding-left: 4.5mm; position: relative; }
+  .flags li::before { content: "!"; position: absolute; left: 0; top: 0; width: 3.2mm; height: 3.2mm; border-radius: 50%; background: #c26a00; color: #fff; font-size: 6.4pt; font-weight: 800; text-align: center; line-height: 3.2mm; }
+  .flags li b { display: block; }
+  .next { padding: 3.2mm 4mm; border-radius: 3mm; background: var(--charcoal); color: #e6e8ea; }
+  .next h4 { color: #fff; }
+  .next ol { margin: 0 0 2.6mm; padding: 0; list-style: none; counter-reset: s; display: grid; gap: 1.6mm; font-size: 7.9pt; line-height: 1.35; }
+  .next li { position: relative; padding-left: 6mm; }
+  .next li::before { counter-increment: s; content: counter(s); position: absolute; left: 0; top: 0; width: 4.2mm; height: 4.2mm; border-radius: 50%; background: var(--lime); color: var(--charcoal); font-size: 7pt; font-weight: 800; text-align: center; line-height: 4.2mm; }
+  .next li b { color: #fff; }
+  .cta { display: inline-block; padding: 2mm 3.5mm; border-radius: 2mm; background: #3dbe5a; color: #0e1a10; font-size: 8.6pt; font-weight: 800; }
+  .contact { margin-top: 2.5mm; font-size: 7.8pt; color: #c8ccd0; }
+</style>
+</head>
+<body>
+
+<section class="page">
+  <div class="band"></div>
+  <div class="top"><b><span>AKH</span> IT Solutions</b><span>Project scoping checklist</span></div>
+  <h1>Turn uncertainty into<br>clear decisions.</h1>
+  <p class="lead">24 questions that align everyone’s expectations and stop costly scope creep, before a single line of code is written. You don’t need every answer. You need to know which ones are still open.</p>
+
+  <div class="how">
+    <div><b>1 · Answer</b>Answer what you can and tick <strong>Known</strong> or <strong>Unsure</strong>. Unsure is useful: it shows where the risk is.</div>
+    <div><b>2 · Decide</b>Write one clear <strong>decision</strong> for each section. If you can’t, that’s the first thing to settle.</div>
+    <div><b>3 · Agree</b>Fill in the scope summary overleaf and share it with everyone involved before work begins.</div>
+  </div>
+
+  <div class="grid">
+    <div class="sec"><h2><span>01</span>The problem</h2>
+      <div class="q">What problem are we solving, in one sentence?<span class="ticks"><span><i></i>Known</span><span><i></i>Unsure</span></span></div>
+      <div class="q">What does it cost today in time, money or customers?<span class="ticks"><span><i></i>Known</span><span><i></i>Unsure</span></span></div>
+      <div class="q">Why does it need solving now rather than later?<span class="ticks"><span><i></i>Known</span><span><i></i>Unsure</span></span></div>
+      <div class="decision">Decision <em>The one problem we solve first:</em><span class="line"></span></div>
+    </div>
+    <div class="sec"><h2><span>02</span>The people</h2>
+      <div class="q">Who will use it every week, and who only occasionally?<span class="ticks"><span><i></i>Known</span><span><i></i>Unsure</span></span></div>
+      <div class="q">What are the three tasks they most need to finish?<span class="ticks"><span><i></i>Known</span><span><i></i>Unsure</span></span></div>
+      <div class="q">Any accessibility, language or device needs?<span class="ticks"><span><i></i>Known</span><span><i></i>Unsure</span></span></div>
+      <div class="decision">Decision <em>Our primary users are:</em><span class="line"></span></div>
+    </div>
+    <div class="sec"><h2><span>03</span>Success</h2>
+      <div class="q">What should be faster, cheaper or easier afterwards?<span class="ticks"><span><i></i>Known</span><span><i></i>Unsure</span></span></div>
+      <div class="q">Which number will prove it worked, and by when?<span class="ticks"><span><i></i>Known</span><span><i></i>Unsure</span></span></div>
+      <div class="q">What must never get worse (speed, security, brand)?<span class="ticks"><span><i></i>Known</span><span><i></i>Unsure</span></span></div>
+      <div class="decision">Decision <em>We’ll call it a success when:</em><span class="line"></span></div>
+    </div>
+    <div class="sec"><h2><span>04</span>First release</h2>
+      <div class="q">Which three things must work on day one?<span class="ticks"><span><i></i>Known</span><span><i></i>Unsure</span></span></div>
+      <div class="q">What can wait for a second phase?<span class="ticks"><span><i></i>Known</span><span><i></i>Unsure</span></span></div>
+      <div class="q">What is definitely not part of this project?<span class="ticks"><span><i></i>Known</span><span><i></i>Unsure</span></span></div>
+      <div class="decision">Decision <em>Our 3 day-one must-haves:</em><span class="line"></span></div>
+    </div>
+    <div class="sec"><h2><span>05</span>Systems and data</h2>
+      <div class="q">Which tools, platforms or data must it connect to?<span class="ticks"><span><i></i>Known</span><span><i></i>Unsure</span></span></div>
+      <div class="q">Who owns that data, and is it clean enough to use?<span class="ticks"><span><i></i>Known</span><span><i></i>Unsure</span></span></div>
+      <div class="q">Any security, privacy or compliance rules to follow?<span class="ticks"><span><i></i>Known</span><span><i></i>Unsure</span></span></div>
+      <div class="decision">Decision <em>Day-one integrations:</em><span class="line"></span></div>
+    </div>
+    <div class="sec"><h2><span>06</span>AI, if relevant</h2>
+      <div class="q">Which repeat task could AI take off your team?<span class="ticks"><span><i></i>Known</span><span><i></i>Unsure</span></span></div>
+      <div class="q">Where must a person review or approve the result?<span class="ticks"><span><i></i>Known</span><span><i></i>Unsure</span></span></div>
+      <div class="q">Would a simpler rule or automation do the job?<span class="ticks"><span><i></i>Known</span><span><i></i>Unsure</span></span></div>
+      <div class="decision">Decision <em>AI helps with / a person checks:</em><span class="line"></span></div>
+    </div>
+    <div class="sec"><h2><span>07</span>Budget, time and sign-off</h2>
+      <div class="q">What budget range are you comfortable with?<span class="ticks"><span><i></i>Known</span><span><i></i>Unsure</span></span></div>
+      <div class="q">Is there a date or event it must be ready for?<span class="ticks"><span><i></i>Known</span><span><i></i>Unsure</span></span></div>
+      <div class="q">Who gives feedback, and who makes the final call?<span class="ticks"><span><i></i>Known</span><span><i></i>Unsure</span></span></div>
+      <div class="decision">Decision <em>Budget, date and sign-off:</em><span class="line"></span></div>
+    </div>
+    <div class="sec"><h2><span>08</span>Guarding against scope creep</h2>
+      <div class="q">How will new ideas be captured without changing this release?<span class="ticks"><span><i></i>Known</span><span><i></i>Unsure</span></span></div>
+      <div class="q">Who can approve a change to scope, budget or date?<span class="ticks"><span><i></i>Known</span><span><i></i>Unsure</span></span></div>
+      <div class="q">What would make us pause and re-plan?<span class="ticks"><span><i></i>Known</span><span><i></i>Unsure</span></span></div>
+      <div class="decision">Decision <em>New requests are handled by:</em><span class="line"></span></div>
+    </div>
+  </div>
+
+  <div class="foot"><span><b>AKH IT Solutions</b> · Clear decisions before work begins</span><span>Page 1 of 2 · Decide</span></div>
+</section>
+
+<section class="page">
+  <div class="band"></div>
+  <div class="top"><b><span>AKH</span> IT Solutions</b><span>Scope summary</span></div>
+  <h1>Agree it once.<br>Avoid surprises later.</h1>
+  <p class="lead">Turn your decisions into one shared page. When everyone signs up to the same scope, budget and change rule, expectations stay aligned and the project stays on track.</p>
+
+  <div class="summary">
+    <h3>Our scope summary</h3>
+    <div class="row"><b>The problem<small>One sentence</small></b><span class="line"></span></div>
+    <div class="row"><b>Primary users</b><span class="line"></span></div>
+    <div class="row"><b>Success measure<small>The number, and by when</small></b><span class="line"></span></div>
+    <div class="row"><b>Day-one must-haves<small>No more than three</small></b><span class="lines"><span class="line"></span><span class="line"></span><span class="line"></span></span></div>
+    <div class="row"><b>Not in this release</b><span class="line"></span></div>
+    <div class="row"><b>Budget range</b><span class="line"></span></div>
+    <div class="row"><b>Target date</b><span class="line"></span></div>
+    <div class="row"><b>Decision-maker<small>One named person</small></b><span class="line"></span></div>
+    <div class="rule"><b>Our change rule:</b> new requests go on a “next phase” list. They only enter this release if the decision-maker agrees what they replace, or approves the extra time and budget.</div>
+    <div class="sign"><div><span>Client name, signature and date</span></div><div><span>Delivery partner name, signature and date</span></div></div>
+  </div>
+
+  <div class="two">
+    <div class="flags">
+      <h4>Scope creep red flags</h4>
+      <ul>
+        <li><b>“Can we just add one more thing?”</b>Every addition has a cost. Put it on the next-phase list first.</li>
+        <li><b>No single decision-maker</b>Feedback from five people with no final say slows everything down.</li>
+        <li><b>Success that can’t be measured</b>If you can’t say when it’s done, it never is.</li>
+        <li><b>“We’ll know it when we see it”</b>Agree examples or a prototype before the build starts.</li>
+        <li><b>A budget agreed before the scope</b>Fix the scope first, then the price, so both stay honest.</li>
+      </ul>
+    </div>
+    <div class="next">
+      <h4>What happens next</h4>
+      <ol>
+        <li><b>Free 30-minute scoping call.</b> Bring this checklist, even half filled in. We’ll help you settle the open questions.</li>
+        <li><b>Fixed quote within 48 hours.</b> One price and one timeline, agreed before any work starts.</li>
+        <li><b>Weekly demos.</b> You see working progress every week, so nothing drifts from what you agreed.</li>
+      </ol>
+      <span class="cta">Book your free scoping call →</span>
+      <p class="contact">akhitsolutions.com · info@akhitsolutions.com<br>+44 20 4529 0790</p>
+    </div>
+  </div>
+
+  <div class="foot"><span><b>AKH IT Solutions</b> · Clear decisions before work begins</span><span>Page 2 of 2 · Agree</span></div>
+</section>
+
+</body>
+</html>

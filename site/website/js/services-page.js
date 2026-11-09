@@ -67,10 +67,41 @@
 
   const form = document.getElementById('services-scoping-form');
   const formStatus = document.getElementById('scoping-submit-status');
+  // Two steps: what they need first, then how to address them and where to send the quote.
+  const panes = form ? [...form.querySelectorAll('[data-qf-pane]')] : [];
+  const stepLabel = form?.querySelector('[data-qf-step-label]');
+  const showStep = step => {
+    form.dataset.step = String(step);
+    panes.forEach(pane => { pane.hidden = pane.dataset.qfPane !== String(step); });
+    if (stepLabel) stepLabel.textContent = `Step ${step} of 2`;
+  };
+  form?.querySelector('[data-qf-next]')?.addEventListener('click', () => {
+    const briefField = document.getElementById('scoping-brief');
+    const text = briefField.value.trim();
+    briefField.setCustomValidity(text.length < 10 ? 'Tell us a little about what you need (a sentence is enough).' : '');
+    if (!briefField.reportValidity()) return;
+    const preview = form.querySelector('[data-qf-preview]');
+    preview.textContent = text.length > 160 ? text.slice(0, 157) + '…' : text;
+    showStep(2);
+    form.querySelector('.akh-qf-title')?.focus();
+    window.akhTrack?.('services_quote_step2');
+  });
+  form?.querySelector('[data-qf-back]')?.addEventListener('click', () => {
+    showStep(1);
+    document.getElementById('scoping-brief')?.focus();
+  });
+  document.getElementById('scoping-brief')?.addEventListener('input', event => event.target.setCustomValidity(''));
   form?.addEventListener('submit', event => {
     event.preventDefault();
-    if (!form.reportValidity()) return;
-    const name = String(new FormData(form).get('name') || '').trim();
+    if (form.dataset.step !== '2') { form.querySelector('[data-qf-next]')?.click(); return; }
+    const fields = [...form.querySelectorAll('[data-qf-pane="2"] input')];
+    for (const field of fields) { if (!field.reportValidity()) return; }
+    const data = new FormData(form);
+    const name = String(data.get('name') || '').trim();
+    document.dispatchEvent(new CustomEvent('akh:lead', { detail: { type: 'services_quote', name, email: String(data.get('email') || '').trim(), brief: String(data.get('brief') || '').trim() } }));
+    window.akhTrack?.('services_quote_submit');
+    form.querySelector('[data-qf-pane="2"]').hidden = true;
+    form.querySelector('.akh-qf-step').hidden = true;
     formStatus.textContent = 'Thanks' + (name ? ', ' + name : '') + '. We’ll reply within one working day with an honest view, a price and a timeline.';
     formStatus.classList.add('is-visible');
   });
