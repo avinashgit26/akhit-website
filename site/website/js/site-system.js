@@ -74,7 +74,7 @@
       const match = [...need.options].find(o => o.value.toLowerCase() === subject.toLowerCase() || o.textContent.toLowerCase().includes(subject.toLowerCase()));
       if (match) need.value = match.value;
     }
-    contact.addEventListener('submit', event => {
+    if (!contact.hasAttribute('data-two-step')) contact.addEventListener('submit', event => {
       event.preventDefault();
       if (!contact.reportValidity()) return;
       const name = contact.querySelector('[name="name"]').value.trim();
@@ -290,4 +290,103 @@ const akhSetupPanel = (drawer, cfg) => {
   const checked = ['a1', 'a2', 'a3'].findIndex((id) => document.getElementById(id) && document.getElementById(id).checked);
   go(checked > 0 ? checked : 0);
   start();
+})();
+
+/* Round 19: two-step forms (Contact, AI fit session), same flow as the Services quote form:
+   step 1 asks what they need, step 2 asks how to address them and where to reply. */
+window.akhTwoStepForm = form => {
+  if (!form || form.dataset.qfReady) return;
+  form.dataset.qfReady = '1';
+  const panes = [...form.querySelectorAll('[data-qf-pane]')];
+  const stepLabel = form.querySelector('[data-qf-step-label]');
+  const brief = form.querySelector('[data-qf-brief]');
+  const status = form.querySelector('[data-qf-status]');
+  const showStep = step => {
+    form.dataset.step = String(step);
+    panes.forEach(pane => { pane.hidden = pane.dataset.qfPane !== String(step); });
+    if (stepLabel) stepLabel.textContent = `Step ${step} of 2`;
+  };
+  form.querySelector('[data-qf-next]')?.addEventListener('click', () => {
+    const text = brief.value.trim();
+    brief.setCustomValidity(text.length < 10 ? 'Tell us a little about what you need (a sentence is enough).' : '');
+    if (!brief.reportValidity()) return;
+    const preview = form.querySelector('[data-qf-preview]');
+    if (preview) preview.textContent = text.length > 160 ? text.slice(0, 157) + '…' : text;
+    showStep(2);
+    form.querySelector('.akh-qf-title')?.focus();
+    window.akhTrack?.(`${form.dataset.leadType || 'form'}_step2`);
+  });
+  form.querySelector('[data-qf-back]')?.addEventListener('click', () => { showStep(1); brief.focus(); });
+  brief?.addEventListener('input', () => brief.setCustomValidity(''));
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    if (form.dataset.step !== '2') { form.querySelector('[data-qf-next]')?.click(); return; }
+    for (const field of form.querySelectorAll('[data-qf-pane="2"] input')) { if (!field.reportValidity()) return; }
+    const data = new FormData(form);
+    const name = String(data.get('name') || '').trim();
+    const detail = { type: form.dataset.leadType || 'form', name, email: String(data.get('email') || '').trim(), brief: String(data.get('brief') || '').trim() };
+    if (data.has('need')) detail.need = String(data.get('need'));
+    if (data.has('budget')) detail.budget = String(data.get('budget'));
+    document.dispatchEvent(new CustomEvent('akh:lead', { detail }));
+    window.akhTrack?.(`${detail.type}_submit`);
+    panes.forEach(pane => { pane.hidden = true; });
+    form.querySelector('.akh-qf-step')?.setAttribute('hidden', '');
+    if (status) {
+      status.textContent = (form.dataset.thanks || 'Thanks{name}. We’ll be in touch within one working day.').replace('{name}', name ? ', ' + name : '');
+      status.classList.add('is-visible');
+    }
+  });
+  // Voice input for the brief, where the browser supports it.
+  const mic = form.querySelector('[data-qf-mic]');
+  const voice = form.querySelector('[data-qf-voice]');
+  const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (mic && brief) {
+    if (!Recognition) {
+      mic.addEventListener('click', () => { if (voice) voice.textContent = 'Voice input is unavailable in this browser. You can type instead.'; });
+    } else {
+      const rec = new Recognition();
+      rec.lang = 'en-GB'; rec.interimResults = false; rec.continuous = false;
+      rec.onstart = () => { mic.setAttribute('aria-pressed', 'true'); if (voice) voice.textContent = 'Listening. Your browser may send audio to its speech service for transcription.'; };
+      rec.onresult = e => {
+        const spoken = e.results?.[0]?.[0]?.transcript?.trim();
+        if (spoken) { brief.value = brief.value.trim() + (brief.value.trim() ? ' ' : '') + spoken; brief.dispatchEvent(new Event('input', { bubbles: true })); }
+      };
+      rec.onerror = e => { if (voice) voice.textContent = e.error === 'not-allowed' ? 'Microphone access was not allowed. You can type instead.' : 'Voice input stopped. You can type instead.'; };
+      rec.onend = () => mic.setAttribute('aria-pressed', 'false');
+      mic.addEventListener('click', () => {
+        if (mic.getAttribute('aria-pressed') === 'true') { rec.stop(); return; }
+        if (voice) voice.textContent = '';
+        try { rec.start(); } catch (_) { if (voice) voice.textContent = 'Voice input could not start. You can type instead.'; }
+      });
+    }
+  }
+};
+document.querySelectorAll('form[data-two-step]').forEach(form => window.akhTwoStepForm(form));
+
+/* Round 19: header "Get a fixed quote" stands in whenever "Find out what we could save you" is hidden. */
+(() => {
+  const alt = document.querySelector('header.header [data-header-quote]');
+  if (!alt) return;
+  const quoteForm = document.querySelector('form#contact-form[data-lead-type="contact"]');
+  if (quoteForm && 'IntersectionObserver' in window) {
+    new IntersectionObserver(([entry]) => document.body.classList.toggle('quote-form-in-view', entry.isIntersecting), { threshold: 0.2 }).observe(quoteForm);
+  }
+  const sync = () => {
+    const b = document.body.classList;
+    const on = (b.contains('scoper-in-view') || b.contains('scoper-cta-in-view')) && !b.contains('scoper-open') && !b.contains('quote-form-in-view');
+    if (on) alt.removeAttribute('aria-hidden'); else alt.setAttribute('aria-hidden', 'true');
+    if (on) alt.removeAttribute('tabindex'); else alt.setAttribute('tabindex', '-1');
+  };
+  new MutationObserver(sync).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+  sync();
+  // Sit exactly where the main header button sits (on phones it runs slightly past the nav edge).
+  const main = alt.parentElement?.querySelector('.cta[data-open-scoper]');
+  const align = () => {
+    if (!main) return;
+    const offset = Math.round(alt.parentElement.getBoundingClientRect().right - main.getBoundingClientRect().right);
+    alt.style.right = offset + 'px';
+  };
+  align();
+  window.addEventListener('resize', align, { passive: true });
+  window.addEventListener('load', align);
 })();

@@ -10,6 +10,11 @@
     } else {
       window.addEventListener('scroll', () => syncHeader(ribbon.getBoundingClientRect().bottom > 0), { passive: true });
     }
+  } else if (header) {
+    // No ribbon: the header turns charcoal once the page is scrolled, as it did when the ribbon left the screen.
+    const syncScroll = () => header.classList.toggle('is-ribbon-gone', window.scrollY > 8);
+    syncScroll();
+    window.addEventListener('scroll', syncScroll, { passive: true });
   }
 
   const dialog = document.getElementById('waitlist-dialog');

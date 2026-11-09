@@ -230,3 +230,13 @@ All long dashes were removed from the site and replaced with commas, full stops,
   - Feedback every week
   - Learn with us courses
   - Hybrid working
+
+## Round 19 (2026-11-09)
+- Home hero: removed the "Trusted by Goddiva and City Goddess" eyebrow. Headline "Software that pays for itself." is now "Apps and AI that pay for themselves."
+- Home stats: "98% Client satisfaction rate" is now "99% On-time delivery". ⚑ Confirm the 99% figure.
+- Home Services card: "Send us the problem. We'll recommend the cheapest thing that works." is now "Tell us the problem. We'll recommend the most affordable thing that works." (Services FAQ and Ask-AI reply use the same wording.)
+- RetailWeave, no link to any retailer: home card "RetailWeave: one platform to run your retail business." / "Orders, stock, returns, sellers and finance in one place. Built by AKH, launching soon."; same on the AI Hub; the early-access pop-up and the assistant say "built by AKH IT Solutions".
+- Tradegala and StudyNest removed (Trusted-by ticker, Tradegala testimonial, meta description).
+- RetailWeave ribbon removed from every page.
+- Header: "Get a fixed quote" (Contact form) shows whenever "Find out what we could save you" is hidden.
+- Contact and AI fit session forms: two steps (what you need, then name and work email), like the Services quote form.

@@ -166,7 +166,7 @@
       return ['We’ve built a multi-brand fashion marketplace, a garment manufacturing portal and a GPT-powered shopping assistant for Goddiva.', 'See our work', 'index.html#selected-work'];
     }
     if (has(q, ['retailweave'])) {
-      return ['RetailWeave is the retail platform we built for our own businesses: orders, stock, returns, sellers and finance in one place. Join the waitlist to try it first.', 'Join the waitlist', 'service/artificial-intelligence.html#retailweave'];
+      return ['RetailWeave is the retail operations platform built by AKH: orders, stock, returns, sellers and finance in one place. Join the waitlist to try it first.', 'Join the waitlist', 'service/artificial-intelligence.html#retailweave'];
     }
     if (has(q, ['staff', 'staffing', 'developer', 'developers', 'frontend', 'front-end', 'backend', 'back-end', 'specialist', 'specialists', 'talent', 'hire', 'hiring', 'contractor', 'contractors'])) {
       return ['We can add vetted developers and specialists to your team in days, not months, from 1 week, without the cost of a long hire.', 'See staffing', 'services.html#tech-staffing'];
@@ -193,7 +193,7 @@
       return ['A fast, search-ready website that turns visitors into enquiries, typically 3–4 weeks. We also look after and improve sites you already have.', 'See websites', 'service/web-site-development.html'];
     }
     if (has(q, ['service', 'services', 'build', 'develop', 'help', 'what can you', 'start'])) {
-      return ['Tell us the result you need (more customers, less manual work, an app or AI) and we’ll recommend the cheapest thing that works.', 'Find out what we could save you', 'index.html#scoper'];
+      return ['Tell us the result you need (more customers, less manual work, an app or AI) and we’ll recommend the most affordable thing that works.', 'Find out what we could save you', 'index.html#scoper'];
     }
     return ['I can tell you what we’d build, what it costs and how long it takes. Try asking about websites, apps, AI, SEO or pricing, or answer three quick questions to see what we could save you.', 'Find out what we could save you', 'index.html#scoper'];
   };
