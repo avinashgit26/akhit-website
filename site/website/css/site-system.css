@@ -908,3 +908,15 @@ html body.homepage-page .testimonial-stage > .quote-controls:not(#akh-x) { grid-
 html body.homepage-page .quote-controls .quote-nav:not(#akh-x) { width: 40px !important; height: 40px !important; min-width: 40px; min-height: 0 !important; padding: 0 !important; }
 html body.homepage-page .quote-controls .quote-dot-r5:not(#akh-x) { width: 8px; height: 8px !important; min-height: 0 !important; min-width: 0; padding: 0 !important; }
 html body.homepage-page .quote-controls .quote-dot-r5[aria-current="true"]:not(#akh-x) { width: 22px; }
+
+/* ---------- Round 12: Services "Where are you starting?" tabs look clickable ---------- */
+html body.services-page .services-process-prompt .services-process-hint { margin-left: 6px; color: var(--akh-green-deep); font-weight: 700; }
+html body.services-page .services-process-prompt .services-process-hint::after { content: " ↓"; }
+html body.services-page .services-process-tab:not(#akh-x) { position: relative; padding-right: 64px !important; cursor: pointer; transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease, background .2s ease; }
+html body.services-page .services-process-tab:not(#akh-x)::after { content: "→"; position: absolute; top: 50%; right: 18px; display: grid; place-items: center; width: 34px; height: 34px; margin-top: -17px; border: 1.5px solid var(--akh-line); border-radius: 50%; background: #fff; color: var(--akh-green-deep); font-size: 16px; font-weight: 800; transition: transform .2s ease, background .2s ease, color .2s ease, border-color .2s ease; }
+html body.services-page .services-process-tab[aria-selected="false"]:not(#akh-x):hover,
+html body.services-page .services-process-tab[aria-selected="false"]:not(#akh-x):focus-visible { border-color: var(--akh-green-deep) !important; box-shadow: 0 10px 24px rgb(26 29 31 / 10%) !important; transform: translateY(-2px); }
+html body.services-page .services-process-tab[aria-selected="false"]:not(#akh-x):hover::after,
+html body.services-page .services-process-tab[aria-selected="false"]:not(#akh-x):focus-visible::after { background: var(--akh-green-deep); border-color: var(--akh-green-deep); color: #fff; transform: translateX(3px); }
+html body.services-page .services-process-tab[aria-selected="true"]:not(#akh-x)::after { content: "↓"; background: var(--akh-highlight); border-color: var(--akh-highlight); color: var(--akh-charcoal); }
+@media (prefers-reduced-motion: reduce) { html body.services-page .services-process-tab:not(#akh-x), html body.services-page .services-process-tab:not(#akh-x)::after { transition: none; } }
