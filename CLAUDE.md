@@ -93,7 +93,10 @@ docs/copy-changes.md             Every copy change, with items to confirm (⚑)
 - **Floating assistant on every page:** the user wanted it kept. Its matching is whole-word, so "hair" no longer reads as "ai".
 - **Testimonials:** quotes are unchanged. Goddiva's awards are shown as verified facts: winner and highly commended at the Boutique Star Awards 2025; shortlisted ×5 at the Drapers Awards 2025, not won. Sources are City Goddess's blog.
 - **Forms:** all front-end only. No backend yet; developers will wire up `submitLead()`.
-- **Stats:** the numbers (98%, 500+, £1.8m and the Services figures) are kept as they are until the user verifies them.
+- **Stats (confirmed by the user, 2026-11-09):**
+  - Home: 98% client satisfaction, 30+ projects completed, 4.9/5 client rating.
+  - Services: 30+ projects delivered, 98% client satisfaction, 4 markets reached (UK, EU incl. Ireland, US and India), 4.9/5 client rating.
+  - The old "£1.8m revenue raised" stat was dropped, because client accounts don't disclose turnover.
 - **Learn page:** price, date and partner placeholders stay until confirmed.
 - **Images:** recoloured from blue to green, with `-green` files next to the originals. The Goddiva screenshot is cropped to hide a customer email.
 - **Menu:** Services · AI · Learn with us · Careers + "Find out what we could save you". About and Work were removed from the menu at the user's request.
@@ -148,7 +151,7 @@ docs/copy-changes.md             Every copy change, with items to confirm (⚑)
 - Fill in the case-study `[metric]` placeholders, team names and photos (About), calendar booking URL and WhatsApp number.
 - Confirm "Goddiva's AI shopping assistant and e-commerce systems were built by AKH", and the scoper line "order allocation went from days to minutes".
 - Get the privacy policy legally reviewed. It's a 2022 template mentioning "www.website.com" and DoubleClick ads.
-- Verify the stats numbers, then confirm the Learn page prices, dates and partners.
+- Confirm the Learn page prices, dates and partners.
 - A Staffing image in the 3D style (the current photo doesn't match) and higher-resolution product screenshots.
 - Developers: connect the forms and `submitLead()` to a CRM, add a GA4 ID, and move the site to akhitsolutions.com.
 - Re-enable the About and Work pages when the user asks.
