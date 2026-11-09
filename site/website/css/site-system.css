@@ -969,3 +969,23 @@ html body :is(.scoper-back, .intake-reset):not(#akh-x):is(:hover, :focus-visible
 html body.homepage-page .header .nav > .cta:not(#akh-x) { transition: opacity .25s ease, transform .25s ease, visibility 0s linear 0s; }
 html body.homepage-page.scoper-in-view:not(.scoper-open) .header .nav > .cta:not(#akh-x) { opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(-6px); transition: opacity .25s ease, transform .25s ease, visibility 0s linear .25s; }
 @media (prefers-reduced-motion: reduce) { html body.homepage-page .header .nav > .cta:not(#akh-x) { transition: none !important; transform: none !important; } }
+
+/* ---------- Round 17: home hero, larger left-hand copy and a slightly narrower chat ---------- */
+@media (min-width: 1025px) {
+  html body.homepage-page .hero-grid:not(#akh-x):not(#akh-y):not(#akh-z):not(#akh-w) { grid-template-columns: minmax(0, 1fr) min(520px, 40%) !important; gap: clamp(40px, 4vw, 64px) !important; }
+  html body.homepage-page .hero-chat-stage:not(#akh-x):not(#akh-y):not(#akh-z):not(#akh-w) { max-width: 520px; }
+  html body.homepage-page .hero-copy > .eyebrow.hero-trust:not(#akh-x):not(#akh-y) { font-size: 13px !important; margin-bottom: 28px !important; }
+  html body.homepage-page .hero-copy h1:not(#akh-x):not(#akh-y) { font-size: clamp(56px, 5.3vw, 78px) !important; margin-bottom: 36px !important; }
+  html body.homepage-page .hero-copy h1 .hero-h1-sub:not(#akh-x) { margin-top: 20px; font-size: .48em; }
+  html body.homepage-page .hero-copy > p:not(.eyebrow):not(#akh-x):not(#akh-y):not(#akh-z) { max-width: 700px !important; margin-bottom: 44px !important; font-size: clamp(19px, 1.5vw, 22px) !important; line-height: 1.6 !important; }
+  html body.homepage-page .hero-copy .hero-answers:not(#akh-x):not(#akh-y):not(#akh-z):not(#akh-w) { gap: 10px !important; max-width: 700px; }
+  html body.homepage-page .hero-copy .hero-action-row:not(#akh-x):not(#akh-y) { max-width: 700px; }
+  html body.homepage-page .hero-copy .hero-answer:not(#akh-x):not(#akh-y):not(#akh-z):not(#akh-w) { min-height: 50px !important; padding: 10px 14px !important; font-size: 15px !important; }
+}
+@container (min-width: 640px) and (max-width: 689px) {
+  html body.homepage-page .hero-copy .hero-answer:not(#akh-x):not(#akh-y):not(#akh-z):not(#akh-w) { padding: 10px 12px !important; font-size: 14px !important; }
+}
+@container (max-width: 639px) {
+  html body.homepage-page .hero-copy .hero-answers:not(#akh-x):not(#akh-y):not(#akh-z):not(#akh-w) { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; align-items: stretch !important; gap: 12px !important; margin-top: 0 !important; }
+  html body.homepage-page .hero-copy .hero-answer:not(#akh-x):not(#akh-y):not(#akh-z):not(#akh-w) { padding: 10px 16px !important; white-space: normal !important; }
+}
