@@ -504,6 +504,20 @@
     if (chip) { event.preventDefault(); openScoper(chip.dataset.scoperPath, chip.textContent.trim(), chip); }
   });
 
+  // Every page: the header button hides while the same button is on screen in the body or footer,
+  // so two identical buttons never show at once.
+  if ('IntersectionObserver' in window) {
+    const ctas = [...document.querySelectorAll('[data-open-scoper]')].filter(el => !el.closest('header.header, .assistant-prompts, .lc-assistant-prompts, .scoper-drawer'));
+    if (ctas.length) {
+      const visible = new Set();
+      const ctaObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => { if (entry.isIntersecting) visible.add(entry.target); else visible.delete(entry.target); });
+        document.body.classList.toggle('scoper-cta-in-view', visible.size > 0);
+      }, { threshold: 0.6 });
+      ctas.forEach(el => ctaObserver.observe(el));
+    }
+  }
+
   if (hero) {
     hero.start();
     if (location.hash === '#scoper') setTimeout(() => {

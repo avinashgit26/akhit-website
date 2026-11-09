@@ -989,3 +989,8 @@ html body.homepage-page.scoper-in-view:not(.scoper-open) .header .nav > .cta:not
   html body.homepage-page .hero-copy .hero-answers:not(#akh-x):not(#akh-y):not(#akh-z):not(#akh-w) { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; align-items: stretch !important; gap: 12px !important; margin-top: 0 !important; }
   html body.homepage-page .hero-copy .hero-answer:not(#akh-x):not(#akh-y):not(#akh-z):not(#akh-w) { padding: 10px 16px !important; white-space: normal !important; }
 }
+
+/* ---------- Round 18: every page, header button hides while the same button is on screen ---------- */
+html body header.header .nav > .cta:not(#akh-x) { transition: opacity .25s ease, transform .25s ease, visibility 0s linear 0s; }
+html body:is(.scoper-in-view, .scoper-cta-in-view):not(.scoper-open) header.header .nav > .cta:not(#akh-x):not(#akh-y) { opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(-6px); transition: opacity .25s ease, transform .25s ease, visibility 0s linear .25s; }
+@media (prefers-reduced-motion: reduce) { html body header.header .nav > .cta:not(#akh-x):not(#akh-y) { transition: none !important; transform: none !important; } }
