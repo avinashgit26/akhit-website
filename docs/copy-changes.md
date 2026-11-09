@@ -205,3 +205,28 @@ All long dashes were removed from the site and replaced with commas, full stops,
   - How hiring works: "Three steps, and an answer either way." It includes the line ⚑ "Applications take about five minutes".
   - What you can expect: ⚑ includes "Access to our Learn with us courses".
 - **Client stories:** the Goddiva awards now show only while the City Goddess quote is on screen. Tradegala and Kugans have no published awards, so none are shown for them.
+
+
+## Round 8 update
+
+- **Footer, every page:** "UK software studio for retail and growing businesses. Fixed quotes, honest advice." now reads "Software, apps and AI that pay for themselves. Built for businesses in every industry, with a fixed quote before we start."
+- **Learn, course providers:**
+  - Each logo opens a panel with two coached courses. Every course lists outcomes, a weekly structure, a capstone project and the certificate.
+  - ⚑ Confirm the course list, durations and any certificate wording once partnerships are agreed:
+
+    | Provider | Courses |
+    |---|---|
+    | Coursera | Front-end developer (Meta track); Machine learning foundations (DeepLearning.AI / Stanford) |
+    | Google | AI Essentials at work; Data analytics |
+    | Microsoft Learn | Power BI dashboards (PL-300); Azure AI fundamentals (AI-900) |
+    | AWS Skill Builder | Cloud foundations (Cloud Practitioner); Generative AI for builders (AI Practitioner) |
+    | IBM SkillsBuild | AI fundamentals; Data analysis with Python |
+    | HubSpot Academy | Inbound marketing; SEO that brings customers |
+
+- **Careers, "What you can expect":** six perk cards:
+  - Mentoring from senior engineers
+  - Work across many industries
+  - Live, portfolio-worthy projects
+  - Feedback every week
+  - Learn with us courses
+  - Hybrid working

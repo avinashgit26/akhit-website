@@ -128,6 +128,19 @@ docs/copy-changes.md             Every copy change, with items to confirm (⚑)
   - "AI" inside the orb, with the hover line "Got a question? Ask our AI."
   - Learn prices and provider logos (`website/images/learn/partners/`).
   - Careers rewritten, with in-page role panels (`#software-engineer`, `#customer-service-assistant`) and a front-end apply form.
+- Rounds 6–9 (2026-11-09):
+  - "Coming soon" pills on RetailWeave (Home Results card, AI Hub section).
+  - Home hero copy centred against the chat; chat is 560px wide on wide screens.
+  - Quick-start buttons go on one line via a container query.
+  - Dark "AI" on the orb.
+  - Header links hidden below 1180px.
+  - Sections alternate white and warm stone (`--akh-stone: #FAF8F5`, class `akh-band-alt` on every second section).
+  - New footer pitch.
+  - Learn:
+    - colour provider logos, three per row, opening course panels (`#courses-<provider>`, two coached courses each);
+    - a 5-card coverflow hero carousel.
+  - Careers perk cards.
+  - A prominent "× Close" on the slide-in panels (shared `akhSetupPanel()` in `site-system.js`).
 
 ## Left to do / confirm
 

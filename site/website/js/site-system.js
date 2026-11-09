@@ -104,45 +104,57 @@
   sync();
 })();
 
-/* Round 5b: careers role panel (details + apply form, front-end only). */
-(function () {
-  const drawer = document.getElementById('role-drawer');
-  if (!drawer) return;
+/* Round 5b/8: slide-in panels (Careers roles, Learn course providers). */
+const akhSetupPanel = (drawer, cfg) => {
   const panel = drawer.querySelector('.akh-role-panel');
-  const roles = [...drawer.querySelectorAll('.akh-role')];
+  const items = [...drawer.querySelectorAll('.akh-role')];
   let lastFocus = null;
+  const key = (el) => el.dataset[cfg.dataKey];
 
   const open = (slug, fromHash) => {
-    const role = roles.find((r) => r.dataset.role === slug);
-    if (!role) return;
+    const item = items.find((r) => key(r) === slug);
+    if (!item) return;
     lastFocus = document.activeElement;
-    roles.forEach((r) => { r.hidden = r !== role; });
+    items.forEach((r) => { r.hidden = r !== item; });
     drawer.hidden = false;
     document.documentElement.classList.add('akh-role-open');
     panel.setAttribute('aria-labelledby', `${slug}-title`);
     panel.scrollTop = 0;
     if (!fromHash && location.hash !== `#${slug}`) history.pushState(null, '', `#${slug}`);
-    requestAnimationFrame(() => role.querySelector('h2').setAttribute('tabindex', '-1') || role.querySelector('h2').focus());
-    if (window.akhTrack) window.akhTrack('careers_role_open', { role: slug });
+    requestAnimationFrame(() => { const h = item.querySelector('h2'); h.setAttribute('tabindex', '-1'); h.focus(); });
+    if (window.akhTrack) window.akhTrack(cfg.event, { item: slug });
   };
-  const close = (fromHash) => {
+  const close = (fromHash, keepFocus) => {
     if (drawer.hidden) return;
     drawer.hidden = true;
     document.documentElement.classList.remove('akh-role-open');
-    if (!fromHash && roles.some((r) => location.hash === `#${r.dataset.role}`)) history.pushState(null, '', location.pathname + location.search);
-    if (lastFocus) lastFocus.focus();
+    if (!fromHash && items.some((r) => location.hash === `#${key(r)}`)) history.pushState(null, '', location.pathname + location.search);
+    if (lastFocus && !keepFocus) lastFocus.focus();
   };
   const fromHash = () => {
     const slug = location.hash.slice(1);
-    if (roles.some((r) => r.dataset.role === slug)) open(slug, true); else close(true);
+    if (items.some((r) => key(r) === slug)) open(slug, true); else close(true);
   };
 
   document.addEventListener('click', (event) => {
-    const opener = event.target.closest('[data-role-open]');
-    if (opener) { event.preventDefault(); open(opener.dataset.roleOpen); return; }
-    if (event.target.closest('[data-role-close]')) { event.preventDefault(); close(); return; }
+    const opener = event.target.closest(`[${cfg.openAttr}]`);
+    if (opener) { event.preventDefault(); open(opener.getAttribute(cfg.openAttr)); return; }
+    if (drawer.hidden) return;
+    if (event.target.closest('[data-role-close]') && drawer.contains(event.target)) { event.preventDefault(); close(); return; }
+    const leave = event.target.closest('[data-panel-leave]');
+    if (leave && drawer.contains(leave)) {
+      event.preventDefault();
+      close(false, true);
+      const target = document.querySelector(leave.getAttribute('href'));
+      const select = leave.dataset.selectId && document.getElementById(leave.dataset.selectId);
+      if (select && leave.dataset.selectValue) select.value = leave.dataset.selectValue;
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const first = target && target.querySelector('input, select, textarea, button');
+      if (first) first.focus({ preventScroll: true });
+      return;
+    }
     const jump = event.target.closest('.akh-role-jump');
-    if (jump) {
+    if (jump && drawer.contains(jump)) {
       event.preventDefault();
       const form = document.querySelector(jump.getAttribute('href'));
       if (form) { form.scrollIntoView({ behavior: 'smooth', block: 'start' }); const first = form.querySelector('input'); if (first) first.focus({ preventScroll: true }); }
@@ -161,6 +173,17 @@
   window.addEventListener('hashchange', fromHash);
   window.addEventListener('popstate', fromHash);
   fromHash();
+};
+
+(function () {
+  const courses = document.getElementById('course-drawer');
+  if (courses) akhSetupPanel(courses, { dataKey: 'course', openAttr: 'data-course-open', event: 'learn_provider_open' });
+})();
+
+(function () {
+  const drawer = document.getElementById('role-drawer');
+  if (!drawer) return;
+  akhSetupPanel(drawer, { dataKey: 'role', openAttr: 'data-role-open', event: 'careers_role_open' });
 
   const MAX = 5 * 1024 * 1024;
   const okType = (name) => /\.(pdf|docx?|DOCX?|PDF)$/.test(name);
@@ -207,4 +230,64 @@
       done.focus();
     });
   });
+})();
+
+/* Round 9: Learn hero coverflow carousel of sample learning paths. */
+(function () {
+  const root = document.querySelector('[data-cf]');
+  if (!root) return;
+  const cards = [...root.querySelectorAll('.akh-cf-stage > .pc')];
+  const dotsWrap = root.querySelector('.akh-cf-dots');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const total = cards.length;
+  let current = 0;
+  let timer = 0;
+
+  const dots = cards.map((card, i) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'akh-cf-dot';
+    dot.setAttribute('aria-label', `Show ${card.querySelector('h3').textContent}`);
+    dot.addEventListener('click', () => { go(i); restart(); });
+    dotsWrap.appendChild(dot);
+    return dot;
+  });
+
+  function go(index) {
+    current = (index + total) % total;
+    cards.forEach((card, i) => {
+      let pos = (i - current + total) % total;
+      if (pos > Math.floor(total / 2)) pos -= total;
+      const center = pos === 0;
+      const adjacent = Math.abs(pos) === 1;
+      card.style.transform = `translateX(${pos * 45}%) scale(${center ? 1 : adjacent ? 0.85 : 0.7}) rotateY(${pos * -10}deg)`;
+      card.style.zIndex = center ? 10 : adjacent ? 5 : 1;
+      card.style.opacity = center ? 1 : adjacent ? 0.4 : 0;
+      card.style.filter = center ? 'none' : 'blur(3px)';
+      card.style.visibility = Math.abs(pos) > 1 ? 'hidden' : 'visible';
+      card.setAttribute('aria-hidden', String(!center));
+      card.inert = !center;
+    });
+    dots.forEach((dot, i) => dot.setAttribute('aria-current', String(i === current)));
+  }
+  const stop = () => { clearInterval(timer); timer = 0; };
+  const start = () => { stop(); if (!reduce) timer = setInterval(() => go(current + 1), 4000); };
+  const restart = () => { if (timer) start(); };
+
+  root.querySelector('[data-cf-prev]').addEventListener('click', () => { go(current - 1); restart(); });
+  root.querySelector('[data-cf-next]').addEventListener('click', () => { go(current + 1); restart(); });
+  root.addEventListener('mouseenter', stop);
+  root.addEventListener('mouseleave', start);
+  root.addEventListener('focusin', stop);
+  root.addEventListener('focusout', (e) => { if (!root.contains(e.relatedTarget)) start(); });
+  document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+
+  // Hero audience tabs jump to their card.
+  ['a1', 'a2', 'a3'].forEach((id, i) => {
+    const radio = document.getElementById(id);
+    if (radio) radio.addEventListener('change', () => { if (radio.checked) { go(i); restart(); } });
+  });
+  const checked = ['a1', 'a2', 'a3'].findIndex((id) => document.getElementById(id) && document.getElementById(id).checked);
+  go(checked > 0 ? checked : 0);
+  start();
 })();
