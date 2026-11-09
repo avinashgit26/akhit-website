@@ -58,7 +58,7 @@
   <link rel="stylesheet" href="website/css/annotation-refinements.css?v=20261106-gg">
   <link rel="stylesheet" href="website/css/spacing-refinements.css?v=20261106-gg">
   <link rel="stylesheet" href="website/css/section-bands.css?v=20261106-gg">
-  <link rel="stylesheet" href="website/css/site-system.css?v=20261109-r10">
+  <link rel="stylesheet" href="website/css/site-system.css?v=20261109-r11">
 </head>
 <body class="homepage-page" data-assistant-context="home">
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -161,7 +161,7 @@
 <article class="quote-card is-current" aria-label="1 of 3" data-client="city-goddess"><div class="quote-rating" role="img" aria-label="5 out of 5 stars">★★★★★</div><span class="quote-mark" aria-hidden="true">“</span><p>We recently hired the AKH IT solutions company to develop a custom web application for our business. The team was extremely knowledgeable and worked closely with us to understand our needs and requirements. The end result was a high-quality, user-friendly application that greatly improved our operations.</p><div class="quote-person"><svg class="avatar" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="32" fill="#e4f3e8"/><path d="M8 62c3-13 11-20 24-20s21 7 24 20" fill="#6b7076"/><ellipse cx="32" cy="30" rx="12" ry="15" fill="#c98c6c"/><path d="M19 29c-1-13 5-21 14-21s14 8 13 22l-4 4-3-13c-7 0-12-4-15-8-1 8-3 12-5 16z" fill="#3f4246"/></svg><div><h3>Balu Manda</h3><span>Business Development Manager, City Goddess</span></div></div></article>
 <article class="quote-card" aria-label="2 of 3" data-client="tradegala"><div class="quote-rating" role="img" aria-label="5 out of 5 stars">★★★★★</div><span class="quote-mark" aria-hidden="true">“</span><p>Our company has been working with the AKH IT solutions team on a number of web app development projects, and we've been consistently impressed with their expertise and innovative approach to problem-solving. We're excited to continue working with them on future projects.</p><div class="quote-person"><svg class="avatar" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="32" fill="#f1e4dd"/><path d="M8 62c3-13 11-20 24-20s21 7 24 20" fill="#ad7059"/><ellipse cx="32" cy="30" rx="12" ry="15" fill="#e9bd9e"/><path d="M19 30c0-13 5-21 14-21 10 0 15 8 13 23l-4 5-3-15c-6 0-11-4-15-8-1 6-3 11-5 16z" fill="#685344"/></svg><div><h3>Amber Domenech Paty</h3><span>Head of E-commerce, Tradegala</span></div></div></article>
 <article class="quote-card" aria-label="3 of 3" data-client="kugans"><div class="quote-rating" role="img" aria-label="5 out of 5 stars">★★★★★</div><span class="quote-mark" aria-hidden="true">“</span><p>As a start-up, we needed a reliable partner to help us build out our digital product offering. This team has been a great fit for us, offering a full range of services from web development to data analytics. Their team is responsive, flexible, and dedicated to delivering high-quality work.</p><div class="quote-person"><svg class="avatar" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="32" fill="#e7ece5"/><path d="M8 62c3-13 11-20 24-20s21 7 24 20" fill="#667e69"/><ellipse cx="32" cy="30" rx="12" ry="15" fill="#a96e50"/><path d="M19 29c0-13 5-20 14-20 9 0 14 7 13 20l-4 5-3-14c-6 0-12-3-15-7-1 6-3 10-5 13z" fill="#2b2d2f"/></svg><div><h3>Shangami S Muthumani</h3><span>Business Development Manager, Kugans</span></div></div></article>
-</div></div></div></div><div class="akh-awards akh-awards--ribbon" aria-labelledby="awards-title" data-awards-for="city-goddess">
+</div></div><div class="quote-controls"><button class="quote-nav" type="button" data-quote-prev aria-label="Previous client story">‹</button><div class="quote-dots-r5" role="group" aria-label="Choose a client story"></div><button class="quote-nav" type="button" data-quote-next aria-label="Next client story">›</button></div></div></div><div class="akh-awards akh-awards--ribbon" aria-labelledby="awards-title" data-awards-for="city-goddess">
   <div class="akh-awards-head"><p class="akh-eyebrow">Awards our clients won</p><h3 id="awards-title">Award-winning brands run on what we build.</h3><p>Goddiva’s AI shopping assistant and e-commerce systems were built by AKH. Here’s what the brand has achieved since.</p></div>
   <div class="akh-grid akh-grid--3">
     <article class="akh-award"><span class="akh-award-badge">Winner</span><h4>Women’s Brand of the Year</h4><p>Goddiva · Boutique Star Awards 2025</p><a href="https://www.citygoddess.co.uk/blogs/e-commerce/goddiva-shines-bright-dual-wins-for-british-brand-of-the-year-and-women-s-brand-of-the-year-2025" target="_blank" rel="noopener noreferrer">Source ↗</a></article>
@@ -220,9 +220,19 @@
       const stop=()=>{clearInterval(timer);timer=0};
       const start=()=>{stop();if(!reduceMotion&&!viewport.matches(':hover')&&!document.hidden)timer=setInterval(()=>update(current+1),7600)};
       viewport.addEventListener('mouseenter',stop);viewport.addEventListener('mouseleave',start);
+      const dotsWrap=document.querySelector('.quote-dots-r5');
+      const dots=cards.map((card,i)=>{const b=document.createElement('button');b.type='button';b.className='quote-dot-r5';b.setAttribute('aria-label','Show story '+(i+1)+' of '+cards.length);b.addEventListener('click',()=>{update(i);start()});dotsWrap&&dotsWrap.appendChild(b);return b});
+      const sync=()=>dots.forEach((d,i)=>d.setAttribute('aria-current',String(i===current)));
+      const go=step=>{update(current+step);sync();start()};
+      document.querySelector('[data-quote-prev]')?.addEventListener('click',()=>go(-1));
+      document.querySelector('[data-quote-next]')?.addEventListener('click',()=>go(1));
+      viewport.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){e.preventDefault();go(-1)}else if(e.key==='ArrowRight'){e.preventDefault();go(1)}});
+      let touchX=null;viewport.addEventListener('touchstart',e=>{touchX=e.touches[0].clientX},{passive:true});
+      viewport.addEventListener('touchend',e=>{if(touchX===null)return;const dx=e.changedTouches[0].clientX-touchX;touchX=null;if(Math.abs(dx)>40)go(dx<0?1:-1)},{passive:true});
+      new MutationObserver(sync).observe(cards[0].parentElement,{subtree:true,attributes:true,attributeFilter:['class']});
       document.addEventListener('visibilitychange',()=>document.hidden?stop():start());
       window.addEventListener('resize',()=>update(current),{passive:true});
-      update(0);start();
+      update(0);sync();start();
     })();
   </script>
   

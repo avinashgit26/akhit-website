@@ -886,3 +886,25 @@ html body.learn-with-us-page .learn-reference .stagewrap .chip:not(#akh-x) { z-i
 /* ---------- Round 10 ---------- */
 /* Careers role filters: a filtered-out card must actually hide (.lc-job sets display:flex) */
 html body.careers-page .lc-job[hidden]:not(#akh-x) { display: none !important; }
+/* Learn hero: the cohort chip travels with each carousel card */
+html body.learn-with-us-page .learn-reference .stagewrap > .chip:not(#akh-x) { display: none !important; }
+html body.learn-with-us-page .learn-reference .akh-cf-stage > .pc:not(#akh-x) { position: relative; }
+html body.learn-with-us-page .learn-reference .akh-cf-stage > .pc > .pc-chip:not(#akh-x) { position: absolute; top: -16px; left: -18px; z-index: 2; }
+@media (max-width: 600px) { html body.learn-with-us-page .learn-reference .akh-cf-stage > .pc > .pc-chip:not(#akh-x) { left: -6px; top: -14px; font-size: 12px; padding: 7px 12px; } }
+/* Slimmer RetailWeave strip */
+html body .launch-bar .launch-inner:not(#akh-x):not(#akh-y):not(#akh-z) { min-height: 32px !important; padding-block: 2px !important; }
+html body .launch-bar .launch-mascot:not(#akh-x):not(#akh-y):not(#akh-z) { width: 20px !important; height: 20px !important; }
+html body .launch-bar .launch-button:not(#akh-x):not(#akh-y):not(#akh-z) { min-height: 24px !important; padding: 0 11px !important; font-size: 11.5px !important; }
+html body .launch-bar .launch-copy strong:not(#akh-x):not(#akh-y):not(#akh-z) { font-size: 13px !important; }
+html body .launch-bar .launch-description:not(#akh-x):not(#akh-y):not(#akh-z) { font-size: 12.5px !important; }
+/* Home testimonials: manual controls */
+.quote-controls { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 18px; }
+.quote-nav { display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border: 1px solid var(--akh-line); border-radius: 50%; background: #fff; color: var(--akh-ink); font-size: 22px; line-height: 1; cursor: pointer; transition: background .2s ease, color .2s ease, border-color .2s ease; }
+.quote-nav:hover, .quote-nav:focus-visible { background: var(--akh-charcoal); border-color: var(--akh-charcoal); color: #fff; }
+.quote-dots-r5 { display: flex; gap: 8px; }
+.quote-dot-r5 { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 999px; background: #c4c8cc; cursor: pointer; transition: width .3s ease, background .3s ease; }
+.quote-dot-r5[aria-current="true"] { width: 22px; background: var(--akh-green-deep); }
+html body.homepage-page .testimonial-stage > .quote-controls:not(#akh-x) { grid-column: 1; justify-self: center; }
+html body.homepage-page .quote-controls .quote-nav:not(#akh-x) { width: 40px !important; height: 40px !important; min-width: 40px; min-height: 0 !important; padding: 0 !important; }
+html body.homepage-page .quote-controls .quote-dot-r5:not(#akh-x) { width: 8px; height: 8px !important; min-height: 0 !important; min-width: 0; padding: 0 !important; }
+html body.homepage-page .quote-controls .quote-dot-r5[aria-current="true"]:not(#akh-x) { width: 22px; }
