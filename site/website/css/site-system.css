@@ -882,3 +882,7 @@ html body.learn-with-us-page .learn-reference .akh-cf-stage > .pc:not(#akh-x) { 
 @media (max-width: 600px) { html body.learn-with-us-page .learn-reference .akh-cf-stage > .pc:not(#akh-x) { width: 86%; } }
 @media (prefers-reduced-motion: reduce) { html body.learn-with-us-page .learn-reference .akh-cf-stage > .pc:not(#akh-x) { transition: none; } }
 html body.learn-with-us-page .learn-reference .stagewrap .chip:not(#akh-x) { z-index: 12; }
+
+/* ---------- Round 10 ---------- */
+/* Careers role filters: a filtered-out card must actually hide (.lc-job sets display:flex) */
+html body.careers-page .lc-job[hidden]:not(#akh-x) { display: none !important; }
