@@ -462,9 +462,9 @@
   let hero = heroRoot ? createScoper(heroRoot) : null;
   let drawer = null; let drawerScoper = null; let lastFocus = null;
 
-  const openDrawer = (path = null, label = null) => {
+  const openDrawer = (path = null, label = null, opener = null) => {
     if (!drawer) { drawer = buildDrawer(); drawerScoper = createScoper(drawer.querySelector('[data-scoper]')); drawer.querySelectorAll('[data-scoper-close]').forEach(b => b.addEventListener('click', closeDrawer)); }
-    lastFocus = document.activeElement;
+    lastFocus = opener || document.activeElement;
     drawer.hidden = false;
     document.body.classList.add('scoper-open');
     if (path) drawerScoper.start(path, label); else drawerScoper.ensureStarted();
@@ -474,30 +474,47 @@
     if (!drawer) return;
     drawer.hidden = true;
     document.body.classList.remove('scoper-open');
-    lastFocus?.focus?.();
+    lastFocus?.focus?.({ preventScroll: true });
   };
   document.addEventListener('keydown', event => { if (event.key === 'Escape' && drawer && !drawer.hidden) closeDrawer(); });
 
-  const openScoper = (path = null, label = null) => {
-    if (hero) {
+  // Home: the hero chat answers only while it is on screen. Anywhere lower down, the same side panel
+  // as every other page opens, so the click never just scrolls back to the top.
+  const heroInView = () => {
+    if (!heroRoot) return false;
+    const r = heroRoot.getBoundingClientRect();
+    const visible = Math.min(r.bottom, window.innerHeight) - Math.max(r.top, 0);
+    return visible >= Math.min(r.height, window.innerHeight) * 0.5;
+  };
+  const openScoper = (path = null, label = null, opener = null) => {
+    if (hero && heroInView()) {
       if (path) hero.start(path, label); else hero.ensureStarted();
       document.getElementById('scoper')?.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
       setTimeout(() => hero.focusFirst(), 450);
     } else {
-      openDrawer(path, label);
+      openDrawer(path, label, opener);
     }
   };
   window.akhOpenScoper = openScoper;
 
   document.addEventListener('click', event => {
     const opener = event.target instanceof Element ? event.target.closest('[data-open-scoper]') : null;
-    if (opener) { event.preventDefault(); openScoper(); return; }
+    if (opener) { event.preventDefault(); openScoper(null, null, opener); return; }
     const chip = event.target instanceof Element ? event.target.closest('[data-scoper-path]') : null;
-    if (chip) { event.preventDefault(); openScoper(chip.dataset.scoperPath, chip.textContent.trim()); }
+    if (chip) { event.preventDefault(); openScoper(chip.dataset.scoperPath, chip.textContent.trim(), chip); }
   });
 
   if (hero) {
     hero.start();
-    if (location.hash === '#scoper') setTimeout(() => openScoper(), 300);
+    if (location.hash === '#scoper') setTimeout(() => {
+      document.getElementById('scoper')?.scrollIntoView({ block: 'center' });
+      setTimeout(() => hero.focusFirst(), 300);
+    }, 300);
+    // Header button hides while the hero chat is on screen (it would point at what is already there).
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(entries => {
+        entries.forEach(entry => document.body.classList.toggle('scoper-in-view', entry.isIntersecting));
+      }, { threshold: 0.25 }).observe(heroRoot);
+    }
   }
 })();
