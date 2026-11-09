@@ -766,3 +766,31 @@ html.akh-role-open, html.akh-role-open body { overflow: hidden; }
 @media (min-width: 1240px) and (max-width: 1300px) {
   html body.homepage-page .hero-copy .hero-answer:not(#akh-x):not(#akh-y) { padding: 8px 11px !important; font-size: 12.5px !important; }
 }
+
+/* ---------- Round 6 ---------- */
+/* Shared "Coming soon" pill (same language as the RetailWeave strip) */
+.akh-soon-badge { display: inline-flex; align-items: center; gap: 7px; padding: 5px 11px; border-radius: 999px; background: var(--akh-charcoal); color: var(--akh-highlight); font-size: 11px; font-weight: 850; letter-spacing: .1em; line-height: 1; text-transform: uppercase; white-space: nowrap; }
+.akh-soon-badge i { width: 7px; height: 7px; border-radius: 50%; background: var(--akh-highlight); animation: rw-pulse 1.6s ease-out infinite; }
+@media (prefers-reduced-motion: reduce) { .akh-soon-badge i { animation: none; } }
+
+/* 1. Home Results: RetailWeave card */
+html body.homepage-page #selected-work .work-card--inhouse:not(#akh-x) { border-color: rgb(35 122 56 / 35%) !important; background: #f6fbf7 !important; }
+html body.homepage-page #selected-work .work-card--inhouse > a:first-child:not(#akh-x) { position: relative; }
+html body.homepage-page #selected-work .work-card--inhouse .akh-soon-badge { position: absolute; top: 14px; left: 14px; z-index: 1; box-shadow: 0 4px 12px rgb(26 29 31 / 18%); }
+html body.homepage-page #selected-work .work-card--inhouse .work-copy:not(#akh-x) { background: #f6fbf7 !important; }
+
+/* 2. Home hero: centre the left column against the chat; trim bottom padding */
+@media (min-width: 1025px) {
+  html body.homepage-page .hero-copy:not(#akh-x):not(#akh-y) { display: flex !important; flex-direction: column !important; justify-content: center !important; }
+  html body.homepage-page section.hero:not(#akh-x) { padding-bottom: 34px !important; }
+}
+
+/* 3. AI Hub: RetailWeave section */
+html body.ai-hub-page section#retailweave:not(#akh-x):not(#akh-y) { background: #f4faf5 !important; border-top: 2px solid rgb(35 122 56 / 45%) !important; }
+html body.ai-hub-page section#retailweave .akh-soon-badge { margin-bottom: 16px; }
+
+/* 4. AI orb: dark, bold "AI" for contrast */
+html body .assistant-launcher-orb .assistant-orb-label:not(#akh-x) { color: #0e1a10; font-size: 20px; font-weight: 900; text-shadow: 0 0 6px rgb(255 255 255 / 85%), 0 0 2px rgb(255 255 255 / 90%); }
+@media (max-width: 760px) { html body .assistant-launcher-orb .assistant-orb-label:not(#akh-x) { font-size: 17px; } }
+/* Header: below 1180px show only the menu button (an older rule kept the links visible) */
+@media (max-width: 1180px) { html body header.header .links:not(#akh-x):not(#akh-y) { display: none !important; } }
