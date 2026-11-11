@@ -1446,3 +1446,20 @@ section[data-events-section][hidden] { display: none !important; }
 @media (prefers-reduced-motion: reduce) { .akh-event-teaser, .akh-events-filter button { transition: none; } }
 @media (max-width: 1000px) { .akh-event-featured { grid-template-columns: 1fr; } .akh-events-grid, .akh-events-teasers { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 640px) { .akh-events-grid, .akh-events-teasers { grid-template-columns: 1fr; } }
+
+/* News & events hero: stage photo on the right, fading into charcoal behind the headline */
+html body.interior-page .page-hero.akh-news-hero:not(#akh-x) {
+  position: relative; display: flex; align-items: center; min-height: clamp(460px, 42vw, 620px);
+  background: linear-gradient(90deg, #1e2124 0%, #1e2124 30%, rgb(30 33 36 / 82%) 46%, rgb(30 33 36 / 20%) 72%, rgb(30 33 36 / 0%) 100%),
+              url("../images/events/news-hero-stage.jpg?v=ceo2") right center / cover no-repeat, #1e2124 !important;
+}
+html body.interior-page .page-hero.akh-news-hero .page-hero-copy:not(#akh-x) { position: relative; z-index: 1; width: var(--page-width) !important; }
+html body.interior-page .page-hero.akh-news-hero .page-hero-copy > :is(h1, p):not(#akh-x) { max-width: 620px; }
+@media (max-width: 860px) {
+  html body.interior-page .page-hero.akh-news-hero:not(#akh-x) {
+    min-height: 0;
+    padding-top: calc(clamp(280px, 80vw, 420px) + 8px) !important;
+    background: linear-gradient(180deg, rgb(30 33 36 / 0%) 0, rgb(30 33 36 / 0%) calc(clamp(280px, 80vw, 420px) - 70px), #1e2124 clamp(280px, 80vw, 420px)),
+                url("../images/events/news-hero-stage.jpg?v=ceo2") 90% 0 / auto clamp(280px, 80vw, 420px) no-repeat, #1e2124 !important;
+  }
+}
