@@ -638,3 +638,12 @@ document.addEventListener('toggle', event => {
   document.addEventListener('focusin', () => setTimeout(sync, 60));
   document.addEventListener('focusout', () => setTimeout(sync, 120));
 })();
+
+/* Round 21: gentle reveal for case study blocks marked [data-akh-reveal]. */
+(() => {
+  const items = document.querySelectorAll('[data-akh-reveal]');
+  if (!items.length) return;
+  if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) { items.forEach(el => el.classList.add('is-visible')); return; }
+  const io = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); } }), { threshold: 0.12 });
+  items.forEach(el => io.observe(el));
+})();
