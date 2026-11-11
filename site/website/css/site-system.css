@@ -1258,3 +1258,11 @@ html body.services-page .services-proof-grid--5 .services-proof-item:last-child:
   html body.services-page .services-proof-grid--5 .services-proof-item:nth-child(2n):not(#akh-x):not(#akh-y) { border-right: 0; }
   html body.services-page .services-proof-grid--5 .services-proof-item:nth-child(5):not(#akh-x):not(#akh-y) { grid-column: 1 / -1; border-right: 0; }
 }
+
+/* Stats bands: numbers sit on one line. Content starts at the top of each box instead of
+   being centred, so a stat with an extra note line no longer lifts its number. */
+html body.homepage-page .proof-grid--4 .proof-item:nth-child(n):not(#akh-x):not(#akh-y):not(#akh-z) { justify-content: flex-start !important; align-content: start !important; }
+html body.services-page .services-proof-grid--5 .services-proof-item:nth-child(n):not(#akh-x):not(#akh-y):not(#akh-z) { justify-content: start !important; align-content: start !important; align-self: stretch; }
+@media (max-width: 760px) {
+  html body.homepage-page .proof-grid--4 .proof-item:nth-child(n):not(#akh-x):not(#akh-y):not(#akh-z) { padding-top: 5px !important; border-top: 0 !important; }
+}
