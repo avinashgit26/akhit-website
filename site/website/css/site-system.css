@@ -1451,7 +1451,7 @@ section[data-events-section][hidden] { display: none !important; }
 html body.interior-page .page-hero.akh-news-hero:not(#akh-x) {
   position: relative; display: flex; align-items: center; min-height: clamp(460px, 42vw, 620px);
   background: linear-gradient(90deg, #1e2124 0%, #1e2124 30%, rgb(30 33 36 / 82%) 46%, rgb(30 33 36 / 20%) 72%, rgb(30 33 36 / 0%) 100%),
-              url("../images/events/news-hero-stage.jpg?v=ceo2") right center / cover no-repeat, #1e2124 !important;
+              url("../images/events/news-hero-stage.jpg?v=stage22") right center / cover no-repeat, #1e2124 !important;
 }
 html body.interior-page .page-hero.akh-news-hero .page-hero-copy:not(#akh-x) { position: relative; z-index: 1; width: var(--page-width) !important; }
 html body.interior-page .page-hero.akh-news-hero .page-hero-copy > :is(h1, p):not(#akh-x) { max-width: 620px; }
@@ -1460,6 +1460,6 @@ html body.interior-page .page-hero.akh-news-hero .page-hero-copy > :is(h1, p):no
     min-height: 0;
     padding-top: calc(clamp(280px, 80vw, 420px) + 8px) !important;
     background: linear-gradient(180deg, rgb(30 33 36 / 0%) 0, rgb(30 33 36 / 0%) calc(clamp(280px, 80vw, 420px) - 70px), #1e2124 clamp(280px, 80vw, 420px)),
-                url("../images/events/news-hero-stage.jpg?v=ceo2") 90% 0 / auto clamp(280px, 80vw, 420px) no-repeat, #1e2124 !important;
+                url("../images/events/news-hero-stage.jpg?v=stage22") 90% 0 / auto clamp(280px, 80vw, 420px) no-repeat, #1e2124 !important;
   }
 }
