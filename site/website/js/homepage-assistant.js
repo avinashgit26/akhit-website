@@ -172,6 +172,9 @@
     if (has(q, ['work', 'portfolio', 'examples', 'case study', 'case studies', 'clients', 'projects'])) {
       return ['We’ve built a multi-brand fashion marketplace, a garment manufacturing portal and a GPT-powered shopping assistant for Goddiva.', 'See our work', 'index.html#selected-work'];
     }
+    if (has(q, ['event', 'events', 'talk', 'talks', 'speaker', 'speaking', 'keynote', 'conference', 'award', 'awards', 'news', 'press'])) {
+      return ['Our founder, Kuganeswaran Thangarajah, speaks at industry events and presents and receives awards. See the latest talks and awards, or invite us to speak at your event.', 'See news and events', 'news-events.html'];
+    }
     if (has(q, ['about', 'who are you', 'who is akh', 'company', 'founder', 'team', 'office', 'offices', 'based', 'located', 'location', 'history', 'mission', 'experience'])) {
       return ['AKH IT Solutions has over a decade of experience helping businesses in every industry with software, apps and AI that pay for themselves. Our head office is in Romford, UK, with teams in Sri Lanka and India.', 'About AKH', 'about-us.html'];
     }

@@ -270,3 +270,9 @@ All long dashes were removed from the site and replaced with commas, full stops,
 - ⚑ Team: Kuganeswaran Thangarajah (Founder and Managing Director) plus five "[Name] / [Role]" placeholders; photos go in website/images/team/.
 - "About" added to the header, mobile menu and footer on every page; the assistant answers "about / team / offices" questions with a link to it.
 - Update (2026-11-11): About "The team" is now a coverflow (same effect as the Learn hero) with the selected person's message on the right ("In their words"), changing with each card. ⚑ Messages are placeholders until each person supplies one; no words are attributed to anyone yet.
+
+## Round 23 (2026-11-11): News & events
+- New page `news-events.html`: "Where you’ll find AKH: on stage, behind the awards and in the room." Talks, awards received and awards presented by founder Kuganeswaran Thangarajah and the team, with filters, a featured latest event and an "Invite us to speak" band (Contact preselects the new need "Speaking or event invitation").
+- All events come from `site/website/data/events.json`; photos in `site/website/images/events/`. ⚑ Three placeholder events until real details and photos arrive.
+- Teasers: About "On stage" and Home "Recently on stage" show the latest 3 real events and stay hidden while only placeholders exist.
+- Footer: "News & events" added on every page. Assistant answers event, talk, award and news questions with a link to the page.

@@ -71,7 +71,8 @@ site/
   service/*.html             Service landing pages + AI fit session (old site URLs kept)
   portfolio/*.html           Case studies: market-place, garment-manufacture-portal, goddiva-ai
   careers.html, learn-with-us.html, contact-us.html, privacy-policy.html
-  about-us.html              About (story, team placeholders, offices)
+  about-us.html              About (story, team carousel, offices, "On stage" teaser)
+  news-events.html           News & events (CEO talks and awards), rendered from website/data/events.json
   portfolio.html             LOCAL ONLY (gitignored)
   website/css/site-system.css    Shared tokens and components, loaded LAST on every page;
                                  overrides older layered CSS with !important / :not(#akh-x)
@@ -87,6 +88,7 @@ docs/copy-changes.md             Every copy change, with items to confirm (⚑)
 
 - **Shared shell:** the header, footer and RetailWeave band are duplicated in every page. Change them the same way across all HTML files.
 - **Cache-busting:** bump the `?v=` tag on changed CSS/JS links.
+- **Adding an event:** add one entry to `site/website/data/events.json` (type talk | award-received | award-presented, date YYYY-MM-DD, image in `website/images/events/`, `placeholder: false`). It appears on News & events, and the latest 3 real events show on About and Home.
 
 ## Decisions and why
 
@@ -155,4 +157,5 @@ docs/copy-changes.md             Every copy change, with items to confirm (⚑)
 - Confirm the Learn page prices, dates and partners.
 - A Staffing image in the 3D style (the current photo doesn't match) and higher-resolution product screenshots.
 - Developers: connect the forms and `submitLead()` to a CRM, add a GA4 ID, and move the site to akhitsolutions.com.
+- Add real events (and remove the placeholders) in `website/data/events.json`.
 - Add real team names and photos to About; re-enable the Work page when the user asks.

@@ -1,0 +1,44 @@
+{
+  "_howto": "Add one object to 'events' per talk or award. type: talk | award-received | award-presented. date: YYYY-MM-DD. image: website/images/events/<file>.jpg (16:9, about 1600x900, under 250 KB). link is optional (article, video or organiser page). Set placeholder to false for real events: only real events appear on Home and About. Delete the placeholder entries once real ones are in.",
+  "events": [
+    {
+      "id": "placeholder-talk",
+      "type": "talk",
+      "title": "[Talk title]",
+      "event": "[Event or conference name]",
+      "date": "2026-11-01",
+      "location": "[City, country]",
+      "summary": "[One line on what Kuganeswaran spoke about and who was in the room.]",
+      "image": "",
+      "imageAlt": "",
+      "link": "",
+      "placeholder": true
+    },
+    {
+      "id": "placeholder-award-received",
+      "type": "award-received",
+      "title": "[Award name]",
+      "event": "[Awards ceremony name]",
+      "date": "2026-10-15",
+      "location": "[City, country]",
+      "summary": "[One line on what the award recognised.]",
+      "image": "",
+      "imageAlt": "",
+      "link": "",
+      "placeholder": true
+    },
+    {
+      "id": "placeholder-award-presented",
+      "type": "award-presented",
+      "title": "[Award presented]",
+      "event": "[Awards ceremony name]",
+      "date": "2026-09-20",
+      "location": "[City, country]",
+      "summary": "[One line on the award Kuganeswaran presented and to whom.]",
+      "image": "",
+      "imageAlt": "",
+      "link": "",
+      "placeholder": true
+    }
+  ]
+}

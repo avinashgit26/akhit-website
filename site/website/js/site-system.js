@@ -683,3 +683,85 @@ document.addEventListener('toggle', event => {
   const io = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); } }), { threshold: 0.12 });
   items.forEach(el => io.observe(el));
 })();
+
+/* Round 23: News & events. One data file (website/data/events.json) feeds the News page,
+   the About "On stage" section and the Home "Recently on stage" strip.
+   Containers: [data-events="featured" | "grid" | "teaser"], optional data-events-limit.
+   Teasers show real events only and hide their [data-events-section] until one exists. */
+(() => {
+  const boxes = document.querySelectorAll('[data-events]');
+  if (!boxes.length) return;
+  const script = document.querySelector('script[src*="site-system.js"]');
+  const ROOT = (script?.getAttribute('src') || '').startsWith('../') ? '../' : '';
+  const TYPES = { 'talk': 'Talk', 'award-received': 'Award received', 'award-presented': 'Award presented' };
+  const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const day = d => { const [y, m, dd] = String(d).split('-').map(Number); return y && m ? `${dd ? dd + ' ' : ''}${MONTHS[m - 1]} ${y}` : ''; };
+  const fallback = box => { box.innerHTML = `<p class="akh-events-fallback"><a href="${ROOT}news-events.html">See news and events →</a></p>`; };
+
+  const photo = e => e.image
+    ? `<figure class="akh-case-frame"><img src="${ROOT}${esc(e.image)}" alt="${esc(e.imageAlt || e.title)}" width="1600" height="900" loading="lazy" decoding="async"></figure>`
+    : `<figure class="akh-case-frame akh-event-nophoto" aria-hidden="true"><span>Photo to be added</span></figure>`;
+  const pill = e => `<span class="akh-event-type akh-event-type--${esc(e.type)}">${esc(TYPES[e.type] || 'News')}</span>`;
+  const meta = e => [day(e.date), e.event, e.location].filter(Boolean).map(esc).join(' · ');
+  const more = e => e.link ? `<a class="akh-event-link" href="${esc(e.link)}" target="_blank" rel="noopener noreferrer">Read more <span aria-hidden="true">↗</span></a>` : '';
+  const tag = e => e.placeholder ? '<em class="akh-team-tag">To be added</em>' : '';
+
+  const card = e => `<article class="akh-event-card${e.placeholder ? ' is-placeholder' : ''}" data-type="${esc(e.type)}">${photo(e)}<div class="akh-event-body">${pill(e)}<h3>${esc(e.title)}</h3><p class="akh-event-meta">${meta(e)}</p><p>${esc(e.summary)}</p>${more(e)}${tag(e)}</div></article>`;
+  const featured = e => `<article class="akh-event-featured${e.placeholder ? ' is-placeholder' : ''}">${photo(e)}<div class="akh-event-body"><p class="akh-eyebrow">Latest</p>${pill(e)}<h2 class="akh-h2">${esc(e.title)}</h2><p class="akh-event-meta">${meta(e)}</p><p class="akh-lead">${esc(e.summary)}</p>${more(e)}${tag(e)}</div></article>`;
+  const teaser = e => `<a class="akh-event-teaser" href="${ROOT}news-events.html#event-${esc(e.id)}">${photo(e)}${pill(e)}<strong>${esc(e.title)}</strong><span class="akh-event-meta">${meta(e)}</span></a>`;
+
+  const jsonLd = events => {
+    const real = events.filter(e => !e.placeholder);
+    if (!real.length || !document.querySelector('[data-events="grid"]')) return;
+    const s = document.createElement('script');
+    s.type = 'application/ld+json';
+    s.textContent = JSON.stringify(real.map(e => ({ '@context': 'https://schema.org', '@type': 'Event', name: `${e.title} · ${e.event}`, startDate: e.date, location: { '@type': 'Place', name: e.location || e.event }, description: e.summary, performer: { '@type': 'Person', name: 'Kuganeswaran Thangarajah' }, organizer: { '@type': 'Organization', name: e.event }, ...(e.image ? { image: new URL(ROOT + e.image, location.href).href } : {}), ...(e.link ? { url: e.link } : {}) })));
+    document.head.appendChild(s);
+  };
+
+  fetch(`${ROOT}website/data/events.json`, { cache: 'no-cache' })
+    .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(data => {
+      const events = (data.events || []).slice().sort((a, b) => String(b.date).localeCompare(String(a.date)));
+      boxes.forEach(box => {
+        const kind = box.dataset.events;
+        const limit = Number(box.dataset.eventsLimit) || 0;
+        if (kind === 'featured') {
+          if (events[0]) box.innerHTML = featured(events[0]); else box.hidden = true;
+        } else if (kind === 'grid') {
+          const list = events.slice(1);
+          box.innerHTML = list.length ? list.map(e => card(e).replace('<article ', `<article id="event-${esc(e.id)}" `)).join('') : '<p class="akh-lead">More news coming soon.</p>';
+        } else if (kind === 'teaser') {
+          const real = events.filter(e => !e.placeholder);
+          const section = box.closest('[data-events-section]');
+          if (!real.length) { if (section) section.hidden = true; return; }
+          if (section) section.hidden = false;
+          box.innerHTML = (limit ? real.slice(0, limit) : real).map(teaser).join('');
+        }
+      });
+      // Featured event also gets an anchor so teaser links land on it.
+      if (events[0]) document.querySelector('.akh-event-featured')?.setAttribute('id', `event-${events[0].id}`);
+      // Filter tabs on the News page.
+      const tabs = document.querySelectorAll('[data-events-filter]');
+      tabs.forEach(tab => tab.addEventListener('click', () => {
+        const type = tab.dataset.eventsFilter;
+        tabs.forEach(t => t.setAttribute('aria-pressed', String(t === tab)));
+        document.querySelectorAll('[data-events="grid"] .akh-event-card').forEach(c => { c.hidden = type !== 'all' && c.dataset.type !== type; });
+        const fe = document.querySelector('.akh-event-featured');
+        if (fe) fe.closest('section').hidden = type !== 'all' && !fe.querySelector(`.akh-event-type--${type}`);
+        const grid = document.querySelector('[data-events="grid"]');
+        const none = grid && ![...grid.querySelectorAll('.akh-event-card')].some(c => !c.hidden);
+        let empty = grid?.querySelector('.akh-events-empty');
+        if (none && grid && !empty && fe?.closest('section').hidden) { empty = document.createElement('p'); empty.className = 'akh-events-empty akh-lead'; empty.textContent = 'Nothing here yet. Check back soon.'; grid.appendChild(empty); }
+        if (empty && (!none || !fe?.closest('section').hidden)) empty.remove();
+        window.akhTrack?.('events_filter', { type });
+      }));
+      jsonLd(events);
+    })
+    .catch(() => boxes.forEach(box => {
+      const section = box.closest('[data-events-section]');
+      if (section) { section.hidden = true; return; }
+      if (box.dataset.events === 'grid') fallback(box); else box.hidden = true;
+    }));
+})();
