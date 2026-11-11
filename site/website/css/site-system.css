@@ -1224,6 +1224,23 @@ html body.homepage-page .proof-grid--4 .proof-note:not(#akh-x) { display: block;
   html body.homepage-page .proof-grid--4 .proof-item:nth-child(2n+1):not(#akh-x) { border-right: 1px solid #ffffff30 !important; padding-left: 0 !important; }
 }
 
+/* Home band with five stats (adds Estimated ROI): 5 across, then 3 + 2, then 2 + 2 + 1 on phones */
+html body.homepage-page .proof-grid.proof-grid--5:not(#akh-x):not(#akh-y):not(#akh-z) { grid-template-columns: repeat(5, minmax(0, 1fr)) !important; row-gap: 18px; }
+html body.homepage-page .proof-grid--5 .proof-item:nth-child(n):not(#akh-x):not(#akh-y) { padding-inline: 12px !important; border-right: 1px solid #ffffff30 !important; }
+html body.homepage-page .proof-grid--5 .proof-item:last-child:not(#akh-x):not(#akh-y):not(#akh-z) { border-right: 0 !important; }
+@media (max-width: 1099px) and (min-width: 761px) {
+  html body.homepage-page .proof-grid.proof-grid--5:not(#akh-x):not(#akh-y):not(#akh-z) { grid-template-columns: repeat(6, minmax(0, 1fr)) !important; }
+  html body.homepage-page .proof-grid--5 .proof-item:nth-child(n):not(#akh-x):not(#akh-y):not(#akh-z) { grid-column: span 2 !important; }
+  html body.homepage-page .proof-grid--5 .proof-item:nth-child(n+4):not(#akh-x):not(#akh-y):not(#akh-z) { grid-column: span 3 !important; }
+  html body.homepage-page .proof-grid--5 .proof-item:nth-child(3):not(#akh-x):not(#akh-y):not(#akh-z) { border-right: 0 !important; }
+}
+@media (max-width: 760px) {
+  html body.homepage-page .proof-grid.proof-grid--5:not(#akh-x):not(#akh-y):not(#akh-z) { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  html body.homepage-page .proof-grid--5 .proof-item:nth-child(n):not(#akh-x):not(#akh-y):not(#akh-z) { grid-column: auto !important; padding-inline: 10px !important; border-right: 1px solid #ffffff30 !important; }
+  html body.homepage-page .proof-grid--5 .proof-item:nth-child(2n):not(#akh-x):not(#akh-y):not(#akh-z) { border-right: 0 !important; }
+  html body.homepage-page .proof-grid--5 .proof-item:nth-child(5):not(#akh-x):not(#akh-y):not(#akh-z) { grid-column: 1 / -1 !important; border-right: 0 !important; }
+}
+
 /* Round 20b: Services metrics band, five stats (3 + 2 on tablets, 2 + 2 + 1 on phones) */
 html body.services-page .services-proof-grid.services-proof-grid--5:not(#akh-x) { grid-template-columns: repeat(5, minmax(0, 1fr)) !important; row-gap: 18px; }
 html body.services-page .services-proof-grid--5 .services-proof-item:not(#akh-x) { padding-inline: 12px; border-right: 1px solid rgb(255 255 255 / 25%); text-align: center; }
