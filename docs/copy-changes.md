@@ -263,3 +263,10 @@ All long dashes were removed from the site and replaced with commas, full stops,
 - Offer bands: Goddiva "AI Sprint · 2–4 weeks / Want an assistant like this?"; Garment "Ops Platform · 8–12 weeks / Want a portal like this?"; Marketplace "Ops Platform · 8–12 weeks / Want a marketplace like this?".
 - ⚑ Confirm the per-client "How we worked it out" step lines (they describe AKH’s standard process applied to each client) and the Goddiva "questions on repeat" examples.
 - Update (2026-11-11): offer bands now all end in "Get a fixed quote" (Contact form with the need preselected). "Ops Platform" removed; Garment and Marketplace eyebrows read "Web application · 8–12 weeks", Goddiva keeps "AI Sprint · 2–4 weeks". Goddiva awards moved to the top of the page, under the cover ("Award-winning since launch."); its Beyond the brief section is now "More engagement, fewer returns, lighter support."
+
+## Round 22 (2026-11-11): About page live
+- About page rebuilt as a story: "We build software the way we’d want it for our own business." → Why we exist + mission ("To help businesses thrive and grow with technology that earns its place…") → four promises (honest advice, fixed price, weekly demos, we stay until it works and it’s yours) → numbers (30+ projects, 4 markets, 3 offices, 4.9/5) → case study cards → team → offices → careers → next step.
+- Uses "over a decade of experience" (confirmed by the user). Removed "runs retail businesses too". Founder's manufacturing background and the Director's name are not stated (not approved).
+- ⚑ Team: Kuganeswaran Thangarajah (Founder and Managing Director) plus five "[Name] / [Role]" placeholders; photos go in website/images/team/.
+- "About" added to the header, mobile menu and footer on every page; the assistant answers "about / team / offices" questions with a link to it.
+- Update (2026-11-11): About "The team" is now a coverflow (same effect as the Learn hero) with the selected person's message on the right ("In their words"), changing with each card. ⚑ Messages are placeholders until each person supplies one; no words are attributed to anyone yet.

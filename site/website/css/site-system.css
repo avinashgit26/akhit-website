@@ -1326,3 +1326,77 @@ html body main.akh-case-page > section.akh-case-glance:has(+ section.akh-case-aw
 html body main.akh-case-page .akh-case-glance .akh-eyebrow { margin-bottom: 14px; }
 html body main.akh-case-page .akh-head { margin-bottom: clamp(20px, 3vw, 32px); }
 html body main.akh-case-page .akh-case-cover-band { padding-bottom: 0; }
+
+/* ===== About page (Round 22) ===== */
+.akh-about-why { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 72px); align-items: center; }
+.akh-about-lead { margin: 0; color: var(--akh-muted); font-size: 18px; line-height: 1.65; }
+.akh-about-mission { padding: clamp(24px, 3vw, 40px); border-left: 4px solid var(--akh-green-deep); border-radius: 0 var(--card-radius) var(--card-radius) 0; background: var(--akh-tint); }
+.akh-about-mission-text { margin: 0; color: var(--akh-ink); font-size: clamp(20px, 2vw, 26px); font-weight: 700; line-height: 1.4; letter-spacing: -0.02em; }
+.akh-about-beliefs .akh-card { display: flex; flex-direction: column; }
+.akh-about-beliefs h3 { margin: 0 0 8px; font-size: 18px; letter-spacing: -0.01em; }
+.akh-about-beliefs p { margin: 0; color: var(--akh-muted); font-size: 15.5px; line-height: 1.55; }
+.akh-about-beliefs .akh-about-proof { margin-top: auto; padding-top: 16px; color: var(--akh-green-deep); font-size: 14px; font-weight: 750; }
+
+html body main.akh-about-page > section.akh-about-stats-band:not(#akh-x):not(#akh-y) { background: var(--akh-charcoal) !important; padding-block: clamp(32px, 4vw, 48px) !important; }
+.akh-about-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.akh-about-stats > div { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 4px; padding: 6px 16px; border-right: 1px solid #ffffff30; text-align: center; }
+.akh-about-stats > div:last-child { border-right: 0; }
+html body .akh-about-stats strong.proof-value:not(#akh-x) { color: var(--akh-highlight) !important; font-size: clamp(34px, 4vw, 52px); font-weight: 800; line-height: 1.05; letter-spacing: -0.04em; }
+html body .akh-about-stats span:not(#akh-x) { color: #fff !important; font-size: 14px; font-weight: 750; }
+html body .akh-about-stats small:not(#akh-x) { color: #c8ccd0 !important; font-size: 12px; font-weight: 600; }
+
+.akh-about-work { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.akh-about-work a { display: grid; align-content: start; gap: 10px; padding: 14px 14px 20px; border: var(--card-border); border-radius: var(--card-radius); background: #fff; box-shadow: var(--card-shadow); color: var(--akh-ink); text-decoration: none; transition: transform .2s ease, box-shadow .2s ease; }
+.akh-about-work a:is(:hover, :focus-visible) { transform: translateY(-2px); box-shadow: 0 14px 34px rgb(26 29 31 / 12%); }
+.akh-about-work .akh-case-frame { box-shadow: none; }
+.akh-about-work strong { padding-inline: 6px; font-size: 19px; letter-spacing: -0.02em; }
+.akh-about-work p { margin: 0; padding-inline: 6px; color: var(--akh-muted); font-size: 15px; line-height: 1.5; }
+.akh-about-work span { padding-inline: 6px; color: var(--akh-green-deep); font-weight: 750; }
+.akh-about-next { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin: 24px 0 0; color: var(--akh-muted); font-size: 15px; }
+.akh-about-next a { color: var(--akh-green-deep); font-weight: 750; }
+.akh-about-pill { padding: 4px 10px; border-radius: 999px; background: var(--akh-tint); color: var(--akh-green-deep); font-size: 12px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+
+.akh-team-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin: 0; padding: 0; list-style: none; }
+.akh-team-card { display: grid; justify-items: center; gap: 4px; padding: 28px 20px 24px; border: var(--card-border); border-radius: var(--card-radius); background: #fff; box-shadow: var(--card-shadow); text-align: center; }
+.akh-team-photo { display: grid; place-items: center; width: 96px; height: 96px; margin-bottom: 12px; overflow: hidden; border-radius: 50%; background: var(--akh-tint); color: var(--akh-green-deep); font-size: 28px; font-weight: 800; }
+.akh-team-photo img { width: 100%; height: 100%; object-fit: cover; }
+.akh-team-card.is-placeholder .akh-team-photo { border: 2px dashed #b9c9bd; background: #f6f8f6; }
+.akh-team-card strong { color: var(--akh-ink); font-size: 17px; }
+.akh-team-card > span { color: var(--akh-muted); font-size: 14.5px; }
+.akh-team-card.is-placeholder strong, .akh-team-card.is-placeholder > span { color: #9aa0a6; }
+.akh-team-tag { margin-top: 10px; padding: 3px 10px; border-radius: 999px; background: var(--akh-paper); color: var(--akh-muted); font-size: 11.5px; font-style: normal; font-weight: 700; }
+.akh-office h3 { margin: 0 0 8px; font-size: 19px; }
+.akh-office p:not(.akh-eyebrow) { margin: 0; color: var(--akh-muted); font-size: 15px; line-height: 1.55; }
+.akh-office .akh-office-hours { margin-top: 10px; color: var(--akh-ink); font-weight: 650; }
+
+@media (prefers-reduced-motion: reduce) { .akh-about-work a { transition: none; } }
+@media (max-width: 1000px) {
+  .akh-about-why { grid-template-columns: 1fr; }
+  .akh-about-work { grid-template-columns: 1fr; max-width: 560px; }
+  .akh-team-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  .akh-about-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 20px; }
+  .akh-about-stats > div:nth-child(2n) { border-right: 0; }
+}
+@media (max-width: 480px) { .akh-team-grid { grid-template-columns: 1fr; } }
+
+/* About team: Learn-style coverflow on the left, the selected person's message on the right */
+.akh-team-show { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(28px, 4vw, 64px); align-items: center; }
+.akh-team-cf .akh-cf-stage { padding: 12px 0 36px; }
+html body .akh-team-cf .akh-cf-stage > .akh-team-card:not(#akh-x) { grid-area: 1 / 1; justify-self: center; width: 62%; box-sizing: border-box; padding: 32px 24px 28px; transition: transform .5s ease, opacity .5s ease, filter .5s ease; will-change: transform; box-shadow: 0 18px 44px rgb(26 29 31 / 10%); }
+.akh-team-cf .akh-team-photo { width: 132px; height: 132px; font-size: 38px; }
+.akh-team-cf .akh-team-card strong { font-size: 19px; }
+.akh-team-voice { position: relative; margin: 0; padding: clamp(28px, 3.4vw, 44px); border-radius: 16px; background: #fff; border: var(--card-border); box-shadow: var(--card-shadow); transition: opacity .22s ease, transform .22s ease; }
+.akh-team-voice.is-changing { opacity: 0; transform: translateY(6px); }
+.akh-team-voice .akh-eyebrow { margin-bottom: 4px; }
+.akh-team-voice-mark { display: block; height: 52px; color: var(--akh-green-deep); font-size: 88px; font-weight: 800; line-height: 1; }
+.akh-team-voice blockquote { margin: 0 0 22px; color: var(--akh-ink); font-size: clamp(20px, 1.9vw, 24px); font-weight: 650; line-height: 1.45; letter-spacing: -0.01em; }
+.akh-team-voice blockquote.is-placeholder { color: #8e949a; font-style: italic; font-weight: 500; }
+.akh-team-voice figcaption { display: grid; gap: 2px; padding-top: 16px; border-top: 1px solid var(--akh-line); }
+.akh-team-voice figcaption strong { color: var(--akh-ink); font-size: 16px; }
+.akh-team-voice figcaption span { color: var(--akh-muted); font-size: 14px; }
+.akh-team-voice-count { position: absolute; top: clamp(28px, 3.4vw, 44px); right: clamp(28px, 3.4vw, 44px); color: var(--akh-muted); font-size: 13px; font-weight: 700; letter-spacing: .06em; }
+@media (prefers-reduced-motion: reduce) { html body .akh-team-cf .akh-cf-stage > .akh-team-card:not(#akh-x) { transition: none; } .akh-team-voice { transition: none; } }
+@media (max-width: 1000px) { .akh-team-show { grid-template-columns: 1fr; } html body .akh-team-cf .akh-cf-stage > .akh-team-card:not(#akh-x) { width: 60%; } }
+@media (max-width: 600px) { html body .akh-team-cf .akh-cf-stage > .akh-team-card:not(#akh-x) { width: 78%; } .akh-team-cf .akh-team-photo { width: 104px; height: 104px; font-size: 30px; } }

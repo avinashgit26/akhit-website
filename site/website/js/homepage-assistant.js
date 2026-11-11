@@ -172,6 +172,9 @@
     if (has(q, ['work', 'portfolio', 'examples', 'case study', 'case studies', 'clients', 'projects'])) {
       return ['We’ve built a multi-brand fashion marketplace, a garment manufacturing portal and a GPT-powered shopping assistant for Goddiva.', 'See our work', 'index.html#selected-work'];
     }
+    if (has(q, ['about', 'who are you', 'who is akh', 'company', 'founder', 'team', 'office', 'offices', 'based', 'located', 'location', 'history', 'mission', 'experience'])) {
+      return ['AKH IT Solutions has over a decade of experience helping businesses in every industry with software, apps and AI that pay for themselves. Our head office is in Romford, UK, with teams in Sri Lanka and India.', 'About AKH', 'about-us.html'];
+    }
     if (has(q, ['retailweave'])) {
       return ['RetailWeave is the retail operations platform built by AKH: orders, stock, returns, sellers and finance in one place. Join the waitlist to try it first.', 'Join the waitlist', 'service/artificial-intelligence.html#retailweave'];
     }

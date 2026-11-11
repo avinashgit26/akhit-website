@@ -24,7 +24,7 @@ The main conversion is the hero "scoper" chat ("Find out what we could save you"
   2. Push one new commit to `akhit main`, built with `git commit-tree HEAD^{tree} -p akhit/main -m "…"`.
   3. Wait for the Pages run (`gh run list -R avinashgit26/akhit-website`).
   4. Check the live URL.
-- **About and Work stay local only.** `site/about-us.html` (About) and `site/portfolio.html` (Work) are gitignored. Don't link them or publish them unless the user asks.
+- **Work stays local only.** `site/portfolio.html` (Work) is gitignored. Don't link or publish it unless the user asks. About (`site/about-us.html`) is live since Round 22 (2026-11-11).
 - **Leave alone:** the user's untracked `site/website/images/home/services/services-hero-abstract.svg`.
 
 ## Design direction
@@ -71,7 +71,8 @@ site/
   service/*.html             Service landing pages + AI fit session (old site URLs kept)
   portfolio/*.html           Case studies: market-place, garment-manufacture-portal, goddiva-ai
   careers.html, learn-with-us.html, contact-us.html, privacy-policy.html
-  about-us.html, portfolio.html   LOCAL ONLY (gitignored)
+  about-us.html              About (story, team placeholders, offices)
+  portfolio.html             LOCAL ONLY (gitignored)
   website/css/site-system.css    Shared tokens and components, loaded LAST on every page;
                                  overrides older layered CSS with !important / :not(#akh-x)
   website/js/homepage-intake.js  Scoper chat (boss's click-through script, savings maths,
@@ -99,7 +100,7 @@ docs/copy-changes.md             Every copy change, with items to confirm (⚑)
   - The old "£1.8m revenue raised" stat was dropped, because client accounts don't disclose turnover.
 - **Learn page:** price, date and partner placeholders stay until confirmed.
 - **Images:** recoloured from blue to green, with `-green` files next to the originals. The Goddiva screenshot is cropped to hide a customer email.
-- **Menu:** Services · AI · Learn with us · Careers + "Find out what we could save you". About and Work were removed from the menu at the user's request.
+- **Menu:** Home · AI Hub · Services · Learn with us · Careers · About + "Find out what we could save you". Work stays off the menu.
 
 ## User preferences
 
@@ -154,4 +155,4 @@ docs/copy-changes.md             Every copy change, with items to confirm (⚑)
 - Confirm the Learn page prices, dates and partners.
 - A Staffing image in the 3D style (the current photo doesn't match) and higher-resolution product screenshots.
 - Developers: connect the forms and `submitLead()` to a CRM, add a GA4 ID, and move the site to akhitsolutions.com.
-- Re-enable the About and Work pages when the user asks.
+- Add real team names and photos to About; re-enable the Work page when the user asks.

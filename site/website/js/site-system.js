@@ -248,13 +248,14 @@ const akhSetupPanel = (drawer, cfg) => {
   });
 })();
 
-/* Round 9: Learn hero coverflow carousel of sample learning paths. */
-(function () {
-  const root = document.querySelector('[data-cf]');
-  if (!root) return;
-  const cards = [...root.querySelectorAll('.akh-cf-stage > .pc')];
+/* Round 9: coverflow carousel (Learn hero sample paths; Round 22: About team).
+   Runs once per [data-cf] root and fires 'akh:cf-change' { index } on the root after every move. */
+document.querySelectorAll('[data-cf]').forEach(function (root) {
+  const cards = [...root.querySelectorAll('.akh-cf-stage > *')];
+  if (!cards.length) return;
   const dotsWrap = root.querySelector('.akh-cf-dots');
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const interval = Number(root.dataset.cfInterval) || 4000;
   const total = cards.length;
   let current = 0;
   let timer = 0;
@@ -263,7 +264,7 @@ const akhSetupPanel = (drawer, cfg) => {
     const dot = document.createElement('button');
     dot.type = 'button';
     dot.className = 'akh-cf-dot';
-    dot.setAttribute('aria-label', `Show ${card.querySelector('h3').textContent}`);
+    dot.setAttribute('aria-label', `Show ${card.dataset.cfLabel || card.querySelector('h3, strong')?.textContent || `item ${i + 1}`}`);
     dot.addEventListener('click', () => { go(i); restart(); });
     dotsWrap.appendChild(dot);
     return dot;
@@ -285,9 +286,10 @@ const akhSetupPanel = (drawer, cfg) => {
       card.inert = !center;
     });
     dots.forEach((dot, i) => dot.setAttribute('aria-current', String(i === current)));
+    root.dispatchEvent(new CustomEvent('akh:cf-change', { detail: { index: current, card: cards[current] } }));
   }
   const stop = () => { clearInterval(timer); timer = 0; };
-  const start = () => { stop(); if (!reduce) timer = setInterval(() => go(current + 1), 4000); };
+  const start = () => { stop(); if (!reduce) timer = setInterval(() => go(current + 1), interval); };
   const restart = () => { if (timer) start(); };
 
   root.querySelector('[data-cf-prev]').addEventListener('click', () => { go(current - 1); restart(); });
@@ -298,14 +300,48 @@ const akhSetupPanel = (drawer, cfg) => {
   root.addEventListener('focusout', (e) => { if (!root.contains(e.relatedTarget)) start(); });
   document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
 
-  // Hero audience tabs jump to their card.
-  ['a1', 'a2', 'a3'].forEach((id, i) => {
-    const radio = document.getElementById(id);
-    if (radio) radio.addEventListener('change', () => { if (radio.checked) { go(i); restart(); } });
-  });
-  const checked = ['a1', 'a2', 'a3'].findIndex((id) => document.getElementById(id) && document.getElementById(id).checked);
+  // Learn hero audience tabs jump to their card (only on the Learn page).
+  const isLearnHero = !!root.closest('.learn-reference');
+  if (isLearnHero) {
+    ['a1', 'a2', 'a3'].forEach((id, i) => {
+      const radio = document.getElementById(id);
+      if (radio) radio.addEventListener('change', () => { if (radio.checked) { go(i); restart(); } });
+    });
+  }
+  const checked = isLearnHero ? ['a1', 'a2', 'a3'].findIndex((id) => document.getElementById(id) && document.getElementById(id).checked) : 0;
   go(checked > 0 ? checked : 0);
   start();
+});
+
+/* Round 22: About team. The message panel follows the coverflow's active card. */
+(() => {
+  const cf = document.querySelector('.akh-team-cf');
+  const voice = document.querySelector('.akh-team-voice');
+  if (!cf || !voice) return;
+  const quote = voice.querySelector('[data-voice-quote]');
+  const name = voice.querySelector('[data-voice-name]');
+  const role = voice.querySelector('[data-voice-role]');
+  const count = voice.querySelector('[data-voice-count]');
+  const total = cf.querySelectorAll('.akh-cf-stage > *').length;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let swap = 0;
+  const fill = (card, index) => {
+    quote.textContent = card.dataset.quote || '';
+    quote.classList.toggle('is-placeholder', card.dataset.quotePlaceholder === 'true');
+    name.textContent = card.querySelector('strong')?.textContent || '';
+    role.textContent = card.querySelector('.akh-team-role')?.textContent || '';
+    count.textContent = `${index + 1} / ${total}`;
+  };
+  cf.addEventListener('akh:cf-change', e => {
+    const { card, index } = e.detail;
+    if (reduce || !voice.dataset.ready) { fill(card, index); voice.dataset.ready = '1'; return; }
+    clearTimeout(swap);
+    voice.classList.add('is-changing');
+    swap = setTimeout(() => { fill(card, index); voice.classList.remove('is-changing'); }, 220);
+  });
+  // The carousel has already shown its first card by now, so fill the panel from it.
+  const first = cf.querySelector('.akh-cf-stage > *');
+  if (first) { fill(first, 0); voice.dataset.ready = '1'; }
 })();
 
 /* Round 19: two-step forms (Contact, AI fit session), same flow as the Services quote form:
