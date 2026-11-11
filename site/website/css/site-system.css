@@ -1318,3 +1318,11 @@ html body.interior-page .page-hero.akh-case-hero:not(#akh-x) { padding-bottom: c
   .akh-case-more { grid-template-columns: 1fr; }
   .akh-case-offer .page-hero-actions .btn2 { width: 100%; }
 }
+
+/* Case studies: tighter rhythm between sections (the global 64–96px rhythm left ~190px gaps here). */
+html body main.akh-case-page > section.akh-section:not(#akh-x):not(#akh-y) { padding-block: clamp(40px, 4.5vw, 64px) !important; }
+html body main.akh-case-page > section.akh-case-glance:not(#akh-x):not(#akh-y) { padding-top: clamp(24px, 3vw, 40px) !important; }
+html body main.akh-case-page > section.akh-case-glance:has(+ section.akh-case-awards):not(#akh-x):not(#akh-y) { padding-bottom: 0 !important; }
+html body main.akh-case-page .akh-case-glance .akh-eyebrow { margin-bottom: 14px; }
+html body main.akh-case-page .akh-head { margin-bottom: clamp(20px, 3vw, 32px); }
+html body main.akh-case-page .akh-case-cover-band { padding-bottom: 0; }
