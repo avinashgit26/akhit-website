@@ -384,7 +384,7 @@
     backButton?.addEventListener('click', goBack);
     resetButton?.addEventListener('click', reset);
 
-    /* Voice input (unchanged behaviour). */
+    /* Voice input with a live transcript. */
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (voiceButton) {
       if (!SpeechRecognition) {
@@ -394,17 +394,16 @@
         voiceAvailable = true;
         recognition = new SpeechRecognition();
         recognition.lang = 'en-GB';
-        recognition.interimResults = false;
+        recognition.interimResults = true;
         recognition.continuous = false;
-        recognition.onstart = () => { voiceButton.setAttribute('aria-pressed', 'true'); voiceButton.setAttribute('aria-label', 'Stop voice input'); setStatus('Listening. Select the microphone again to stop.'); };
+        /* Live transcript: words show in the box while the visitor is still speaking. */
+        let voiceBase = '';
+        recognition.onstart = () => { voiceBase = briefInput.value.trim(); voiceButton.setAttribute('aria-pressed', 'true'); voiceButton.setAttribute('aria-label', 'Stop voice input'); setStatus('Listening. Select the microphone again to stop.'); };
         recognition.onresult = event => {
-          const transcript = event.results?.[0]?.[0]?.transcript?.trim();
-          if (transcript) {
-            briefInput.value = [briefInput.value.trim(), transcript].filter(Boolean).join(' ');
-            briefInput.dispatchEvent(new Event('input', { bubbles: true }));
-            briefInput.focus();
-            setStatus('Voice input added. Review or edit it before sending.');
-          }
+          let spoken = '', done = false; for (let i = 0; i < event.results.length; i += 1) { spoken += event.results[i][0].transcript; if (event.results[i].isFinal) done = true; }
+          briefInput.value = [voiceBase, spoken.trim()].filter(Boolean).join(' ');
+          briefInput.dispatchEvent(new Event('input', { bubbles: true }));
+          if (done) { briefInput.focus(); setStatus('Voice input added. Review or edit it before sending.'); }
         };
         recognition.onerror = event => setStatus(event.error === 'not-allowed' ? 'Microphone access was not allowed. You can type instead.' : 'Voice input stopped. You can type instead.');
         recognition.onend = () => { voiceButton.setAttribute('aria-pressed', 'false'); voiceButton.setAttribute('aria-label', 'Use voice input'); };
@@ -439,7 +438,7 @@
           <div class="hero-intake-heading scoper-frame-head">
             <h2 id="scoper-drawer-title">Find out what we could save you</h2>
             <p class="scoper-subtitle">3 taps. Under a minute. No sales pitch.</p>
-            <div class="scoper-meta"><span class="scoper-bot-label">AKH · online now</span><span class="scoper-progress" aria-hidden="true"><i></i><i></i><i></i></span></div>
+            <div class="scoper-meta"><span class="scoper-bot-label">Savings estimator · tap, type or talk</span><span class="scoper-progress" aria-hidden="true"><i></i><i></i><i></i></span></div>
           </div>
           <div class="intake-thread" role="log" aria-live="polite" aria-relevant="additions"></div>
           <form class="intake-composer" novalidate>

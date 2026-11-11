@@ -258,12 +258,14 @@
     } else if (Recognition && voiceButton) {
       const recognition = new Recognition();
       recognition.lang = "en-GB";
-      recognition.interimResults = false;
+      recognition.interimResults = true;
       recognition.continuous = false;
-      recognition.onstart = () => { voiceButton.setAttribute("aria-pressed", "true"); status.textContent = "Listening. Your browser may send audio to its speech service for transcription."; };
+      let voiceBase = "";
+      recognition.onstart = () => { voiceBase = input.value.trim(); voiceButton.setAttribute("aria-pressed", "true"); status.textContent = "Listening. Your browser may send audio to its speech service for transcription."; };
       recognition.onresult = event => {
-        const transcript = event.results?.[0]?.[0]?.transcript || "";
-        if (transcript) { input.value = [input.value.trim(), transcript].filter(Boolean).join(" "); input.focus(); status.textContent = "Voice input added. Review it, then select Send."; }
+        let spoken = '', done = false; for (let i = 0; i < event.results.length; i += 1) { spoken += event.results[i][0].transcript; if (event.results[i].isFinal) done = true; }
+        input.value = [voiceBase, spoken.trim()].filter(Boolean).join(" ");
+        if (done) { input.focus(); status.textContent = "Voice input added. Review it, then select Send."; }
       };
       recognition.onerror = event => { status.textContent = event.error === "not-allowed" ? "Microphone access was not allowed. You can type instead." : "Voice input stopped. You can type instead."; };
       recognition.onend = () => voiceButton.setAttribute("aria-pressed", "false");
@@ -305,10 +307,7 @@
 
   const newsletter = document.getElementById("preview-newsletter");
   newsletter?.addEventListener("submit", event => event.preventDefault());
-  newsletter?.querySelector("button[type=submit]")?.addEventListener("click", () => {
-    const email = newsletter.querySelector('input[type="email"]');
-    if (email && (!email.value.trim() || !email.validity.valid)) { email.reportValidity(); return; }
-  });
+  /* Newsletter messages are handled in site-system.js (Round 20). */
 
   const sessionForm = document.getElementById("ai-fit-preview");
   sessionForm?.addEventListener("submit", event => {

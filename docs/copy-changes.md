@@ -240,3 +240,17 @@ All long dashes were removed from the site and replaced with commas, full stops,
 - RetailWeave ribbon removed from every page.
 - Header: "Get a fixed quote" (Contact form) shows whenever "Find out what we could save you" is hidden.
 - Contact and AI fit session forms: two steps (what you need, then name and work email), like the Services quote form.
+
+## Round 20 (2026-11-11)
+- RetailWeave waitlist: after a valid email, "You're on the list. We'll email {email} as soon as RetailWeave early access opens." Empty/invalid email shows a message.
+- AI Hub hero: "Scroll to explore" removed. Secondary button "See what AI could save you" is now "See the 2-week AI Sprint".
+- Scoper status line "AKH · online now" is now "Savings estimator · tap, type or talk". Assistant title "Chat with us" is now "AKH AI assistant", with a role line (services/pricing/process; roles on Careers; courses on Learn).
+- Home and Services FAQ intros: "Ask our AI assistant" is now a button that opens the assistant.
+- Learn: Start learning, Join the next cohort, Talk to us / Talk about team training, Educator workshops and Start a partner conversation each open their own pop-up form with a learning-specific thank-you. ⚑ Confirm the "reply within one working day" promises.
+- Learn "Register your interest": messages for empty/invalid email and a confirmation.
+- Careers apply: mobile with country code, "Why do you want to join AKH?" and CV now required. Confirmation lists next steps (review, short call, interview or task, decision). ⚑ Confirm the 15–20 minute call wording.
+- Footer (every page): new layout. Trust line "Fixed quote in 48h · Zero pressure · 1 working day reply"; Solutions / Direct contact columns; newsletter card "One practical tech idea a month" with a thank-you message; "© 2026 AKH IT Solutions Ltd. Registered in England & Wales." ⚑ Confirm company wording; "Schedule a 15-min discovery call" goes to Contact until the calendar URL is ready. Terms of Business and the IP Handover Guarantee were left out (no page / unconfirmed).
+
+## Round 20b (2026-11-11): metrics bands
+- Home: 99% On-time delivery · 4 Markets reached (UK, EU incl. Ireland, US and India) · 4.9/5 Client rating · 30+ Projects completed. ⚑ ROI / client value stat left out: no verified Goddiva figure exists (launch post has no numbers; Companies House filings are small-company accounts without turnover). Add it once Goddiva confirms a number in writing.
+- Services: 30+ Projects delivered · 99% Client satisfaction (was 98%) · 48h Fixed quote turnaround ("Fixed quote within 48 hours") · 100% Upfront fixed pricing ("Zero drift: you spend what we quote") · 100% IP and code ownership ("You own everything we build"). Markets and Client rating removed from Services. ⚑ Confirm 99%; review "zero drift" and "100% IP ownership" with management.

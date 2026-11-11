@@ -90,6 +90,13 @@
     focusTarget?.focus();
   };
   launcher.addEventListener('click', () => openAssistant(false));
+  /* In-page "Ask our AI assistant" links open the same assistant, even when the corner launcher is off screen. */
+  document.addEventListener('click', event => {
+    const ask = event.target instanceof Element ? event.target.closest('[data-ask-akh]') : null;
+    if (!ask) return;
+    event.preventDefault();
+    openAssistant(false);
+  });
   closeButton?.addEventListener('click', closeAssistant);
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape' && !panel.hidden) closeAssistant();
@@ -152,7 +159,7 @@
     if (context === 'careers') {
       if (has(q, ['role', 'roles', 'job', 'jobs', 'open', 'vacancy', 'vacancies', 'hiring'])) return ['Two roles are open now: Customer Service Assistant and Software Engineer (React and Laravel).', 'See open roles', '#open-roles'];
     }
-    if (has(q, ['estimate', 'save', 'saving', 'savings'])) return ['Answer three quick questions and you’ll see roughly what the problem is costing you and what we’d build.', 'Find out what we could save you', 'index.html#scoper'];
+    if (has(q, ['estimate', 'estimator', 'save', 'saving', 'savings', 'roi', 'pay for itself'])) return ['That’s a job for our savings estimator: tap, type or talk through three quick questions and you’ll see roughly what the problem costs you and what we’d build.', 'Open the savings estimator', 'index.html#scoper'];
     if (has(q, ['price', 'prices', 'pricing', 'cost', 'costs', 'budget', 'quote', 'how much', 'expensive', 'cheap'])) {
       return ['You get a fixed quote within 48 hours of a free 30-minute call: one price, agreed before any work starts. If an off-the-shelf tool would do the job, we’ll tell you.', 'Get my fixed quote', 'contact-us.html'];
     }
@@ -233,12 +240,16 @@
   } else if (voiceButton) {
     recognition = new Recognition();
     recognition.lang = 'en-GB';
-    recognition.interimResults = false;
+    recognition.interimResults = true;
     recognition.continuous = false;
-    recognition.onstart = () => { voiceButton.setAttribute('aria-pressed', 'true'); status.textContent = 'Listening. Your browser may send audio to its speech service for transcription.'; };
+    /* Words appear in the box as they are spoken (interim results), then settle when final. */
+    let voiceBase = '';
+    recognition.onstart = () => { voiceBase = input.value.trim(); voiceButton.setAttribute('aria-pressed', 'true'); status.textContent = 'Listening. Your browser may send audio to its speech service for transcription.'; };
     recognition.onresult = event => {
-      const transcript = event.results?.[0]?.[0]?.transcript || '';
-      if (transcript) { input.value = [input.value.trim(), transcript].filter(Boolean).join(' '); input.focus(); status.textContent = 'Voice input added. Review it, then select Send.'; }
+      let spoken = '', done = false;
+      for (let i = 0; i < event.results.length; i += 1) { spoken += event.results[i][0].transcript; if (event.results[i].isFinal) done = true; }
+      input.value = [voiceBase, spoken.trim()].filter(Boolean).join(' ');
+      if (done) { input.focus(); status.textContent = 'Voice input added. Review it, then select Send.'; }
     };
     recognition.onerror = event => { status.textContent = event.error === 'not-allowed' ? 'Microphone access was not allowed. You can type instead.' : 'Voice input stopped. You can type instead.'; };
     recognition.onend = () => voiceButton.setAttribute('aria-pressed', 'false');
@@ -251,9 +262,5 @@
 
   const newsletter = document.getElementById('preview-newsletter');
   newsletter?.addEventListener('submit', event => event.preventDefault());
-  newsletter?.querySelector('.newsletter-button')?.addEventListener('click', () => {
-    const email = newsletter.querySelector('input[type="email"]');
-    if (email && !email.value.trim()) { email.reportValidity(); return; }
-    if (email && !email.validity.valid) { email.reportValidity(); return; }
-  });
+  /* Newsletter messages are handled in site-system.js (Round 20). */
 })();

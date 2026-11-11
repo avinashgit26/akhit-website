@@ -120,19 +120,20 @@
     } else {
       recognition = new Recognition();
       recognition.lang = 'en-GB';
-      recognition.interimResults = false;
+      recognition.interimResults = true;
       recognition.continuous = false;
+      let voiceBase = '';
       recognition.onstart = () => {
+        voiceBase = brief.value.trim();
         mic.setAttribute('aria-pressed', 'true');
         mic.setAttribute('aria-label', 'Stop voice input');
         voiceStatus.textContent = 'Listening. Your browser may send audio to its speech service for transcription.';
       };
       recognition.onresult = event => {
-        const spoken = event.results?.[0]?.[0]?.transcript?.trim();
-        if (spoken) {
-          brief.value = brief.value.trim() + (brief.value.trim() ? ' ' : '') + spoken;
-          brief.dispatchEvent(new Event('input', { bubbles: true }));
-        }
+        let spoken = '';
+        for (let i = 0; i < event.results.length; i += 1) spoken += event.results[i][0].transcript;
+        brief.value = [voiceBase, spoken.trim()].filter(Boolean).join(' ');
+        brief.dispatchEvent(new Event('input', { bubbles: true }));
       };
       recognition.onerror = event => {
         voiceStatus.textContent = event.error === 'not-allowed'

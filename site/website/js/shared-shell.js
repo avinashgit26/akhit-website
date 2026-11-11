@@ -27,9 +27,33 @@
   open?.addEventListener('click', () => dialog.showModal());
   close?.addEventListener('click', () => dialog.close());
   dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
+  /* After a successful sign-up the dialog shows a confirmation; reopening it starts fresh. */
+  const resetWaitlist = () => {
+    if (!form || !status) return;
+    form.hidden = false;
+    status.classList.remove('is-success', 'is-error');
+    status.textContent = '';
+  };
+  // Reset each time the dialog opens (an attribute change, so it works however the dialog was opened).
+  new MutationObserver(() => { if (dialog.open) resetWaitlist(); }).observe(dialog, { attributes: true, attributeFilter: ['open'] });
+  email?.addEventListener('input', () => { if (status?.classList.contains('is-error')) { status.classList.remove('is-error'); status.textContent = ''; } });
   form?.addEventListener('submit', event => {
     event.preventDefault();
-    if (!email?.value.trim() || !email.validity.valid) { email?.reportValidity(); return; }
-    if (status) status.textContent = 'RetailWeave early access is coming soon.';
+    const value = email?.value.trim() || '';
+    if (!value || !email.validity.valid) {
+      if (status) { status.classList.add('is-error'); status.textContent = value ? 'Please enter a valid email address, like you@company.com.' : 'Please enter your email address.'; }
+      email?.focus();
+      return;
+    }
+    document.dispatchEvent(new CustomEvent('akh:lead', { detail: { type: 'waitlist', email: value } }));
+    window.akhTrack?.('waitlist_join');
+    if (status) {
+      status.classList.remove('is-error');
+      status.classList.add('is-success');
+      status.innerHTML = '<strong>You’re on the list.</strong> We’ll email <b></b> as soon as RetailWeave early access opens.';
+      status.querySelector('b').textContent = value;
+    }
+    form.hidden = true;
+    email.value = '';
   });
 })();

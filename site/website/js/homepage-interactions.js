@@ -17,7 +17,7 @@
     if (hero && 'IntersectionObserver' in window) {
       const heroObserver = new IntersectionObserver(entries => {
         entries.forEach(entry => setLauncherVisible(!entry.isIntersecting));
-      }, { threshold: 0, rootMargin: '0px 0px -40% 0px' });
+      }, { threshold: 0, rootMargin: '-35% 0px 0px 0px' });
       heroObserver.observe(hero);
     } else if (hero) {
       const updateLauncherVisibility = () => setLauncherVisible(hero.getBoundingClientRect().bottom < window.innerHeight * 0.6);

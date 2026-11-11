@@ -194,27 +194,40 @@ const akhSetupPanel = (drawer, cfg) => {
     const checkFile = () => {
       const f = file.files[0];
       file.setCustomValidity('');
-      if (!f) { fileName.textContent = 'No file chosen'; return true; }
+      if (!f) { fileName.textContent = 'No file chosen'; return file.checkValidity(); }
       fileName.textContent = f.name;
       if (!okType(f.name)) file.setCustomValidity('Please upload a PDF, DOC or DOCX file.');
       else if (f.size > MAX) file.setCustomValidity('Please upload a file under 5 MB.');
       return file.checkValidity();
     };
     file.addEventListener('change', () => { checkFile(); error.textContent = file.validationMessage; });
+    const why = form.querySelector('textarea[name="why"]');
+    const mobile = form.querySelector('input[name="mobile"]');
+    const checkText = () => {
+      if (why) why.setCustomValidity(why.value.trim() && why.value.trim().length < 20 ? 'Please tell us a little more (at least 20 characters).' : '');
+      if (mobile) {
+        const digits = mobile.value.replace(/\D/g, '');
+        mobile.setCustomValidity(mobile.value.trim() && (digits.length < 7 || digits.length > 12 || /^\s*\+/.test(mobile.value)) ? 'Please enter a valid mobile number, without the country code.' : '');
+      }
+    };
     form.querySelectorAll('input:not([type="file"]), textarea').forEach((input) => {
-      input.addEventListener('blur', () => input.classList.toggle('is-invalid', !input.checkValidity()));
-      input.addEventListener('input', () => { if (input.checkValidity()) input.classList.remove('is-invalid'); });
+      input.addEventListener('blur', () => { checkText(); input.classList.toggle('is-invalid', !input.checkValidity()); });
+      input.addEventListener('input', () => { checkText(); if (input.checkValidity()) input.classList.remove('is-invalid'); });
     });
     form.addEventListener('submit', (event) => {
       event.preventDefault();
       checkFile();
+      checkText();
       const invalid = [...form.elements].filter((el) => el.willValidate && !el.checkValidity());
       invalid.forEach((el) => el.classList.add('is-invalid'));
       if (invalid.length) {
         const el = invalid[0];
-        error.textContent = el.type === 'file' ? el.validationMessage
+        error.textContent = el.type === 'file' ? (el.files.length ? el.validationMessage : 'Please attach your CV or resume (PDF, DOC or DOCX).')
           : el.type === 'email' && el.value ? 'Please enter a valid email address.'
-          : el.name === 'mobile' && el.value ? 'Please enter a valid mobile number.'
+          : el.name === 'mobile' && el.value ? 'Please enter a valid mobile number, without the country code.'
+          : el.name === 'why' && el.value.trim() ? 'Please tell us a little more about why you want to join (at least 20 characters).'
+          : el.name === 'why' ? 'Please tell us why you want to join AKH.'
+          : el.name === 'mobile' ? 'Please enter your mobile number.'
           : 'Please fill in the required fields marked *.';
         el.focus();
         return;
@@ -222,9 +235,12 @@ const akhSetupPanel = (drawer, cfg) => {
       error.textContent = '';
       const data = Object.fromEntries([...new FormData(form)].filter(([k]) => k !== 'cv'));
       data.role = form.dataset.roleTitle;
+      data.mobile = `${data.country_code || ''} ${data.mobile || ''}`.trim();
       if (typeof window.submitLead === 'function') window.submitLead({ type: 'job_application', ...data });
       if (window.akhTrack) window.akhTrack('careers_apply', { role: data.role });
       const done = form.parentElement.querySelector('.akh-role-done');
+      const who = done.querySelector('[data-applicant]');
+      if (who) who.textContent = data.first_name ? `, ${String(data.first_name).trim()}` : '';
       form.hidden = true;
       done.hidden = false;
       done.focus();
@@ -345,11 +361,14 @@ window.akhTwoStepForm = form => {
       mic.addEventListener('click', () => { if (voice) voice.textContent = 'Voice input is unavailable in this browser. You can type instead.'; });
     } else {
       const rec = new Recognition();
-      rec.lang = 'en-GB'; rec.interimResults = false; rec.continuous = false;
-      rec.onstart = () => { mic.setAttribute('aria-pressed', 'true'); if (voice) voice.textContent = 'Listening. Your browser may send audio to its speech service for transcription.'; };
+      rec.lang = 'en-GB'; rec.interimResults = true; rec.continuous = false;
+      let voiceBase = '';
+      rec.onstart = () => { voiceBase = brief.value.trim(); mic.setAttribute('aria-pressed', 'true'); if (voice) voice.textContent = 'Listening. Your browser may send audio to its speech service for transcription.'; };
       rec.onresult = e => {
-        const spoken = e.results?.[0]?.[0]?.transcript?.trim();
-        if (spoken) { brief.value = brief.value.trim() + (brief.value.trim() ? ' ' : '') + spoken; brief.dispatchEvent(new Event('input', { bubbles: true })); }
+        let spoken = '';
+        for (let i = 0; i < e.results.length; i += 1) spoken += e.results[i][0].transcript;
+        brief.value = [voiceBase, spoken.trim()].filter(Boolean).join(' ');
+        brief.dispatchEvent(new Event('input', { bubbles: true }));
       };
       rec.onerror = e => { if (voice) voice.textContent = e.error === 'not-allowed' ? 'Microphone access was not allowed. You can type instead.' : 'Voice input stopped. You can type instead.'; };
       rec.onend = () => mic.setAttribute('aria-pressed', 'false');
@@ -362,6 +381,18 @@ window.akhTwoStepForm = form => {
   }
 };
 document.querySelectorAll('form[data-two-step]').forEach(form => window.akhTwoStepForm(form));
+
+/* Round 20: FAQs open one at a time. Opening a question closes any other open question in the same list.
+   Only plain <details> (the FAQ items); menus, role/course sections and service cards are left alone. */
+document.addEventListener('toggle', event => {
+  const item = event.target;
+  if (!(item instanceof HTMLDetailsElement) || !item.open || item.classList.length) return;
+  const list = item.parentElement;
+  if (!list) return;
+  [...list.children].forEach(other => {
+    if (other !== item && other instanceof HTMLDetailsElement && other.open && !other.classList.length) other.open = false;
+  });
+}, true);
 
 /* Round 19: header "Get a fixed quote" stands in whenever "Find out what we could save you" is hidden. */
 (() => {
@@ -389,4 +420,221 @@ document.querySelectorAll('form[data-two-step]').forEach(form => window.akhTwoSt
   align();
   window.addEventListener('resize', align, { passive: true });
   window.addEventListener('load', align);
+})();
+
+/* Round 20: Learn with us pop-ups. Learning is its own revenue stream, so its CTAs open
+   learning-specific forms here instead of sending people to the build-services quote form. */
+(() => {
+  const triggers = document.querySelectorAll('[data-learn-open]');
+  const interest = document.getElementById('learn-interest-form');
+  const EMAIL_EMPTY = 'Please enter your email address.';
+  const EMAIL_BAD = 'Please enter a valid email address, like you@example.com.';
+  const emailMessage = input => (!input.value.trim() ? EMAIL_EMPTY : EMAIL_BAD);
+
+  /* Register your interest (bottom of the page): clear messages for an empty or invalid email. */
+  if (interest) {
+    const email = interest.querySelector('input[type="email"]');
+    const status = document.getElementById('learn-interest-status');
+    email.addEventListener('input', () => { if (status.classList.contains('is-error')) { status.className = 'akh-learn-status'; status.textContent = ''; email.removeAttribute('aria-invalid'); } });
+    interest.addEventListener('submit', event => {
+      event.preventDefault();
+      if (!email.value.trim() || !email.checkValidity()) {
+        status.className = 'akh-learn-status is-error';
+        status.textContent = emailMessage(email);
+        email.setAttribute('aria-invalid', 'true');
+        email.focus();
+        return;
+      }
+      const role = document.getElementById('f1')?.value || '';
+      const topic = document.getElementById('f2')?.value || '';
+      document.dispatchEvent(new CustomEvent('akh:lead', { detail: { type: 'learn_interest', email: email.value.trim(), role, topic } }));
+      window.akhTrack?.('learn_interest_submit', { topic });
+      status.className = 'akh-learn-status is-success';
+      status.textContent = `Thanks, you’re on the list for ${topic}. We’ll email you first when it opens, with early-access pricing.`;
+      email.value = '';
+    });
+  }
+
+  if (!triggers.length) return;
+  const PATHS = ['AI and automation', 'Websites and apps', 'Data and analytics', 'Marketing and transformation'];
+  const F = {
+    name: { label: 'Your name', name: 'name', autocomplete: 'name', required: true },
+    email: { label: 'Email address', name: 'email', type: 'email', autocomplete: 'email', required: true },
+    workEmail: { label: 'Work email', name: 'email', type: 'email', autocomplete: 'email', required: true },
+    path: { label: 'What do you want to learn?', name: 'path', options: PATHS },
+  };
+  const VARIANTS = {
+    start: {
+      eyebrow: 'Self-paced learning', title: 'Start learning at your own pace.',
+      intro: 'Pick a path and we’ll send you how to start, what you’ll build and the early-access price.',
+      fields: [F.name, F.email, F.path], submit: 'Start learning',
+      thanks: 'You’re in, {name}. We’ll email your path details and how to start within one working day.',
+    },
+    cohort: {
+      eyebrow: 'Guided cohort', title: 'Save your seat in the next cohort.',
+      intro: 'Learn with a small group, a coach and weekly live sessions. Tell us your path and when you’d like to start.',
+      fields: [F.name, F.email, F.path, { label: 'When would you like to start?', name: 'start', options: ['As soon as possible', 'In the next 1–2 months', 'Later this year', 'Not sure yet'] }],
+      submit: 'Request my seat',
+      thanks: 'Seat request received, {name}. We’ll email the next cohort dates and your early-access price.',
+    },
+    team: {
+      eyebrow: 'Teams & schools', title: 'Train your team on the skills you need.',
+      intro: 'Tell us who’s learning and what they need to be able to do. We’ll suggest a programme built around your people and tools.',
+      fields: [F.name, F.workEmail, { label: 'Organisation', name: 'organisation', autocomplete: 'organization', required: true },
+        { label: 'How many learners?', name: 'learners', options: ['1–10', '11–25', '26–50', '50+'] },
+        { label: 'What should they be able to do afterwards?', name: 'goals', textarea: true, placeholder: 'For example: use AI tools safely in daily work' }],
+      submit: 'Talk about team training',
+      thanks: 'Thanks, {name}. We’ll reply within one working day to plan your team’s programme.',
+    },
+    educator: {
+      eyebrow: 'Educator workshops', title: 'Hands-on workshops for educators.',
+      intro: 'Practical sessions that help teachers and lecturers use AI and digital tools in class, with ready-to-use material.',
+      fields: [F.name, F.workEmail, { label: 'School, college or university', name: 'institution', autocomplete: 'organization', required: true },
+        { label: 'How many educators?', name: 'educators', options: ['1–10', '11–25', '26–50', '50+'] },
+        { label: 'Topic', name: 'topic', options: ['AI in teaching and assessment', 'Digital skills for the classroom', 'Data and analytics basics', 'Something else'] }],
+      submit: 'Ask about a workshop',
+      thanks: 'Thanks, {name}. We’ll be in touch within one working day with workshop options and dates.',
+    },
+    partner: {
+      eyebrow: 'For course providers', title: 'Partner with AKH to deliver your courses.',
+      intro: 'We add coaching, cohorts and support to your courses so more learners finish and apply what they learn. Tell us about your catalogue.',
+      fields: [F.name, F.workEmail, { label: 'Organisation', name: 'organisation', autocomplete: 'organization', required: true },
+        { label: 'Course catalogue or website', name: 'website', type: 'url', placeholder: 'https://', optional: true },
+        { label: 'Which courses would you like to offer with AKH?', name: 'message', textarea: true }],
+      submit: 'Start a partner conversation',
+      thanks: 'Thanks, {name}. Our learning partnerships team will reply within one working day to arrange a first call.',
+    },
+  };
+
+  const dialog = document.createElement('dialog');
+  dialog.className = 'modal launch-dialog akh-learn-dialog';
+  dialog.setAttribute('aria-labelledby', 'learn-dialog-title');
+  dialog.innerHTML = '<div class="modal-inner"><div class="modal-top"><div><p class="eyebrow" data-l-eyebrow></p><h2 id="learn-dialog-title" data-l-title></h2></div><button class="modal-close" type="button" aria-label="Close">×</button></div><p class="launch-intro" data-l-intro></p><form class="akh-learn-form" novalidate></form><div class="akh-learn-done" tabindex="-1" role="status" aria-live="polite" hidden></div></div>';
+  document.body.append(dialog);
+  const form = dialog.querySelector('form');
+  const done = dialog.querySelector('.akh-learn-done');
+  dialog.querySelector('.modal-close').addEventListener('click', () => dialog.close());
+  dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
+  let variant = 'start';
+
+  const fieldHtml = (f, i) => {
+    const id = `learn-f-${i}`;
+    const req = f.required ? ' required' : '';
+    const label = `<span class="field-label">${f.label}${f.required ? ' *' : ''}${f.optional ? ' <span class="akh-qf-optional">(optional)</span>' : ''}</span>`;
+    let control;
+    if (f.options) control = `<select id="${id}" name="${f.name}">${f.options.map(o => `<option>${o}</option>`).join('')}</select>`;
+    else if (f.textarea) control = `<textarea id="${id}" name="${f.name}" rows="3" maxlength="1500"${f.placeholder ? ` placeholder="${f.placeholder}"` : ''}${req}></textarea>`;
+    else control = `<input id="${id}" name="${f.name}" data-what="${f.label.replace(/^Your /i, '').toLowerCase()}" type="${f.type || 'text'}"${f.autocomplete ? ` autocomplete="${f.autocomplete}"` : ''}${f.placeholder ? ` placeholder="${f.placeholder}"` : ''}${req}>`;
+    return `<label class="field" for="${id}">${label}${control}<span class="akh-field-error" aria-live="polite"></span></label>`;
+  };
+
+  const openVariant = (key, preset) => {
+    const v = VARIANTS[key];
+    if (!v) return;
+    variant = key;
+    dialog.querySelector('[data-l-eyebrow]').textContent = v.eyebrow;
+    dialog.querySelector('[data-l-title]').textContent = v.title;
+    dialog.querySelector('[data-l-intro]').textContent = v.intro;
+    form.innerHTML = v.fields.map(fieldHtml).join('') + `<button class="cta" type="submit">${v.submit} <span aria-hidden="true">→</span></button><p class="akh-learn-small">We’ll only use your details to reply about learning with AKH.</p>`;
+    if (preset) { const sel = form.querySelector('select[name="path"]'); if (sel) sel.value = preset; }
+    form.hidden = false;
+    done.hidden = true;
+    done.textContent = '';
+    if (!dialog.open) dialog.showModal();
+    form.querySelector('input')?.focus();
+    window.akhTrack?.('learn_popup_open', { variant: key });
+  };
+
+  const fieldError = el => {
+    if (el.validity.valueMissing) return el.type === 'email' ? EMAIL_EMPTY : `Please enter your ${(el.dataset.what || 'details')}.`;
+    if (el.type === 'email' && !el.validity.valid) return EMAIL_BAD;
+    if (el.type === 'url' && !el.validity.valid) return 'Please enter a full web address, starting with https://';
+    return '';
+  };
+  const showError = el => {
+    const msg = fieldError(el);
+    const slot = el.parentElement.querySelector('.akh-field-error');
+    if (slot) slot.textContent = msg;
+    el.toggleAttribute('aria-invalid', Boolean(msg));
+    el.classList.toggle('is-invalid', Boolean(msg));
+    return !msg;
+  };
+  form.addEventListener('input', event => { if (event.target.classList?.contains('is-invalid')) showError(event.target); });
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    const controls = [...form.querySelectorAll('input, textarea')];
+    const bad = controls.filter(el => !showError(el));
+    if (bad.length) { bad[0].focus(); return; }
+    const data = Object.fromEntries(new FormData(form));
+    document.dispatchEvent(new CustomEvent('akh:lead', { detail: { type: `learn_${variant}`, ...data } }));
+    window.akhTrack?.(`learn_${variant}_submit`);
+    const first = String(data.name || '').trim().split(/\s+/)[0] || 'there';
+    done.innerHTML = '<span class="akh-learn-done-mark" aria-hidden="true">✓</span><p></p><button class="akh-btn akh-btn--secondary" type="button">Close</button>';
+    done.querySelector('p').textContent = VARIANTS[variant].thanks.replace('{name}', first);
+    done.querySelector('button').addEventListener('click', () => dialog.close());
+    form.hidden = true;
+    done.hidden = false;
+    done.focus();
+  });
+
+  document.addEventListener('click', event => {
+    const btn = event.target instanceof Element ? event.target.closest('[data-learn-open]') : null;
+    if (!btn) return;
+    event.preventDefault();
+    openVariant(btn.dataset.learnOpen, btn.dataset.selectValue);
+  });
+})();
+
+/* Round 20: footer newsletter shows a clear message for an empty/invalid email and a thank-you once subscribed. */
+(() => {
+  const form = document.getElementById('preview-newsletter');
+  if (!form) return;
+  const email = form.querySelector('input[type="email"]');
+  const status = form.parentElement.querySelector('.site-newsletter-status');
+  if (!email || !status) return;
+  const handle = event => {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    const value = email.value.trim();
+    if (!value || !email.checkValidity()) {
+      status.className = 'site-newsletter-status is-error';
+      status.textContent = value ? 'Please enter a valid email address, like you@company.com.' : 'Please enter your email address.';
+      email.setAttribute('aria-invalid', 'true');
+      email.focus();
+      return;
+    }
+    email.removeAttribute('aria-invalid');
+    document.dispatchEvent(new CustomEvent('akh:lead', { detail: { type: 'newsletter', email: value } }));
+    window.akhTrack?.('newsletter_subscribe');
+    status.className = 'site-newsletter-status is-success';
+    status.textContent = 'Thanks, you’re subscribed. Your first tech idea arrives next month.';
+    email.value = '';
+  };
+  form.addEventListener('submit', handle, true);
+  email.addEventListener('input', () => { if (status.classList.contains('is-error')) { status.className = 'site-newsletter-status'; status.textContent = ''; email.removeAttribute('aria-invalid'); } });
+})();
+
+/* Round 20: on-screen keyboard. Phones keep fixed panels sized to the full screen when the keyboard opens,
+   which pushed the chat send button out of view. Track the visible area and let CSS fit the panels to it. */
+(() => {
+  const vv = window.visualViewport;
+  if (!vv) return;
+  const root = document.documentElement;
+  const sync = () => {
+    const covered = Math.max(0, window.innerHeight - vv.height - vv.offsetTop);
+    const open = covered > 120 && document.activeElement?.matches?.('input, textarea, select');
+    root.classList.toggle('akh-kb-open', Boolean(open));
+    root.style.setProperty('--akh-vv-h', `${Math.round(vv.height)}px`);
+    root.style.setProperty('--akh-vv-top', `${Math.round(vv.offsetTop)}px`);
+    root.style.setProperty('--akh-kb', `${Math.round(open ? covered : 0)}px`);
+    if (open) {
+      const field = document.activeElement;
+      const box = field.closest('.assistant-panel, .lc-assistant-panel, .ai-assistant-panel, .scoper-drawer-panel, .launch-dialog');
+      if (box) requestAnimationFrame(() => field.scrollIntoView({ block: 'nearest' }));
+    }
+  };
+  vv.addEventListener('resize', sync);
+  vv.addEventListener('scroll', sync);
+  document.addEventListener('focusin', () => setTimeout(sync, 60));
+  document.addEventListener('focusout', () => setTimeout(sync, 120));
 })();
