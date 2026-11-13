@@ -286,3 +286,9 @@ All long dashes were removed from the site and replaced with commas, full stops,
 - ⚑ Check spellings "Dixons Department Store" and "Carol C Collections"; confirm the venue (London).
 - ⚑ "Goddiva, the fashion brand he founded" is the user's wording, while the case study still presents Goddiva as a client. Confirm both can stand.
 - ⚑ Add an external source link (Boutique Magazine or City Goddess post) for the 2026 awards when published.
+
+## Round 26 (2026-11-13): Drapers Awards 2026 story + Boutique poster
+- New article `news/drapers-awards-2026.html`: "Goddiva named Retailer Tech Innovator of the Year at the Drapers Awards 2026." Collected by Goddiva co-founders Kuganeswaran Thangarajah and Mina Melikova, 11 November 2026, London. "Shortlisted in 2025. Winner in 2026." "A week to remember: two tech awards in two nights." Goddiva's aim paraphrased from its LinkedIn post (more personal, seamless and fun fashion retail through technology). No quotes attributed.
+- Boutique article: Goddiva's "Double Win!" poster beside its two award cards, plus a link to the Drapers story.
+- News & events features the Drapers story; Home and About teasers show both stories. Awards rows (Home, Goddiva case study): "Drapers Awards 2025 · Shortlisted ×5" replaced by "Winner · Retailer Tech Innovator of the Year · Drapers Awards 2026".
+- ⚑ Confirm the Drapers date (11 Nov) and venue (London); Mina Melikova's title ("Goddiva co-founder"); add the Drapers winners link when published.

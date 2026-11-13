@@ -2,6 +2,18 @@
   "_howto": "Add one object to 'events' per talk or award. type: talk | award-received | award-presented. date: YYYY-MM-DD. image: website/images/events/<file>.jpg (about 1600px wide, under 250 KB; it is cropped to 16:9, use imagePos e.g. '50% 30%' to keep faces in view). link is optional: an article on this site (news/<page>.html) or an outside page (opens in a new tab). Set placeholder to false for real events. A night with several awards can have a full article: add it to 'stories' (id, title, summary, date, image, url) and give each of that night's events story: '<story id>'. The newest story is featured at the top of News & events and on Home and About.",
   "stories": [
     {
+      "id": "drapers-awards-2026",
+      "title": "Goddiva named Retailer Tech Innovator of the Year at the Drapers Awards 2026",
+      "summary": "One night after its Boutique Star Awards win, Goddiva took home a second tech award. Co-founders Kuganeswaran Thangarajah and Mina Melikova collected it in London.",
+      "event": "Drapers Awards 2026",
+      "date": "2026-11-11",
+      "location": "London, UK",
+      "image": "website/images/events/drapers-2026.jpg",
+      "imagePos": "50% 50%",
+      "imageAlt": "Kuganeswaran Thangarajah and Mina Melikova holding the Drapers Awards 2026 trophy",
+      "url": "news/drapers-awards-2026.html"
+    },
+    {
       "id": "boutique-star-awards-2026",
       "title": "Two awards presented, two brought home: our night at the Boutique Star Awards 2026",
       "summary": "Boutique Magazine invited our founder, Kuganeswaran Thangarajah, to present two of the night’s awards. Goddiva, the fashion brand he founded, took home two more.",
@@ -16,6 +28,21 @@
   ],
   "events": [
     {
+      "id": "drapers-2026-retailer-tech-innovator",
+      "type": "award-received",
+      "title": "Retailer Tech Innovator of the Year 2026: Winner",
+      "event": "Drapers Awards 2026",
+      "date": "2026-11-11",
+      "location": "London, UK",
+      "summary": "Goddiva won Retailer Tech Innovator of the Year. Co-founders Kuganeswaran Thangarajah and Mina Melikova collected the award.",
+      "image": "website/images/events/drapers-2026.jpg",
+      "imagePos": "50% 50%",
+      "imageAlt": "Kuganeswaran Thangarajah and Mina Melikova with the Drapers Awards 2026 trophy",
+      "link": "news/drapers-awards-2026.html",
+      "story": "drapers-awards-2026",
+      "placeholder": false
+    },
+    {
       "id": "boutique-2026-tech-innovation",
       "type": "award-received",
       "title": "Tech Innovation of the Year 2026: Winner",
@@ -23,9 +50,9 @@
       "date": "2026-11-10",
       "location": "London, UK",
       "summary": "Goddiva, the fashion brand founded by Kuganeswaran Thangarajah, won Tech Innovation of the Year.",
-      "image": "website/images/events/boutique-2026-podium.jpg",
-      "imagePos": "50% 30%",
-      "imageAlt": "Kuganeswaran Thangarajah holding a Boutique Star Award on stage",
+      "image": "website/images/events/boutique-2026-double-win.jpg",
+      "imagePos": "50% 52%",
+      "imageAlt": "Goddiva’s Boutique Star Awards 2026 plaque and glass star trophy",
       "link": "news/boutique-star-awards-2026.html",
       "story": "boutique-star-awards-2026",
       "placeholder": false
@@ -38,9 +65,9 @@
       "date": "2026-11-10",
       "location": "London, UK",
       "summary": "Goddiva was highly commended for British Brand of the Year, a second year of recognition in the category.",
-      "image": "website/images/events/boutique-2026-stage.jpg",
-      "imagePos": "50% 30%",
-      "imageAlt": "Winners celebrating on stage at the Boutique Star Awards 2026",
+      "image": "website/images/events/boutique-2026-double-win.jpg",
+      "imagePos": "50% 52%",
+      "imageAlt": "Goddiva’s Boutique Star Awards 2026 plaque and glass star trophy",
       "link": "news/boutique-star-awards-2026.html",
       "story": "boutique-star-awards-2026",
       "placeholder": false

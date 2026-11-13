@@ -179,6 +179,7 @@ docs/copy-changes.md             Every copy change, with items to confirm (⚑)
   Goddiva shows its awards right under the cover. "Ops Platform" was dropped because no such offer exists. Results use stated facts, not "[X%]".
 - **Goddiva awards** are verified facts: winner and highly commended at the Boutique Star Awards 2025; shortlisted ×5 at the Drapers Awards 2025 (not won). Sources are City Goddess's blog.
 - **Boutique Star Awards 2026** (10 Nov 2026, London, from the user): Kuganeswaran presented Independent Department Store of the Year (Dixons Department Store) and Outstanding Business (Carol C Collections); Goddiva won Tech Innovation of the Year and was highly commended for British Brand of the Year. The user approved describing Goddiva as "the fashion brand he founded". Don't claim AKH built the winning tech until confirmed.
+- **Drapers Awards 2026** (11 Nov 2026, London, from Goddiva's LinkedIn post and the user): Goddiva won Retailer Tech Innovator of the Year, collected by its co-founders Kuganeswaran Thangarajah and Mina Melikova (describe Mina as "Goddiva co-founder"). This replaced the 2025 Drapers shortlist card on the awards rows.
 - **Stats:**
   - Home: 99% on-time delivery · 4 markets reached (UK, EU incl. Ireland, US, India) · **3x–5x estimated ROI** · 4.9/5 client rating · 30+ projects completed.
   - Services: 30+ projects delivered · 99% client satisfaction · 48h fixed quote turnaround · 100% upfront fixed pricing · 100% IP and code ownership.
@@ -260,6 +261,7 @@ docs/copy-changes.md             Every copy change, with items to confirm (⚑)
 - **Round 23: News & events page** (events.json, filters, featured event, "Invite us to speak"), About and Home teasers, Speaking option on Contact.
 - **Round 24: News & events hero photo** (stage, podium, trophy and audience), framed separately for phones.
 - **Round 25: Boutique Star Awards 2026 story**, the first real news: article page, featured on News & events, four award cards, Home and About teasers live, 2026 awards on the Home ribbon and Goddiva case study.
+- **Round 26: Drapers Awards 2026 story** (Retailer Tech Innovator of the Year), the Boutique "Double Win" poster, two-story teasers, Drapers win on the awards rows.
 
 ## Left to do / confirm
 

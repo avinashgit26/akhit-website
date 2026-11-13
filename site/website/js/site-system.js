@@ -688,7 +688,7 @@ document.addEventListener('toggle', event => {
    the About "On stage" section and the Home "Recently on stage" strip.
    Containers: [data-events="featured" | "grid" | "teaser"], optional data-events-limit.
    "stories" are full articles about one night (news/*.html). The newest story is featured;
-   events that belong to it (story: id) appear in the grid but not again in teasers.
+   teasers list stories first, and events that belong to a story (story: id) appear only in the grid.
    Teasers show real content only and hide their [data-events-section] until some exists. */
 (() => {
   const boxes = document.querySelectorAll('[data-events]');
@@ -756,8 +756,9 @@ document.addEventListener('toggle', event => {
           const list = story ? events : events.slice(1);
           box.innerHTML = list.length ? list.map(card).join('') : '<p class="akh-lead">More news coming soon.</p>';
         } else if (kind === 'teaser') {
-          const real = events.filter(e => !e.placeholder && !(story && e.story === story.id));
-          const items = story ? [story, ...real] : real;
+          const storyIds = new Set(stories.map(st => st.id));
+          const real = events.filter(e => !e.placeholder && !storyIds.has(e.story));
+          const items = [...stories, ...real];
           const section = box.closest('[data-events-section]');
           if (!items.length) { if (section) section.hidden = true; return; }
           if (section) section.hidden = false;
