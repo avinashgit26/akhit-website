@@ -292,3 +292,8 @@ All long dashes were removed from the site and replaced with commas, full stops,
 - Boutique article: Goddiva's "Double Win!" poster beside its two award cards, plus a link to the Drapers story.
 - News & events features the Drapers story; Home and About teasers show both stories. Awards rows (Home, Goddiva case study): "Drapers Awards 2025 · Shortlisted ×5" replaced by "Winner · Retailer Tech Innovator of the Year · Drapers Awards 2026".
 - ⚑ Confirm the Drapers date (11 Nov) and venue (London); Mina Melikova's title ("Goddiva co-founder"); add the Drapers winners link when published.
+
+## Round 27 (2026-11-13): About hero wording
+- About hero headline changed from "We build software the way we’d want it for our own business." (read as if AKH builds for itself) to "We help businesses thrive and grow with technology."
+- Intro now: "Websites, apps, AI, SEO, design and skilled people: for over a decade we’ve given businesses in every industry the digital tools to work faster, serve their customers better and grow. Every project has a fixed price agreed before we start."
+- Mission reworded so it doesn’t repeat the headline: "To make every client’s business better with technology that earns its place: the most affordable thing that works, built to last, and handed over so they own it."
