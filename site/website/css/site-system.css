@@ -1463,3 +1463,28 @@ html body.interior-page .page-hero.akh-news-hero .page-hero-copy > :is(h1, p):no
                 url("../images/events/news-hero-stage.jpg?v=stage22") 90% 0 / auto clamp(280px, 80vw, 420px) no-repeat, #1e2124 !important;
   }
 }
+
+/* Round 25: Boutique Star Awards 2026 story. Five-card awards rows, the article page and story teasers. */
+html body .akh-grid.akh-grid--awards:not(#akh-x) { grid-template-columns: repeat(5, minmax(0, 1fr)) !important; gap: 14px; }
+@media (max-width: 1100px) { html body .akh-grid.akh-grid--awards:not(#akh-x) { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; } }
+@media (max-width: 760px) { html body .akh-grid.akh-grid--awards:not(#akh-x) { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
+@media (max-width: 480px) { html body .akh-grid.akh-grid--awards:not(#akh-x) { grid-template-columns: 1fr !important; } }
+.akh-grid--awards .akh-award h4 { padding-right: 28px; }
+
+.akh-article-back { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.akh-article-back:is(:hover, :focus-visible) { color: var(--akh-highlight); }
+.akh-article-figure { margin: 0; }
+.akh-article-figure figcaption { margin-top: 10px; color: var(--akh-muted); font-size: 14px; line-height: 1.5; }
+.akh-article-awards { margin-top: clamp(24px, 3vw, 36px); }
+.akh-article-awards .akh-award { padding: 22px 22px 18px; }
+.akh-article-awards .akh-award p { margin: 0; font-size: 15px; }
+.akh-article-awards .akh-award strong { color: var(--akh-ink); }
+.akh-award--presented .akh-award-badge { background: var(--akh-charcoal); }
+.akh-award--presented::before { content: "★"; color: var(--akh-green-deep); }
+
+.akh-event-teaser-body { display: grid; gap: 10px; justify-items: start; }
+.akh-event-teaser-sum { color: var(--akh-muted); font-size: 15px; line-height: 1.55; }
+.akh-event-teaser--story:only-child { grid-column: 1 / -1; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: center; gap: clamp(20px, 3vw, 40px); padding: 14px; }
+.akh-event-teaser--story:only-child .akh-event-teaser-body { margin: 0; padding: 8px clamp(4px, 1.5vw, 16px) 8px 0; }
+.akh-event-teaser--story:only-child strong { font-size: clamp(20px, 2vw, 26px); line-height: 1.2; letter-spacing: -0.02em; }
+@media (max-width: 760px) { .akh-event-teaser--story:only-child { grid-template-columns: 1fr; } .akh-event-teaser--story:only-child .akh-event-teaser-body { padding: 0 6px 6px; } }

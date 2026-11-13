@@ -1,44 +1,79 @@
 {
-  "_howto": "Add one object to 'events' per talk or award. type: talk | award-received | award-presented. date: YYYY-MM-DD. image: website/images/events/<file>.jpg (16:9, about 1600x900, under 250 KB). link is optional (article, video or organiser page). Set placeholder to false for real events: only real events appear on Home and About. Delete the placeholder entries once real ones are in.",
+  "_howto": "Add one object to 'events' per talk or award. type: talk | award-received | award-presented. date: YYYY-MM-DD. image: website/images/events/<file>.jpg (about 1600px wide, under 250 KB; it is cropped to 16:9, use imagePos e.g. '50% 30%' to keep faces in view). link is optional: an article on this site (news/<page>.html) or an outside page (opens in a new tab). Set placeholder to false for real events. A night with several awards can have a full article: add it to 'stories' (id, title, summary, date, image, url) and give each of that night's events story: '<story id>'. The newest story is featured at the top of News & events and on Home and About.",
+  "stories": [
+    {
+      "id": "boutique-star-awards-2026",
+      "title": "Two awards presented, two brought home: our night at the Boutique Star Awards 2026",
+      "summary": "Boutique Magazine invited our founder, Kuganeswaran Thangarajah, to present two of the night’s awards. Goddiva, the fashion brand he founded, took home two more.",
+      "event": "Boutique Star Awards 2026 (Boutique Magazine)",
+      "date": "2026-11-10",
+      "location": "London, UK",
+      "image": "website/images/events/boutique-2026-stage.jpg",
+      "imagePos": "50% 30%",
+      "imageAlt": "Winners celebrating on stage under the Boutique Star Awards 2026 screen",
+      "url": "news/boutique-star-awards-2026.html"
+    }
+  ],
   "events": [
     {
-      "id": "placeholder-talk",
-      "type": "talk",
-      "title": "[Talk title]",
-      "event": "[Event or conference name]",
-      "date": "2026-11-01",
-      "location": "[City, country]",
-      "summary": "[One line on what Kuganeswaran spoke about and who was in the room.]",
-      "image": "",
-      "imageAlt": "",
-      "link": "",
-      "placeholder": true
-    },
-    {
-      "id": "placeholder-award-received",
+      "id": "boutique-2026-tech-innovation",
       "type": "award-received",
-      "title": "[Award name]",
-      "event": "[Awards ceremony name]",
-      "date": "2026-10-15",
-      "location": "[City, country]",
-      "summary": "[One line on what the award recognised.]",
-      "image": "",
-      "imageAlt": "",
-      "link": "",
-      "placeholder": true
+      "title": "Tech Innovation of the Year 2026: Winner",
+      "event": "Boutique Star Awards 2026",
+      "date": "2026-11-10",
+      "location": "London, UK",
+      "summary": "Goddiva, the fashion brand founded by Kuganeswaran Thangarajah, won Tech Innovation of the Year.",
+      "image": "website/images/events/boutique-2026-podium.jpg",
+      "imagePos": "50% 30%",
+      "imageAlt": "Kuganeswaran Thangarajah holding a Boutique Star Award on stage",
+      "link": "news/boutique-star-awards-2026.html",
+      "story": "boutique-star-awards-2026",
+      "placeholder": false
     },
     {
-      "id": "placeholder-award-presented",
+      "id": "boutique-2026-british-brand",
+      "type": "award-received",
+      "title": "British Brand of the Year 2026: Highly commended",
+      "event": "Boutique Star Awards 2026",
+      "date": "2026-11-10",
+      "location": "London, UK",
+      "summary": "Goddiva was highly commended for British Brand of the Year, a second year of recognition in the category.",
+      "image": "website/images/events/boutique-2026-stage.jpg",
+      "imagePos": "50% 30%",
+      "imageAlt": "Winners celebrating on stage at the Boutique Star Awards 2026",
+      "link": "news/boutique-star-awards-2026.html",
+      "story": "boutique-star-awards-2026",
+      "placeholder": false
+    },
+    {
+      "id": "boutique-2026-independent-department-store",
       "type": "award-presented",
-      "title": "[Award presented]",
-      "event": "[Awards ceremony name]",
-      "date": "2026-09-20",
-      "location": "[City, country]",
-      "summary": "[One line on the award Kuganeswaran presented and to whom.]",
-      "image": "",
-      "imageAlt": "",
-      "link": "",
-      "placeholder": true
+      "title": "Independent Department Store of the Year 2026",
+      "event": "Boutique Star Awards 2026",
+      "date": "2026-11-10",
+      "location": "London, UK",
+      "summary": "Kuganeswaran Thangarajah presented the award to Dixons Department Store.",
+      "image": "website/images/events/boutique-2026-podium.jpg",
+      "imagePos": "50% 30%",
+      "imageAlt": "Kuganeswaran Thangarajah on stage at the Boutique Star Awards 2026",
+      "link": "news/boutique-star-awards-2026.html",
+      "story": "boutique-star-awards-2026",
+      "placeholder": false
+    },
+    {
+      "id": "boutique-2026-outstanding-business",
+      "type": "award-presented",
+      "title": "Outstanding Business 2026",
+      "event": "Boutique Star Awards 2026",
+      "date": "2026-11-10",
+      "location": "London, UK",
+      "summary": "Kuganeswaran Thangarajah presented the award to Carol C Collections.",
+      "image": "website/images/events/boutique-2026-stage.jpg",
+      "imagePos": "50% 30%",
+      "imageAlt": "The Boutique Star Awards 2026 winners on stage",
+      "link": "news/boutique-star-awards-2026.html",
+      "story": "boutique-star-awards-2026",
+      "placeholder": false
     }
   ]
 }

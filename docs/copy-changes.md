@@ -276,3 +276,13 @@ All long dashes were removed from the site and replaced with commas, full stops,
 - All events come from `site/website/data/events.json`; photos in `site/website/images/events/`. ⚑ Three placeholder events until real details and photos arrive.
 - Teasers: About "On stage" and Home "Recently on stage" show the latest 3 real events and stay hidden while only placeholders exist.
 - Footer: "News & events" added on every page. Assistant answers event, talk, award and news questions with a link to the page.
+
+## Round 25 (2026-11-13): Boutique Star Awards 2026 story (first real news)
+- New article `news/boutique-star-awards-2026.html`: "Two awards presented, two brought home: our night at the Boutique Star Awards 2026." Boutique Magazine’s Boutique Star Awards, 10 November 2026, London. Founder Kuganeswaran Thangarajah presented Independent Department Store of the Year 2026 (to Dixons Department Store) and Outstanding Business 2026 (to Carol C Collections). Goddiva, "the fashion brand he founded", won Tech Innovation of the Year 2026 and was highly commended for British Brand of the Year 2026. Photos: stage and podium (`website/images/events/boutique-2026-*.jpg`).
+- "Why it matters to us: Technology that earns its place." No claim that AKH built the winning tech.
+- `events.json`: placeholders removed; the night is one story plus four award cards (2 presented, 2 received). News & events features the story; Home "Recently on stage" and About "On stage" now show it.
+- Home awards ribbon and Goddiva case study: two 2026 awards added before the 2025 ones ("Read the story →").
+- Assistant: "Boutique" and awards questions link to the story.
+- ⚑ Check spellings "Dixons Department Store" and "Carol C Collections"; confirm the venue (London).
+- ⚑ "Goddiva, the fashion brand he founded" is the user's wording, while the case study still presents Goddiva as a client. Confirm both can stand.
+- ⚑ Add an external source link (Boutique Magazine or City Goddess post) for the 2026 awards when published.
