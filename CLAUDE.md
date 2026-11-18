@@ -289,12 +289,12 @@ tools/check-seo.py               Pre-launch checks: old URLs, sitemap, internal 
 - **Round 27: About hero and mission** reworded around helping clients' businesses grow.
 - **Round 28 (2026-11-18): Life at AKH + SEO migration** (Technology Director):
   - Life at AKH explorer on About, strip on Careers (life.json);
-  - About hero image: the user's growth-steps render, recoloured from navy/cobalt to slate and green (`website/images/about-us/about-hero-growth-green.webp`, original kept), right of the copy with a gentle float, above the copy on phones;
   - 4 old blog posts and the terms page migrated at their old URLs; "From our blog" on News & events;
   - clean URLs, canonicals, robots meta, og:url/og:image, BreadcrumbList/Service/FAQPage data, titles of 60 or fewer characters, descriptions of 155 or fewer;
   - `.htaccess` (301 map, HTTPS, caching), sitemap.xml, robots.txt, 404 page;
   - images to WebP (16 MB to about 2 MB), width/height and lazy loading, font preconnect;
   - `docs/seo-migration.md`, `tools/serve-clean.js`, `tools/check-seo.py`.
+- **Round 29 (2026-11-18): About hero scene.** The user's warm cream scene (laptop, store steps, growth bars) replaces the growth-steps render. It's a full-bleed background (`website/images/about-us/about-hero-scene.webp`, original PNG kept), so the About hero is the one light hero: ink text, deep-green primary, dark outline secondary. The copy sits on the cream left side; on phones the scene sits on top. og:image is `about-hero-scene-share.jpg`.
 
 ## Left to do / confirm
 

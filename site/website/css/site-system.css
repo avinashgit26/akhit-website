@@ -1634,18 +1634,39 @@ html body .launch-dialog.akh-life-dialog:not(#akh-x) { width: min(760px, calc(10
 /* Long links in legal and article text wrap instead of pushing the page sideways on small phones. */
 .prose, .akh-prose { overflow-wrap: anywhere; }
 
-/* Round 28: About hero, copy left and the growth-steps render on the right (stacks under the copy on phones). */
-html body.interior-page .page-hero.akh-about-hero .akh-about-hero-grid:not(#akh-x) {
-  display: grid; grid-template-columns: minmax(0, 1fr) clamp(340px, 40vw, 560px); align-items: center; gap: clamp(24px, 4vw, 56px);
+/* Round 29: About hero = the warm cream scene (laptop, store steps, growth bars) as a full-bleed background.
+   The copy sits on the empty cream left side, so this one hero is light: ink text, deep-green primary, dark outline secondary.
+   On phones the scene sits on top (right part in view) and the copy follows on cream. */
+html body.interior-page .page-hero.akh-about-hero:not(#akh-x):not(#akh-y):not(#akh-z) {
+  position: relative; display: flex; align-items: center; min-height: clamp(480px, 44vw, 660px);
+  /* The scene is sized to the hero's height and anchored bottom-right, so its empty cream side sits behind the copy. */
+  background: linear-gradient(90deg, #efdfd5 0%, #efdfd5 22%, rgb(239 223 213 / 80%) 34%, rgb(239 223 213 / 0%) 48%),
+              url("../images/about-us/about-hero-scene.webp") right bottom / auto 86% no-repeat, #efdfd5 !important;
+  color: var(--akh-ink) !important;
 }
-html body.interior-page .page-hero.akh-about-hero .page-hero-copy > :is(h1, p):not(#akh-x) { max-width: 620px; }
-.akh-about-hero-art { margin: 0; pointer-events: none; }
-.akh-about-hero-art img { display: block; width: 100%; height: auto; filter: drop-shadow(0 30px 40px rgb(0 0 0 / 35%)); }
-@media (prefers-reduced-motion: no-preference) {
-  .akh-about-hero-art img { animation: akh-hero-float 7s ease-in-out infinite; }
-  @keyframes akh-hero-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+html body.interior-page .page-hero.akh-about-hero .page-hero-copy:not(#akh-x) { position: relative; z-index: 1; width: var(--page-width) !important; }
+html body.interior-page .page-hero.akh-about-hero .page-hero-copy > h1:not(#akh-x):not(#akh-y) { max-width: 600px !important; }
+html body.interior-page .page-hero.akh-about-hero .page-hero-copy > p:not(#akh-x):not(#akh-y) { max-width: 480px !important; }
+html body.interior-page .page-hero.akh-about-hero :is(h1, h2, strong):not(#akh-x):not(#akh-y):not(#akh-z) { color: var(--akh-ink) !important; }
+html body.interior-page .page-hero.akh-about-hero p:not(.lc-eyebrow):not(#akh-x):not(#akh-y):not(#akh-z) { color: #4a4f54 !important; }
+html body.interior-page .page-hero.akh-about-hero .lc-eyebrow:not(#akh-x):not(#akh-y):not(#akh-z) { color: var(--akh-green-deep) !important; }
+html body.interior-page .page-hero.akh-about-hero a.cta:not(#akh-x):not(#akh-y):not(#akh-z) { background: var(--akh-green-deep) !important; color: #fff !important; }
+html body.interior-page .page-hero.akh-about-hero a.cta:hover:not(#akh-x):not(#akh-y):not(#akh-z) { background: var(--akh-green-deep-hover) !important; }
+html body.interior-page .page-hero.akh-about-hero a.btn2:not(#akh-x):not(#akh-y):not(#akh-z) { color: var(--akh-ink) !important; border-color: rgb(26 29 31 / 45%) !important; background: rgb(255 255 255 / 35%) !important; }
+html body.interior-page .page-hero.akh-about-hero a.btn2:hover:not(#akh-x):not(#akh-y):not(#akh-z) { border-color: var(--akh-ink) !important; background: rgb(255 255 255 / 70%) !important; }
+@media (max-width: 1100px) {
+  html body.interior-page .page-hero.akh-about-hero:not(#akh-x):not(#akh-y):not(#akh-z) {
+    background: linear-gradient(90deg, #efdfd5 0%, #efdfd5 34%, rgb(239 223 213 / 85%) 46%, rgb(239 223 213 / 0%) 62%),
+                url("../images/about-us/about-hero-scene.webp") right bottom / auto 74% no-repeat, #efdfd5 !important;
+  }
+  html body.interior-page .page-hero.akh-about-hero .page-hero-copy > h1:not(#akh-x):not(#akh-y) { max-width: 440px !important; }
+  html body.interior-page .page-hero.akh-about-hero .page-hero-copy > p:not(#akh-x):not(#akh-y) { max-width: 420px !important; }
 }
 @media (max-width: 860px) {
-  html body.interior-page .page-hero.akh-about-hero .akh-about-hero-grid:not(#akh-x) { grid-template-columns: minmax(0, 1fr); }
-  .akh-about-hero-art { order: -1; width: min(420px, 82%); margin-inline: auto; }
+  html body.interior-page .page-hero.akh-about-hero .page-hero-copy > :is(h1, p):not(#akh-x):not(#akh-y) { max-width: 600px !important; }
+  html body.interior-page .page-hero.akh-about-hero:not(#akh-x):not(#akh-y):not(#akh-z) {
+    display: block; min-height: 0; padding-top: calc(clamp(240px, 62vw, 420px) + 8px) !important;
+    background: linear-gradient(180deg, rgb(239 223 213 / 0%) 0, rgb(239 223 213 / 0%) calc(clamp(240px, 62vw, 420px) - 60px), #efdfd5 clamp(240px, 62vw, 420px)),
+                url("../images/about-us/about-hero-scene.webp") 88% 0 / auto clamp(240px, 62vw, 420px) no-repeat, #efdfd5 !important;
+  }
 }
