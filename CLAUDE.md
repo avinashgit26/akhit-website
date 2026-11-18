@@ -123,10 +123,14 @@ site/
   learn-with-us.html         Learn: coverflow hero, provider panels, learning pop-ups, interest form
   careers.html               Careers: roles in slide-in panels with apply form
   contact-us.html            Two-step fixed-quote form (preselects need from ?subject=)
-  about-us.html              About: story, promises, numbers, team coverflow + messages, offices
-  news-events.html           News & events: CEO talks and awards, rendered from events.json
+  about-us.html              About: story, promises, numbers, team coverflow + messages, Life at AKH, offices
+  news-events.html           News & events: CEO talks and awards, rendered from events.json; "From our blog"
   news/*.html                Full news articles (stories), e.g. boutique-star-awards-2026.html
-  privacy-policy.html
+  blog/*.html                The 4 old-site blog posts, migrated at their old URLs (Round 28)
+  privacy-policy.html, terms-and-condition.html   Legal (both ⚑ legal review)
+  404.html                   Not-found page (root <base>, noindex)
+  .htaccess                  Apache rules for akhitsolutions.com: HTTPS/non-www, clean URLs, old-URL 301s, caching
+  sitemap.xml, robots.txt    For search engines (regenerate sitemap lastmod when pages change)
   portfolio.html             LOCAL ONLY (gitignored)
   website/css/site-system.css    Tokens and shared components, loaded LAST on every page;
                                  overrides older layered CSS with !important / :not(#akh-x)
@@ -137,12 +141,21 @@ site/
   website/js/homepage-assistant.js  Floating "AKH AI assistant" (whole-word keyword answers, page contexts)
   website/js/shared-shell.js     Header behaviour, RetailWeave waitlist dialog
   website/js/ai-hub.js           AI Hub assistant + WebGL nebula
-  website/data/events.json       All News & events entries (single source)
-  website/images/portfolio/case-*.jpg   Case study covers and challenge, solution and impact images
-  website/images/events/         Event photos + news-hero-stage.jpg
+  website/data/events.json       All News & events entries (single source): stories, articles (blog), events
+  website/data/life.json         Life at AKH moments (About section + Careers strip)
+  website/images/portfolio/case-*.webp  Case study covers and challenge, solution and impact images
+  website/images/events/         Event photos + news-hero-stage
+  website/images/blog/           Migrated blog images (WebP; JPG covers for og:image)
+  website/images/share/akh-share.jpg    Default social share image (1200x630)
   website/images/team/           Team photos (to add)
 docs/copy-changes.md             Every copy change, with items to confirm (⚑)
+docs/seo-migration.md            URL map, redirects, pre-launch checklist, Search Console steps and monitoring
+tools/serve-clean.js             Local server that behaves like .htaccess (launch config "akh-site-clean", :8090)
+tools/check-seo.py               Pre-launch checks: old URLs, sitemap, internal links, titles, canonicals
 ```
+
+- **Clean URLs (Round 28):** internal links have no `.html` (`about-us`, `service/seo-service`, `./` for Home, `../` from subfolders), matching the old site's URLs. GitHub Pages and Apache both serve them. Preview with `akh-site-clean` (the plain Python server can't). Every page has a canonical to `https://akhitsolutions.com/<path>`. New pages: add a canonical, a title of 60 or fewer characters and a description of 155 or fewer, add the URL to `sitemap.xml`, then run `python tools/check-seo.py`.
+- **Images:** use WebP (sharp, quality about 78–80, max 1600px wide; cutouts 1000px). Originals stay on disk. og:image stays JPG.
 
 - **Shared shell:** the header, footer, AI assistant, waitlist dialog and cookie banner are duplicated in every page. Change them the same way across all HTML files (scripts are best, as the earlier rounds did).
 - **Cache-busting:** bump the `?v=` tag on changed CSS/JS links, and add `?v=` to an image URL in CSS when a file is replaced under the same name.
@@ -156,6 +169,15 @@ docs/copy-changes.md             Every copy change, with items to confirm (⚑)
 
   For a night with several awards, write an article in `site/news/` (copy `boutique-star-awards-2026.html`), add it to `stories` in events.json, and give that night's events `story: "<id>"`. The newest story is featured on News & events and in the Home and About teasers; its events appear only in the News grid.
 - **Adding a team member:** edit one card in the About team section: photo, name, role, and their message in `data-quote`. Remove `data-quote-placeholder`.
+- **Adding a Life at AKH moment:** add one entry to `moments` in `website/data/life.json`:
+  - `type`: team | celebration | learning | achievement;
+  - `date`, `title`, `place`, `summary`;
+  - `images` (one or more `{ src, alt, pos }`, WebP in `website/images/life/`);
+  - an optional `link` to an article;
+  - `placeholder: false`.
+
+  It appears in the About explorer (pillar tabs, bento mosaic, photo pop-up) and on the Careers strip. A pillar shows only once it has a real moment. Stories in events.json join Achievements automatically.
+- **Adding a blog post:** copy a page in `site/blog/`, add it to `articles` in events.json and to `sitemap.xml`.
 
 ## Decisions and why
 
@@ -198,7 +220,9 @@ docs/copy-changes.md             Every copy change, with items to confirm (⚑)
   - columns: Solutions (incl. About us, News & events), Direct contact, and a newsletter card;
   - bottom bar: "© 2026 AKH IT Solutions Ltd. Registered in England & Wales."
 
-  "Terms of Business" and the "IP Handover Guarantee" were left out (no page, unconfirmed). The discovery-call link goes to Contact until the calendar URL exists.
+  "Terms of Business" and the "IP Handover Guarantee" were left out (no page, unconfirmed). The discovery-call link goes to Contact until the calendar URL exists. Round 28 added a "Terms" link (the old site's website terms, migrated) beside Privacy policy.
+- **Life at AKH (Round 28, Technology Director):** a section on About, not a separate page. It's a charcoal band with pillar tabs (auto-advance with a lime progress line, inspired by Zebra's "Life at Zebra" values reel), a bento photo mosaic and a moment pop-up. It uses approved content only and never invents team quotes. Careers has a 3-photo strip linking to it.
+- **Old site content (Round 28):** the user said the old site will go offline, so everything was brought across. The 4 blog posts and the terms keep their old URLs; `/blog` and `/portfolio` 301 to News & events and Home's case studies. Hosting stays Apache, as today.
 - **Menu:** Home · AI Hub · Services · Learn with us · Careers · About, plus "Find out what we could save you". News & events is in the footer only, to keep six header links. Work stays off the menu.
 - **Forms are all front-end only.** Each fires an `akh:lead` event and `akhTrack()`. Developers will wire up `submitLead()` and a CRM.
 - **The UK-focused positioning** was retained per the director, while the copy stays open to every industry and market.
@@ -262,6 +286,15 @@ docs/copy-changes.md             Every copy change, with items to confirm (⚑)
 - **Round 24: News & events hero photo** (stage, podium, trophy and audience), framed separately for phones.
 - **Round 25: Boutique Star Awards 2026 story**, the first real news: article page, featured on News & events, four award cards, Home and About teasers live, 2026 awards on the Home ribbon and Goddiva case study.
 - **Round 26: Drapers Awards 2026 story** (Retailer Tech Innovator of the Year), the Boutique "Double Win" poster, two-story teasers, Drapers win on the awards rows.
+- **Round 27: About hero and mission** reworded around helping clients' businesses grow.
+- **Round 28 (2026-11-18): Life at AKH + SEO migration** (Technology Director):
+  - Life at AKH explorer on About, strip on Careers (life.json);
+  - About hero image: the user's growth-steps render, recoloured from navy/cobalt to slate and green (`website/images/about-us/about-hero-growth-green.webp`, original kept), right of the copy with a gentle float, above the copy on phones;
+  - 4 old blog posts and the terms page migrated at their old URLs; "From our blog" on News & events;
+  - clean URLs, canonicals, robots meta, og:url/og:image, BreadcrumbList/Service/FAQPage data, titles of 60 or fewer characters, descriptions of 155 or fewer;
+  - `.htaccess` (301 map, HTTPS, caching), sitemap.xml, robots.txt, 404 page;
+  - images to WebP (16 MB to about 2 MB), width/height and lazy loading, font preconnect;
+  - `docs/seo-migration.md`, `tools/serve-clean.js`, `tools/check-seo.py`.
 
 ## Left to do / confirm
 
@@ -283,12 +316,14 @@ docs/copy-changes.md             Every copy change, with items to confirm (⚑)
   - the calendar booking URL and WhatsApp number;
   - Learn prices, dates and partners.
 - Confirm "Goddiva's AI shopping assistant and e-commerce systems were built by AKH" and "order allocation went from days to minutes".
-- Get the privacy policy legally reviewed. It's a 2022 template mentioning "www.website.com" and DoubleClick.
-- Decide where the old About and Blog content and URLs go; set up 301 redirects before the domain move.
+- Get the privacy policy and the migrated terms legally reviewed. Privacy is a 2022 template mentioning "www.website.com" and DoubleClick; the terms cite the law of Sri Lanka.
+- Confirm the migrated Goddiva AI blog post is still approved: it says AKH built Goddiva AI, shows a quote from "Narmina Melikova, CEO" and names Gomethan Ganesamoorthy as Tech Lead.
+- Life at AKH: add Team activities and Learning sessions moments when approved.
 - **Developers:**
   - connect `submitLead()` and every `akh:lead` event to a CRM, with notification emails;
   - server-side CV upload;
   - add a GA4 ID;
-  - move to akhitsolutions.com with HTTPS.
+  - move to akhitsolutions.com with HTTPS, uploading `site/.htaccess`, and follow `docs/seo-migration.md` (staging test with `tools/check-seo.py`, Search Console Domain property, submit the sitemap, monitor at weeks 1, 2, 4 and 8);
+  - turn off or redirect the GitHub Pages copy after the move.
 - Full QA with Ajay and Misha on real phones (keyboard behaviour and voice input), then sign-off.
 - A Staffing image in the 3D style; re-enable the Work page when the user asks.

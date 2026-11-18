@@ -48,11 +48,11 @@
   const HONEST = 'If an off-the-shelf tool does the job, we’ll tell you and save you the build.';
   const HOW_WORKED = 'Hours a week (the middle of the band you chose) × 52 weeks × £15 an hour. A rough guide to the cost of the time, not a promise of savings.';
   const PROOF = {
-    garment: { text: 'We built this for a UK fashion manufacturer: order allocation went from days to minutes.', href: 'portfolio/garment-manufacture-portal.html', label: 'See the project' },
-    goddiva: { text: 'We built a GPT-powered shopping assistant for UK fashion brand Goddiva that answers product, size and order questions.', href: 'portfolio/goddiva-ai.html', label: 'See the project' },
-    marketplace: { text: 'We built a multi-brand marketplace for a UK fashion group, with one back office for every seller.', href: 'portfolio/market-place.html', label: 'See the project' },
-    invoice: { text: 'See how we size an invoice workflow so AI only does the steps it’s good at.', href: 'service/artificial-intelligence.html#ai-fit-session', label: 'See the example' },
-    work: { text: 'See what we’ve built for retail, fashion and e-commerce businesses.', href: 'index.html#selected-work', label: 'See our work' }
+    garment: { text: 'We built this for a UK fashion manufacturer: order allocation went from days to minutes.', href: 'portfolio/garment-manufacture-portal', label: 'See the project' },
+    goddiva: { text: 'We built a GPT-powered shopping assistant for UK fashion brand Goddiva that answers product, size and order questions.', href: 'portfolio/goddiva-ai', label: 'See the project' },
+    marketplace: { text: 'We built a multi-brand marketplace for a UK fashion group, with one back office for every seller.', href: 'portfolio/market-place', label: 'See the project' },
+    invoice: { text: 'See how we size an invoice workflow so AI only does the steps it’s good at.', href: 'service/artificial-intelligence#ai-fit-session', label: 'See the example' },
+    work: { text: 'See what we’ve built for retail, fashion and e-commerce businesses.', href: './#selected-work', label: 'See our work' }
   };
   const A_CARDS = {
     'Orders and stock': { area: 'order and stock', fix: 'We’d replace it with one system that syncs orders, stock and dispatch automatically.', proof: 'garment' },
@@ -218,8 +218,8 @@
       if (id === 'F') {
         bubble('Here’s what we’ve built for businesses like yours.');
         choices([
-          { label: 'See our work', href: 'index.html#selected-work' },
-          { label: 'Get the free scoping checklist', href: 'index.html#checklist' },
+          { label: 'See our work', href: './#selected-work' },
+          { label: 'Get the free scoping checklist', href: './#checklist' },
           { label: 'Start again', action: 'reset' }
         ], o => { if (o.action === 'reset') reset(); });
         return;
@@ -284,8 +284,8 @@
       track('scoper_result', { path, a2, a3 });
       choices([
         { label: 'Send me the plan', action: 'plan' },
-        { label: 'Book a 15-min call', href: 'contact-us.html#book' },
-        { label: 'Talk to a person', href: 'contact-us.html' }
+        { label: 'Book a 15-min call', href: 'contact-us#book' },
+        { label: 'Talk to a person', href: 'contact-us' }
       ], o => { if (o.action === 'plan') step(() => renderCapture()); }, true);
       setStatus('Your result is ready.');
     };
@@ -323,7 +323,7 @@
     const renderDone = () => {
       bubble(`Done, ${state.name}. Your plan is on its way. Someone from our team will reply within one working day.`);
       choices([
-        { label: 'See similar work', href: 'index.html#selected-work' },
+        { label: 'See similar work', href: './#selected-work' },
         { label: 'Start a new idea', action: 'reset' }
       ], o => { if (o.action === 'reset') reset(); });
       if (backButton) backButton.hidden = true;

@@ -34,7 +34,7 @@
     banner.className = 'akh-cookie';
     banner.setAttribute('role', 'region');
     banner.setAttribute('aria-label', 'Cookie choice');
-    banner.innerHTML = `<p>We use essential cookies to run this site, and optional analytics only if you agree. <a href="${ROOT}privacy-policy.html">Privacy policy</a></p>
+    banner.innerHTML = `<p>We use essential cookies to run this site, and optional analytics only if you agree. <a href="${ROOT}privacy-policy">Privacy policy</a></p>
       <div class="akh-cookie-actions"><button class="akh-cookie-decline" type="button">Decline</button><button class="akh-cookie-accept" type="button">Accept</button></div>`;
     const choose = value => { saveChoice(value); banner.remove(); document.dispatchEvent(new CustomEvent('akh:consent', { detail: value })); };
     banner.querySelector('.akh-cookie-accept').addEventListener('click', () => choose('accepted'));
@@ -695,13 +695,13 @@ document.addEventListener('toggle', event => {
   if (!boxes.length) return;
   const script = document.querySelector('script[src*="site-system.js"]');
   const ROOT = (script?.getAttribute('src') || '').startsWith('../') ? '../' : '';
-  const TYPES = { 'talk': 'Talk', 'award-received': 'Award received', 'award-presented': 'Award presented', 'story': 'News' };
+  const TYPES = { 'talk': 'Talk', 'award-received': 'Award received', 'award-presented': 'Award presented', 'story': 'News', 'article': 'Blog' };
   const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const day = d => { const [y, m, dd] = String(d).split('-').map(Number); return y && m ? `${dd ? dd + ' ' : ''}${MONTHS[m - 1]} ${y}` : ''; };
   const isExternal = u => /^https?:\/\//i.test(String(u || ''));
   const href = u => isExternal(u) ? u : ROOT + u;
-  const fallback = box => { box.innerHTML = `<p class="akh-events-fallback"><a href="${ROOT}news-events.html">See news and events →</a></p>`; };
+  const fallback = box => { box.innerHTML = `<p class="akh-events-fallback"><a href="${ROOT}news-events">See news and events →</a></p>`; };
 
   const photo = e => e.image
     ? `<figure class="akh-case-frame"><img src="${ROOT}${esc(e.image)}" alt="${esc(e.imageAlt || e.title)}" width="1600" height="900" loading="lazy" decoding="async"${e.imagePos ? ` style="object-position:${esc(e.imagePos)}"` : ''}></figure>`
@@ -720,7 +720,7 @@ document.addEventListener('toggle', event => {
   const card = e => `<article id="event-${esc(e.id)}" class="akh-event-card${e.placeholder ? ' is-placeholder' : ''}" data-type="${esc(e.type)}">${photo(e)}<div class="akh-event-body">${pill(e)}<h3>${esc(e.title)}</h3><p class="akh-event-meta">${meta(e)}</p><p>${esc(e.summary)}</p>${more(e)}${tag(e)}</div></article>`;
   const featured = e => `<article id="event-${esc(e.id)}" class="akh-event-featured${e.placeholder ? ' is-placeholder' : ''}${e.type === 'story' ? ' akh-event-featured--story' : ''}">${photo(e)}<div class="akh-event-body"><p class="akh-eyebrow">Latest</p>${pill(e)}<h2 class="akh-h2">${esc(e.title)}</h2><p class="akh-event-meta">${meta(e)}</p><p class="akh-lead">${esc(e.summary)}</p>${more(e, e.type === 'story' ? 'Read the full story' : '')}${tag(e)}</div></article>`;
   const teaser = e => {
-    const to = e.type === 'story' ? href(e.url) : (e.link && !isExternal(e.link) ? href(e.link) : `${ROOT}news-events.html#event-${e.id}`);
+    const to = e.type === 'story' ? href(e.url) : (e.link && !isExternal(e.link) ? href(e.link) : `${ROOT}news-events#event-${e.id}`);
     const extra = e.type === 'story' ? `<span class="akh-event-teaser-sum">${esc(e.summary)}</span><span class="akh-event-link">Read the full story <span aria-hidden="true">→</span></span>` : '';
     return `<a class="akh-event-teaser${e.type === 'story' ? ' akh-event-teaser--story' : ''}" href="${esc(to)}">${photo(e)}<span class="akh-event-teaser-body">${pill(e)}<strong>${esc(e.title)}</strong><span class="akh-event-meta">${meta(e)}</span>${extra}</span></a>`;
   };
@@ -763,6 +763,13 @@ document.addEventListener('toggle', event => {
           if (!items.length) { if (section) section.hidden = true; return; }
           if (section) section.hidden = false;
           box.innerHTML = (limit ? items.slice(0, limit) : items).map(teaser).join('');
+        } else if (kind === 'articles') {
+          // Round 28: posts migrated from the old blog (blog/*.html), newest first.
+          const posts = (data.articles || []).map(a => ({ ...a, type: 'article' })).sort(byDate);
+          const section = box.closest('[data-events-section]');
+          if (!posts.length) { if (section) section.hidden = true; return; }
+          if (section) section.hidden = false;
+          box.innerHTML = posts.map(a => card({ ...a, link: a.url })).join('').replaceAll('Read the story', 'Read the article');
         }
       });
       // Filter tabs on the News page. A featured story covers every type, so it shows on "All" only.
@@ -787,4 +794,154 @@ document.addEventListener('toggle', event => {
       if (section) { section.hidden = true; return; }
       if (box.dataset.events === 'grid') fallback(box); else box.hidden = true;
     }));
+})();
+
+/* Round 28: Life at AKH. website/data/life.json feeds the About section (#life-at-akh, [data-life="explorer"])
+   and the Careers strip ([data-life="strip"]). Stories in events.json join Achievements when storiesAsAchievements is true.
+   Only pillars with real moments show; [data-life-section] stays hidden until at least one exists.
+   Explorer: pillar tabs (auto-advance every 7s while on screen, paused on hover/focus, off for reduced motion),
+   a bento mosaic, and a moment pop-up (standard .modal.launch-dialog shell: × close, Esc, backdrop click) with a photo slider. */
+(() => {
+  const boxes = document.querySelectorAll('[data-life]');
+  if (!boxes.length) return;
+  const script = document.querySelector('script[src*="site-system.js"]');
+  const ROOT = (script?.getAttribute('src') || '').startsWith('../') ? '../' : '';
+  const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const month = d => { const [y, m] = String(d).split('-').map(Number); return y && m ? `${MONTHS[m - 1]} ${y}` : ''; };
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const ORDER = ['celebration', 'achievement', 'learning', 'team'];
+  const sectionOf = b => b.closest('[data-life-section]');
+  const hide = () => boxes.forEach(b => { const s = sectionOf(b); if (s) s.hidden = true; });
+  const img = (im, cls) => `<img${cls ? ` class="${cls}"` : ''} src="${ROOT}${esc(im.src)}" alt="${esc(im.alt)}" width="1600" height="900" loading="lazy" decoding="async"${im.pos ? ` style="object-position:${esc(im.pos)}"` : ''}>`;
+
+  Promise.all([
+    fetch(`${ROOT}website/data/life.json`, { cache: 'no-cache' }).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }),
+    fetch(`${ROOT}website/data/events.json`, { cache: 'no-cache' }).then(r => (r.ok ? r.json() : {})).catch(() => ({}))
+  ]).then(([life, events]) => {
+    const pillars = life.pillars || {};
+    let moments = (life.moments || []).filter(m => !m.placeholder && pillars[m.type] && (m.images || []).length);
+    if (life.storiesAsAchievements) {
+      moments = moments.concat((events.stories || []).filter(s => s.image).map(s => ({
+        id: `story-${s.id}`, type: 'achievement', date: s.date, title: s.title, place: s.location, summary: s.summary,
+        images: [{ src: s.image, alt: s.imageAlt || s.title, pos: s.imagePos }], link: s.url
+      })));
+    }
+    const seen = new Set();
+    moments = moments.filter(m => (seen.has(m.id) ? false : seen.add(m.id))).sort((a, b) => String(b.date).localeCompare(String(a.date)));
+    if (!moments.length) { hide(); return; }
+    boxes.forEach(b => { const s = sectionOf(b); if (s) s.hidden = false; });
+    // Links to about-us#life-at-akh arrive before the section is shown, so jump to it once it is.
+    if (location.hash && location.hash.length > 1) {
+      const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+      if (target?.matches('[data-life-section]')) setTimeout(() => target.scrollIntoView({ block: 'start', behavior: 'instant' }), 0);
+    }
+    const byId = Object.fromEntries(moments.map(m => [m.id, m]));
+    const meta = m => [month(m.date), m.place].filter(Boolean).map(esc).join(' · ');
+
+    // ---- Moment pop-up (one dialog per page) ----
+    let dialog;
+    const openMoment = (id, from) => {
+      const m = byId[id];
+      if (!m) return;
+      if (!dialog) {
+        dialog = document.createElement('dialog');
+        dialog.className = 'modal launch-dialog akh-life-dialog';
+        dialog.setAttribute('aria-labelledby', 'life-dialog-title');
+        dialog.innerHTML = '<div class="modal-inner"><div class="modal-top"><div><p class="eyebrow" data-ld-eyebrow></p><h2 id="life-dialog-title" data-ld-title></h2></div><button class="modal-close" type="button" aria-label="Close">×</button></div><div class="akh-life-slider" data-ld-slider></div><p class="launch-intro" data-ld-summary></p><p class="akh-life-dialog-link" data-ld-link></p></div>';
+        document.body.append(dialog);
+        dialog.querySelector('.modal-close').addEventListener('click', () => dialog.close());
+        dialog.addEventListener('click', e => { if (e.target === dialog) dialog.close(); });
+        dialog.addEventListener('close', () => dialog.akhFrom?.focus?.());
+      }
+      dialog.akhFrom = from;
+      dialog.querySelector('[data-ld-eyebrow]').textContent = [pillars[m.type]?.label, month(m.date), m.place].filter(Boolean).join(' · ');
+      dialog.querySelector('[data-ld-title]').textContent = m.title;
+      dialog.querySelector('[data-ld-summary]').textContent = m.summary || '';
+      const link = dialog.querySelector('[data-ld-link]');
+      link.innerHTML = m.link ? `<a class="akh-event-link" href="${esc(ROOT + m.link)}">Read the full story <span aria-hidden="true">→</span></a>` : '';
+      link.hidden = !m.link;
+      const slider = dialog.querySelector('[data-ld-slider]');
+      const imgs = m.images;
+      slider.innerHTML = `<figure class="akh-life-slide">${imgs.map((im, i) => img(im, i ? '' : 'is-on')).join('')}</figure>` +
+        (imgs.length > 1 ? '<div class="akh-cf-controls"><button class="akh-cf-btn" type="button" data-ld-prev aria-label="Previous photo">‹</button><span class="akh-life-count" aria-live="polite"></span><button class="akh-cf-btn" type="button" data-ld-next aria-label="Next photo">›</button></div>' : '');
+      let at = 0;
+      const show = i => {
+        at = (i + imgs.length) % imgs.length;
+        slider.querySelectorAll('.akh-life-slide img').forEach((el, k) => el.classList.toggle('is-on', k === at));
+        const c = slider.querySelector('.akh-life-count');
+        if (c) c.textContent = `${at + 1} of ${imgs.length}`;
+      };
+      slider.querySelector('[data-ld-prev]')?.addEventListener('click', () => show(at - 1));
+      slider.querySelector('[data-ld-next]')?.addEventListener('click', () => show(at + 1));
+      show(0);
+      dialog.showModal();
+      window.akhTrack?.('life_moment_open', { id });
+    };
+    document.addEventListener('click', e => {
+      const t = e.target.closest('[data-life-open]');
+      if (!t) return;
+      e.preventDefault();
+      openMoment(t.dataset.lifeOpen, t);
+    });
+
+    const cap = m => `<span class="akh-life-cap"><strong>${esc(m.title)}</strong><span>${meta(m)}</span></span>`;
+    const tile = (m, im, big) => `<button type="button" class="akh-life-tile${big ? ' is-big' : ''}" data-life-open="${esc(m.id)}" aria-label="${esc(m.title)}: open photos and story">${img(im)}${cap(m)}</button>`;
+
+    boxes.forEach(box => {
+      if (box.dataset.life === 'strip') {
+        // The newest moment from each pillar first, so the strip shows the team as well as the awards.
+        const firsts = ORDER.map(t => moments.find(m => m.type === t)).filter(Boolean).sort((a, b) => String(b.date).localeCompare(String(a.date)));
+        const pick = [...firsts, ...moments.filter(m => !firsts.includes(m))].slice(0, 3);
+        box.innerHTML = pick.map(m => `<a class="akh-life-card" href="${ROOT}about-us#life-at-akh">${img(m.images[0])}${cap(m)}</a>`).join('');
+        return;
+      }
+      // ---- Explorer (About) ----
+      const types = ORDER.filter(t => moments.some(m => m.type === t));
+      const tabs = box.querySelector('.akh-life-tabs');
+      const intro = box.querySelector('.akh-life-intro');
+      const mosaic = box.querySelector('.akh-life-mosaic');
+      mosaic.id = 'life-panel';
+      tabs.innerHTML = types.map((t, i) => `<button type="button" role="tab" id="life-tab-${t}" aria-controls="life-panel" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}"><span>${esc(pillars[t].label)}</span><span class="akh-life-n">${moments.filter(m => m.type === t).length}</span><i class="akh-life-progress" aria-hidden="true"></i></button>`).join('');
+      const buttons = [...tabs.querySelectorAll('[role="tab"]')];
+      let current = 0;
+      const render = i => {
+        current = (i + types.length) % types.length;
+        const t = types[current];
+        buttons.forEach((b, k) => { b.setAttribute('aria-selected', String(k === current)); b.tabIndex = k === current ? 0 : -1; });
+        mosaic.setAttribute('aria-labelledby', `life-tab-${t}`);
+        intro.textContent = pillars[t].intro || '';
+        const list = moments.filter(m => m.type === t);
+        // One tile per moment; with fewer than 3, extra photos from the same moments fill the mosaic.
+        const tiles = list.map(m => [m, m.images[0]]);
+        list.forEach(m => m.images.slice(1).forEach(im => { if (tiles.length < 3) tiles.push([m, im]); }));
+        const shown = tiles.slice(0, 5);
+        mosaic.dataset.count = String(shown.length);
+        mosaic.innerHTML = shown.map(([m, im], k) => tile(m, im, k === 0)).join('');
+        mosaic.classList.remove('is-in');
+        void mosaic.offsetWidth;
+        mosaic.classList.add('is-in');
+      };
+      buttons.forEach((b, k) => {
+        // Once someone picks a pillar themselves, stop auto-advancing.
+        b.addEventListener('click', () => { box.classList.remove('is-auto'); render(k); window.akhTrack?.('life_pillar', { type: types[k] }); });
+        b.addEventListener('keydown', e => {
+          const d = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
+          if (!d) return;
+          e.preventDefault();
+          box.classList.remove('is-auto');
+          render(current + d);
+          buttons[current].focus();
+        });
+        // The lime progress line is a CSS animation; when it finishes, move on to the next pillar.
+        b.querySelector('.akh-life-progress').addEventListener('animationend', () => { if (k === current) render(current + 1); });
+      });
+      if (!reduce && types.length > 1) {
+        box.classList.add('is-auto');
+        // Only cycle while the section is on screen (CSS pauses the line otherwise, and on hover or focus).
+        new IntersectionObserver(([en]) => box.classList.toggle('is-visible', en.isIntersecting), { threshold: 0.35 }).observe(box);
+      }
+      render(0);
+    });
+  }).catch(hide);
 })();

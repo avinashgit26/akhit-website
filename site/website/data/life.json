@@ -1,0 +1,41 @@
+{
+  "_howto": "Life at AKH (About page section #life-at-akh and the Careers strip). Add one object to 'moments' per team activity, celebration, learning session or achievement, using approved content only. type: team | celebration | learning | achievement. date: YYYY-MM-DD. images: one or more { src, alt, pos } (put photos in website/images/life/, about 1600px wide, WebP, under 250 KB; they are cropped to 16:9, use pos e.g. '50% 30%' to keep faces in view). link is optional (an article on this site, e.g. blog/<slug>.html or news/<slug>.html). Set placeholder to false for real moments: a pillar with no real moments is hidden, and the whole section stays hidden until at least one exists. 'storiesAsAchievements': true also lists every story in events.json under Achievements.",
+  "storiesAsAchievements": true,
+  "pillars": {
+    "team": { "label": "Team activities", "intro": "Days out, team-building and the things we do together away from client work." },
+    "celebration": { "label": "Celebrations", "intro": "Year-ends, milestones and the moments we stop to say thank you to the people who make the work happen." },
+    "learning": { "label": "Learning sessions", "intro": "Workshops, talks and time set aside to learn something new together." },
+    "achievement": { "label": "Achievements", "intro": "Launches, awards and milestones the team is proud of." }
+  },
+  "moments": [
+    {
+      "id": "year-end-party-2022",
+      "type": "celebration",
+      "date": "2023-01-16",
+      "title": "Year-end party at Hotel Riu Sri Lanka",
+      "place": "Hotel Riu, Sri Lanka",
+      "summary": "The team and their families came together to celebrate the year, with team activities, music and an awards ceremony where every recipient was congratulated in person.",
+      "images": [
+        { "src": "website/images/blog/year-end-party-group.webp", "alt": "The AKH team together on stage at Hotel Riu Sri Lanka", "pos": "50% 45%" },
+        { "src": "website/images/blog/year-end-party-awards.webp", "alt": "AKH team members receiving appreciation awards at the year-end party", "pos": "50% 50%" },
+        { "src": "website/images/blog/year-end-party-families.webp", "alt": "The founder speaking on stage and the team with their families at the year-end party", "pos": "50% 50%" }
+      ],
+      "link": "blog/year-end-party-at-hotel-riu-sri-lanka",
+      "placeholder": false
+    },
+    {
+      "id": "goddiva-ai-launch",
+      "type": "achievement",
+      "date": "2025-10-31",
+      "title": "Goddiva AI goes live",
+      "place": "Launch",
+      "summary": "The team designed, built and launched Goddiva AI, a chat-based shopping assistant, and saw the launch covered across retail and technology media.",
+      "images": [
+        { "src": "website/images/blog/goddiva-ai-launch-cover-green.webp", "alt": "Screens from the Goddiva AI shopping assistant", "pos": "50% 50%" },
+        { "src": "website/images/blog/goddiva-ai-launch-press.webp", "alt": "Press coverage of the Goddiva AI launch", "pos": "50% 50%" }
+      ],
+      "link": "blog/a-k-h-it-solutions-marks-a-milestone-with-the-successful-launch-of-goddiva-ai",
+      "placeholder": false
+    }
+  ]
+}

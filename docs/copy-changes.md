@@ -297,3 +297,31 @@ All long dashes were removed from the site and replaced with commas, full stops,
 - About hero headline changed from "We build software the way we’d want it for our own business." (read as if AKH builds for itself) to "We help businesses thrive and grow with technology."
 - Intro now: "Websites, apps, AI, SEO, design and skilled people: for over a decade we’ve given businesses in every industry the digital tools to work faster, serve their customers better and grow. Every project has a fixed price agreed before we start."
 - Mission reworded so it doesn’t repeat the headline: "To make every client’s business better with technology that earns its place: the most affordable thing that works, built to last, and handed over so they own it."
+
+## Round 28 (2026-11-18): Life at AKH, old-site content and SEO migration
+Requested by the Technology Director: more visibility for the people behind AKH, and an SEO-safe move from the old site.
+
+**Life at AKH (About, new section after the team; Careers strip)**
+- About: eyebrow "Life at AKH", title "The people behind your project, off the clock too.", intro "The celebrations, launches and moments that make AKH a team people want to stay in.", button "See open roles". Pillar intros: Team activities "Days out, team-building and the things we do together away from client work."; Celebrations "Year-ends, milestones and the moments we stop to say thank you to the people who make the work happen."; Learning sessions "Workshops, talks and time set aside to learn something new together."; Achievements "Launches, awards and milestones the team is proud of." Only pillars with real moments show (today: Celebrations, Achievements).
+- Moments (all already published by AKH): the year-end party at Hotel Riu Sri Lanka (old blog, January 2023), Goddiva AI going live (old blog, October 2025), and the two 2026 award stories.
+- Careers: "Life at AKH" strip, "Work that gets used, with a team that celebrates it." / "Year-end celebrations, launches and the moments we share as a team." / "See life at AKH".
+- ⚑ Add Team activities and Learning sessions moments (photos and a line each) when approved.
+
+**Old blog migrated (same URLs, `blog/…`)**
+- Text copied from the old pages with only these edits: UK spelling, no long dashes, sentence-case subheadings, "Mr." to "Mr", FAQ toggles turned into headings. New intros and meta descriptions written for each.
+- The working-from-home post repeated the AI post's FAQs by mistake on the old site; they were left out.
+- Blue blog covers recoloured green; the year-end party cover collage (with retired brand logos) replaced by the team group photo.
+- News & events: new "From our blog" section, "Ideas, launches and life at AKH."
+- ⚑ The Goddiva AI post states that AKH built Goddiva AI, quotes "Narmina Melikova, Chief Executive Officer, Goddiva" (in an image) and names Gomethan Ganesamoorthy as Tech Lead. All were published on the old site; confirm they are still approved (CLAUDE.md lists Mina Melikova as "Goddiva co-founder").
+
+**Terms and conditions** migrated word for word to `/terms-and-condition` and linked in every footer. ⚑ Legal review (it refers to the law of Sri Lanka).
+
+**Page titles and descriptions (SEO, all titles 60 or fewer characters, descriptions 155 or fewer)**
+- About: "About AKH IT Solutions | Software, Apps and AI Studio"; "Over a decade helping businesses in every industry with software, apps and AI that pay for themselves. Fixed quotes, weekly demos, code you own."
+- Careers: "Careers | Software and Support Roles | AKH IT Solutions"; description shortened ("Live projects, mentoring and code reviews.").
+- Home description: "Web, app and AI development agency. Tell us the problem and get a fixed quote, a timeline and an honest view within 48 hours of a free call." (dropped the client names and "UK", per the global positioning).
+- Learn: "Learn AI and Data with Live Coaching | AKH IT Solutions". Services: "Web, App, AI and SEO Services | AKH IT Solutions".
+- AI Hub: "AI Development Company UK | AKH IT Solutions"; description shortened. AI fit session: "Free AI Fit Session | AKH IT Solutions".
+- Service pages: "SEO Services UK", "Website Development UK", "Graphic Design and Branding UK", "iOS and Android App Development UK" (each "| AKH IT Solutions"). Website development description no longer says "for UK businesses".
+- Case studies: "Goddiva AI Shopping Assistant Case Study", "Multi-Brand Marketplace Case Study". News: "Boutique Star Awards 2026", "Goddiva Wins at the Drapers Awards 2026"; Drapers description shortened.
+- New 404 page: "That page has moved." with links to the main pages.

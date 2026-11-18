@@ -1,0 +1,5 @@
+# AKH IT Solutions
+User-agent: *
+Allow: /
+
+Sitemap: https://akhitsolutions.com/sitemap.xml

@@ -50,7 +50,7 @@ button { font: inherit; }
 .ai-menu nav a:hover { color: var(--ai-blue); background: #eaf6ec; }
 
 .ai-hero { position: relative; isolation: isolate; overflow: hidden; min-height: 670px; color: #f9fcfa; background: var(--ai-dark); }
-.ai-hero::before { position: absolute; z-index: -2; inset: 0; content: ""; background-image: linear-gradient(90deg, #17191b 0%, #26292c 31%, rgb(38 41 44 / 94%) 47%, rgb(38 41 44 / 54%) 68%, rgb(38 41 44 / 32%) 100%), linear-gradient(180deg, rgb(23 25 27 / 20%), transparent 46%, rgb(23 25 27 / 54%)), url("../images/home/ai-hub-hero/workflow-automation-green.jpg"); background-position: center, center, 68% center; background-size: cover; background-repeat: no-repeat; }
+.ai-hero::before { position: absolute; z-index: -2; inset: 0; content: ""; background-image: linear-gradient(90deg, #17191b 0%, #26292c 31%, rgb(38 41 44 / 94%) 47%, rgb(38 41 44 / 54%) 68%, rgb(38 41 44 / 32%) 100%), linear-gradient(180deg, rgb(23 25 27 / 20%), transparent 46%, rgb(23 25 27 / 54%)), url("../images/home/ai-hub-hero/workflow-automation-green.webp"); background-position: center, center, 68% center; background-size: cover; background-repeat: no-repeat; }
 .ai-nebula-canvas { position: absolute; z-index: -1; inset: 0; width: 100%; height: 100%; opacity: .4; pointer-events: none; }
 .ai-hero-inner { display: grid; min-height: 670px; grid-template-columns: minmax(0, 1fr); align-items: center; padding-block: 76px; }
 .ai-hero-copy { max-width: 690px; }
@@ -244,7 +244,7 @@ html.no-js .ai-capability-group[aria-hidden="true"], html.no-js .ai-mobile-group
   .ai-announcement-link { min-height: 32px; padding-block: 7px; }
   .ai-hero, .ai-hero-inner { min-height: 0; }
   .ai-hero-inner { grid-template-columns: minmax(0, 1fr); padding-block: 48px 52px; }
-  .ai-hero::before { background-image: linear-gradient(180deg, rgb(23 25 27 / 18%) 0%, rgb(38 41 44 / 91%) 44%, #26292c 100%), url("../images/home/ai-hub-hero/workflow-automation-green.jpg"); background-position: center, 72% top; background-size: cover, auto 76%; }
+  .ai-hero::before { background-image: linear-gradient(180deg, rgb(23 25 27 / 18%) 0%, rgb(38 41 44 / 91%) 44%, #26292c 100%), url("../images/home/ai-hub-hero/workflow-automation-green.webp"); background-position: center, 72% top; background-size: cover, auto 76%; }
   .ai-nebula-canvas { opacity: .28; }
   .ai-hero h1 { font-size: clamp(43px, 11vw, 62px); }
   .ai-hero-copy > p:not(.ai-kicker) { font-size: 16px; }
@@ -316,7 +316,7 @@ body.ai-hub-page .ai-hero {
   min-height: 610px !important;
   color: #f9fcfa !important;
   background-color: #26292c !important;
-  background-image: linear-gradient(90deg, #26292c 0%, #26292c 29%, rgb(38 41 44 / 95%) 44%, rgb(38 41 44 / 58%) 65%, rgb(38 41 44 / 18%) 100%), linear-gradient(180deg, rgb(23 25 27 / 12%), rgb(23 25 27 / 34%)), url("../images/home/ai-hub-hero/workflow-automation-green.jpg") !important;
+  background-image: linear-gradient(90deg, #26292c 0%, #26292c 29%, rgb(38 41 44 / 95%) 44%, rgb(38 41 44 / 58%) 65%, rgb(38 41 44 / 18%) 100%), linear-gradient(180deg, rgb(23 25 27 / 12%), rgb(23 25 27 / 34%)), url("../images/home/ai-hub-hero/workflow-automation-green.webp") !important;
   background-position: center, center, right center;
   background-size: cover, cover, 52% auto;
   background-repeat: no-repeat;
@@ -332,7 +332,7 @@ body.ai-hub-page .ai-hero-note, body.ai-hub-page .ai-scroll-cue { color: #dbdddf
 body.ai-hub-page .ai-scroll-cue { z-index: 1; }
 
 @media (max-width: 760px) {
-  body.ai-hub-page .ai-hero { min-height: 0 !important; background-image: linear-gradient(180deg, rgb(38 41 44 / 28%) 0%, rgb(38 41 44 / 78%) 47%, #26292c 86%), url("../images/home/ai-hub-hero/workflow-automation-green.jpg") !important; background-position: center, right 10% top; background-size: cover, 78% auto; }
+  body.ai-hub-page .ai-hero { min-height: 0 !important; background-image: linear-gradient(180deg, rgb(38 41 44 / 28%) 0%, rgb(38 41 44 / 78%) 47%, #26292c 86%), url("../images/home/ai-hub-hero/workflow-automation-green.webp") !important; background-position: center, right 10% top; background-size: cover, 78% auto; }
   body.ai-hub-page .ai-hero-inner { min-height: 0 !important; padding-block: 48px 52px; }
 }
 
