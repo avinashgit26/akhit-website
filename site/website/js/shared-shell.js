@@ -50,7 +50,7 @@
     if (status) {
       status.classList.remove('is-error');
       status.classList.add('is-success');
-      status.innerHTML = '<strong>You’re on the list.</strong> We’ll email <b></b> as soon as RetailWeave early access opens.';
+      status.innerHTML = '<strong>You’re on the list.</strong> We’ll email <b></b> as soon as RetailView early access opens.';
       status.querySelector('b').textContent = value;
     }
     form.hidden = true;

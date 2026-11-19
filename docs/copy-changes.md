@@ -325,3 +325,8 @@ Requested by the Technology Director: more visibility for the people behind AKH,
 - Service pages: "SEO Services UK", "Website Development UK", "Graphic Design and Branding UK", "iOS and Android App Development UK" (each "| AKH IT Solutions"). Website development description no longer says "for UK businesses".
 - Case studies: "Goddiva AI Shopping Assistant Case Study", "Multi-Brand Marketplace Case Study". News: "Boutique Star Awards 2026", "Goddiva Wins at the Drapers Awards 2026"; Drapers description shortened.
 - New 404 page: "That page has moved." with links to the main pages.
+
+## Round 30 (2026-11-19): RetailView, footer, Life at AKH wording
+- Product name: "RetailWeave" is now "RetailView" everywhere (footer badge, AI Hub section and title, Home in-house card, waitlist pop-up and confirmation, AI assistant answer). Earlier entries above keep the old name as history.
+- Footer links regrouped: "Solutions" split into "Services" (Services & Engineering, AI & Automations, RetailView, Case Studies) and "Company" (About us, Careers, Learn with us, News & events). Newsletter copy unchanged, now in a full-width band.
+- About, Life at AKH: title "The people behind your project, off the clock too." is now "We celebrate the people behind every win."; intro "The celebrations, launches and moments that make AKH a team people want to stay in." is now "Our team is the backbone of everything we deliver. We make time to recognise their work, celebrate our achievements together and enjoy the moments in between."

@@ -42,7 +42,7 @@
     document.body.append(banner);
   }
 
-  /* Any [data-open-waitlist] button opens the RetailWeave dialog. */
+  /* Any [data-open-waitlist] button opens the RetailView dialog. */
   const dialog = document.getElementById('waitlist-dialog');
   document.addEventListener('click', event => {
     const btn = event.target instanceof Element ? event.target.closest('[data-open-waitlist]') : null;
@@ -50,7 +50,7 @@
     event.preventDefault();
     if (!dialog.open) dialog.showModal();
   });
-  if (dialog && location.hash === '#retailweave') setTimeout(() => { if (!dialog.open) dialog.showModal(); }, 400);
+  if (dialog && location.hash === '#retailview') setTimeout(() => { if (!dialog.open) dialog.showModal(); }, 400);
 
   /* Checklist lead magnet: email first, then the download appears (front-end only). */
   const checklist = document.getElementById('checklist-form');

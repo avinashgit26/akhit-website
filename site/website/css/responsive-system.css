@@ -185,7 +185,7 @@ body:is(.homepage-page,.ai-hub-page,.services-page,.learn-with-us-page,.careers-
   body:is(.homepage-page,.ai-hub-page,.services-page,.learn-with-us-page,.careers-page) header.header { transition: none; }
 }
 
-/* Keep the RetailWeave announcement in one stable row and keep its mark out of the copy flow. */
+/* Keep the RetailView announcement in one stable row and keep its mark out of the copy flow. */
 body:is(.homepage-page,.ai-hub-page,.services-page,.learn-with-us-page,.careers-page) .launch-inner {
   box-sizing: border-box;
   flex-wrap: nowrap !important;

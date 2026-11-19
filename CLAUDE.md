@@ -12,7 +12,7 @@ AKH IT Solutions is a UK-based software studio: web apps, websites, mobile apps,
 
 - **Main conversion:** the hero "scoper" chat, "Find out what we could save you".
 - **Secondary conversions:** a fixed-quote request on Contact, the Learn sign-ups and Careers applications.
-- **RetailWeave** (the in-house retail platform) is promoted as "launching soon".
+- **RetailView** (the in-house retail platform) is promoted as "launching soon".
 - **Live site:** https://avinashgit26.github.io/akhit-website/
 - **Repo:** `avinashgit26/akhit-website`, git remote `akhit`. GitHub Pages deploys `site/` through `.github/workflows/pages.yml`. A deploy takes under a minute.
 - **Local branch:** `redesign/grey-green-outcome-copy`.
@@ -51,7 +51,7 @@ Tokens are defined at the top of `site/website/css/site-system.css`:
 | Tint (soft green fills, success) | `#EAF6EC` |
 | Errors | `#B3261E` on light, `#FFB4A9` on dark |
 
-- No navy, cobalt blue or old lime anywhere. The only exception is the RetailWeave logo, which keeps its own colours.
+- No navy, cobalt blue or old lime anywhere. The only exception is the RetailView logo, which keeps its own colours.
 - Dark surfaces always get white or light-grey text (one global rule).
 - Images are warm cream and green renders, 16:9. Older blue images were recoloured (`-green` files sit next to the originals).
 
@@ -116,7 +116,7 @@ site/
                              client stories + awards ribbon, "Recently on stage" teaser (hidden until real
                              events), checklist lead magnet, FAQ
   services.html              Services: offer tabs A–Z, delivery and process tabs, stats band, FAQ, two-step quote form
-  service/artificial-intelligence.html   AI Hub: AI Sprint, RetailWeave, fit session, WebGL nebula
+  service/artificial-intelligence.html   AI Hub: AI Sprint, RetailView, fit session, WebGL nebula
   service/ai-fit-session.html  Free AI fit session (two-step form)
   service/*.html             Five service landing pages (old-site URLs kept for SEO)
   portfolio/*.html           Case studies: market-place, garment-manufacture-portal, goddiva-ai
@@ -139,7 +139,7 @@ site/
                                  newsletter, reveals
   website/js/homepage-intake.js  Scoper chat (click-through script, savings maths, drawer, submitLead() stub)
   website/js/homepage-assistant.js  Floating "AKH AI assistant" (whole-word keyword answers, page contexts)
-  website/js/shared-shell.js     Header behaviour, RetailWeave waitlist dialog
+  website/js/shared-shell.js     Header behaviour, RetailView waitlist dialog
   website/js/ai-hub.js           AI Hub assistant + WebGL nebula
   website/data/events.json       All News & events entries (single source): stories, articles (blog), events
   website/data/life.json         Life at AKH moments (About section + Careers strip)
@@ -217,7 +217,8 @@ tools/check-seo.py               Pre-launch checks: old URLs, sitemap, internal 
 - **News & events** replaces the old Blog (the director's SEO point). One JSON file feeds the page. The About and Home teasers stay hidden until a real event exists. "Invite us to speak" opens Contact with "Speaking or event invitation" preselected.
 - **Footer (every page):**
   - CTA row with "Fixed quote in 48h · Zero pressure · 1 working day reply";
-  - columns: Solutions (incl. About us, News & events), Direct contact, and a newsletter card;
+  - columns: brand and socials, Services (Services & Engineering, AI & Automations, RetailView, Case Studies), Company (About us, Careers, Learn with us, News & events), Direct contact (Round 30: a new link goes into its group, so the footer no longer stretches);
+  - a slim full-width newsletter band (form, status, checklist PDF) above the bottom bar;
   - bottom bar: "© 2026 AKH IT Solutions Ltd. Registered in England & Wales."
 
   "Terms of Business" and the "IP Handover Guarantee" were left out (no page, unconfirmed). The discovery-call link goes to Contact until the calendar URL exists. Round 28 added a "Terms" link (the old site's website terms, migrated) beside Privacy policy.
@@ -243,7 +244,7 @@ tools/check-seo.py               Pre-launch checks: old URLs, sitemap, internal 
   - outcome-led copy;
   - hero scoper chat;
   - Contact, Privacy, AI fit session, five service pages and three case studies;
-  - RetailWeave "launching soon";
+  - RetailView "launching soon";
   - client stories with an awards ribbon;
   - Learn coverflow and provider panels;
   - Careers role panels;
@@ -254,7 +255,7 @@ tools/check-seo.py               Pre-launch checks: old URLs, sitemap, internal 
   - header "Get a fixed quote" swap;
   - two-step Contact and AI fit forms;
   - Tradegala and StudyNest removed;
-  - neutral RetailWeave wording.
+  - neutral RetailView wording.
 - **Round 20 (2026-11-11), director's testing fixes and the user's 13 changes:**
   - waitlist and newsletter confirmations;
   - FAQ one-at-a-time;
@@ -295,6 +296,11 @@ tools/check-seo.py               Pre-launch checks: old URLs, sitemap, internal 
   - images to WebP (16 MB to about 2 MB), width/height and lazy loading, font preconnect;
   - `docs/seo-migration.md`, `tools/serve-clean.js`, `tools/check-seo.py`.
 - **Round 29 (2026-11-18): About hero scene.** The user's warm cream scene (laptop, store steps, growth bars) replaces the growth-steps render. It's a full-bleed background (`website/images/about-us/about-hero-scene.webp`, original PNG kept), so the About hero is the one light hero: ink text, deep-green primary, dark outline secondary. The copy sits on the cream left side; on phones the scene sits on top. og:image is `about-hero-scene-share.jpg`.
+- **Round 30 (2026-11-19):**
+  - the product is **RetailView** (was RetailWeave): text, alt text, the `#retailview` anchor and ids, the AI assistant (still answers the old name); image file names unchanged;
+  - About hero scene recoloured from blush (#EFDFD5, not in the palette) to a light neutral (`about-hero-scene-neutral.webp`, hero fill #E5E4DD), so it sits with the grey/stone palette like the Careers and Learn light heroes;
+  - footer: Services and Company groups beside Direct contact, newsletter as a full-width band;
+  - Life at AKH heading: "We celebrate the people behind every win." with a new intro about recognising the team.
 
 ## Left to do / confirm
 

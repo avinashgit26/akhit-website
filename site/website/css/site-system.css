@@ -171,7 +171,7 @@ html body header.header .cta .cta-short { display: none; }
   html body header.header .cta .cta-short { display: inline; }
 }
 
-/* ---------- RetailWeave bar: thin and muted ---------- */
+/* ---------- RetailView bar: thin and muted ---------- */
 html body .launch-bar { background: var(--akh-charcoal-deep) !important; border-bottom: 1px solid #34383b !important; }
 html body .launch-bar .launch-inner { min-height: 40px !important; padding-block: 6px !important; gap: 14px !important; }
 html body .launch-bar .launch-copy { font-size: 12.5px !important; color: #c8ccd0 !important; }
@@ -507,7 +507,7 @@ html body.homepage-page .hero .hero-intake .scoper-subtitle:not(#akh-x) { color:
 html body .hero-intake .intake-message--visitor:not(#akh-x), html body .hero-intake .intake-message--visitor :is(span, p):not(#akh-x) { color: #fff !important; }
 html body .hero-intake .scoper-bot-label:not(#akh-x) { color: var(--akh-green-deep) !important; }
 
-/* ---------- RetailWeave band: loud and clear ---------- */
+/* ---------- RetailView band: loud and clear ---------- */
 html body .launch-bar:not(#akh-x) { position: relative; overflow: hidden; background: linear-gradient(90deg, #b8f27a 0%, #9be45f 55%, #b8f27a 100%) !important; border-bottom: 0 !important; color: var(--akh-charcoal) !important; }
 html body .launch-bar:not(#akh-x)::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, transparent 0%, rgb(255 255 255 / 55%) 45%, transparent 60%); transform: translateX(-100%); animation: rw-shine 4.5s ease-in-out infinite; pointer-events: none; }
 @keyframes rw-shine { 0%, 35% { transform: translateX(-100%); } 75%, 100% { transform: translateX(100%); } }
@@ -596,7 +596,7 @@ html body.services-page .services-proof-item span:not(#akh-x) { color: #fff !imp
 html body.services-page .services-hero .services-proof .services-proof-value:not(#akh-x):not(.x1):not(.x2):not(.x3) { color: #b8f27a !important; -webkit-text-fill-color: #b8f27a; }
 
 /* ---------- Round 5 ---------- */
-/* 1. RetailWeave: a thin strip, same weight as the header line */
+/* 1. RetailView: a thin strip, same weight as the header line */
 html body .launch-bar .launch-inner:not(#akh-x):not(#akh-y) { min-height: 38px !important; padding-block: 4px !important; gap: 12px !important; }
 html body .launch-bar .launch-mascot:not(#akh-x):not(#akh-y) { width: 22px !important; height: 22px !important; padding: 2px !important; border-radius: 6px !important; filter: none !important; }
 html body .launch-bar .launch-copy:not(#akh-x):not(#akh-y) { gap: 2px 10px !important; font-size: 13px !important; line-height: 1.3 !important; }
@@ -768,12 +768,12 @@ html.akh-role-open, html.akh-role-open body { overflow: hidden; }
 }
 
 /* ---------- Round 6 ---------- */
-/* Shared "Coming soon" pill (same language as the RetailWeave strip) */
+/* Shared "Coming soon" pill (same language as the RetailView strip) */
 .akh-soon-badge { display: inline-flex; align-items: center; gap: 7px; padding: 5px 11px; border-radius: 999px; background: var(--akh-charcoal); color: var(--akh-highlight); font-size: 11px; font-weight: 850; letter-spacing: .1em; line-height: 1; text-transform: uppercase; white-space: nowrap; }
 .akh-soon-badge i { width: 7px; height: 7px; border-radius: 50%; background: var(--akh-highlight); animation: rw-pulse 1.6s ease-out infinite; }
 @media (prefers-reduced-motion: reduce) { .akh-soon-badge i { animation: none; } }
 
-/* 1. Home Results: RetailWeave card */
+/* 1. Home Results: RetailView card */
 html body.homepage-page #selected-work .work-card--inhouse:not(#akh-x) { border-color: rgb(35 122 56 / 35%) !important; background: #f6fbf7 !important; }
 html body.homepage-page #selected-work .work-card--inhouse > a:first-child:not(#akh-x) { position: relative; }
 html body.homepage-page #selected-work .work-card--inhouse .akh-soon-badge { position: absolute; top: 14px; left: 14px; z-index: 1; box-shadow: 0 4px 12px rgb(26 29 31 / 18%); }
@@ -785,9 +785,9 @@ html body.homepage-page #selected-work .work-card--inhouse .work-copy:not(#akh-x
   html body.homepage-page section.hero:not(#akh-x) { padding-bottom: 34px !important; }
 }
 
-/* 3. AI Hub: RetailWeave section */
-html body.ai-hub-page section#retailweave:not(#akh-x):not(#akh-y) { background: #f4faf5 !important; border-top: 2px solid rgb(35 122 56 / 45%) !important; }
-html body.ai-hub-page section#retailweave .akh-soon-badge { margin-bottom: 16px; }
+/* 3. AI Hub: RetailView section */
+html body.ai-hub-page section#retailview:not(#akh-x):not(#akh-y) { background: #f4faf5 !important; border-top: 2px solid rgb(35 122 56 / 45%) !important; }
+html body.ai-hub-page section#retailview .akh-soon-badge { margin-bottom: 16px; }
 
 /* 4. AI orb: dark, bold "AI" for contrast */
 html body .assistant-launcher-orb .assistant-orb-label:not(#akh-x) { color: #0e1a10; font-size: 20px; font-weight: 900; text-shadow: 0 0 6px rgb(255 255 255 / 85%), 0 0 2px rgb(255 255 255 / 90%); }
@@ -799,8 +799,8 @@ html body .assistant-launcher-orb .assistant-orb-label:not(#akh-x) { color: #0e1
 :root { --akh-stone: #f6f2ee; }
 html body :is(main, body) > section:is(.clients, .home-services, .work, .akh-how, .testimonials, .akh-magnet-section, .akh-section, .services-offerings, .services-engineering, .services-process, .services-faq, .services-scoping, .ai-section, .prov, .sec-pad, .lc-section):not(#akh-x):not(#akh-y):not(#akh-z) { border-top: 0 !important; }
 html body :is(main, body) > section.akh-band-alt:not(#akh-x):not(#akh-y):not(#akh-z) { background: var(--akh-stone) !important; background-image: none !important; }
-/* AI Hub RetailWeave keeps its "coming soon" green tint and top line */
-html body.ai-hub-page section#retailweave:not(#akh-x):not(#akh-y):not(#akh-z):not(#akh-w) { background: #f4faf5 !important; border-top: 2px solid rgb(35 122 56 / 45%) !important; }
+/* AI Hub RetailView keeps its "coming soon" green tint and top line */
+html body.ai-hub-page section#retailview:not(#akh-x):not(#akh-y):not(#akh-z):not(#akh-w) { background: #f4faf5 !important; border-top: 2px solid rgb(35 122 56 / 45%) !important; }
 
 /* ---------- Round 8 ---------- */
 /* AI Hub: "AI step" tag keeps dark text on lime */
@@ -891,7 +891,7 @@ html body.learn-with-us-page .learn-reference .stagewrap > .chip:not(#akh-x) { d
 html body.learn-with-us-page .learn-reference .akh-cf-stage > .pc:not(#akh-x) { position: relative; }
 html body.learn-with-us-page .learn-reference .akh-cf-stage > .pc > .pc-chip:not(#akh-x) { position: absolute; top: -16px; left: -18px; z-index: 2; }
 @media (max-width: 600px) { html body.learn-with-us-page .learn-reference .akh-cf-stage > .pc > .pc-chip:not(#akh-x) { left: -6px; top: -14px; font-size: 12px; padding: 7px 12px; } }
-/* Slimmer RetailWeave strip */
+/* Slimmer RetailView strip */
 html body .launch-bar .launch-inner:not(#akh-x):not(#akh-y):not(#akh-z) { min-height: 32px !important; padding-block: 2px !important; }
 html body .launch-bar .launch-mascot:not(#akh-x):not(#akh-y):not(#akh-z) { width: 20px !important; height: 20px !important; }
 html body .launch-bar .launch-button:not(#akh-x):not(#akh-y):not(#akh-z) { min-height: 24px !important; padding: 0 11px !important; font-size: 11.5px !important; }
@@ -1049,7 +1049,7 @@ html body .akh-two-col:has(.akh-qf-form--lg):not(#akh-x) { grid-template-columns
 /* Assistant: name and role line */
 html body .assistant-heading .assistant-role-line { display: block; margin-top: 2px; color: var(--akh-muted); font-size: 12.5px; font-weight: 500; line-height: 1.35; letter-spacing: 0; }
 
-/* RetailWeave waitlist: error and confirmation */
+/* RetailView waitlist: error and confirmation */
 html body #waitlist-status:not(#akh-x) { font-size: 14px; line-height: 1.5; }
 html body #waitlist-status.is-error:not(#akh-x) { color: #B3261E !important; font-weight: 650; }
 html body #waitlist-status.is-success:not(#akh-x) { margin-top: 18px; padding: 18px 20px; border-radius: 10px; background: var(--akh-tint); color: var(--akh-ink) !important; font-size: 16px; }
@@ -1634,14 +1634,15 @@ html body .launch-dialog.akh-life-dialog:not(#akh-x) { width: min(760px, calc(10
 /* Long links in legal and article text wrap instead of pushing the page sideways on small phones. */
 .prose, .akh-prose { overflow-wrap: anywhere; }
 
-/* Round 29: About hero = the warm cream scene (laptop, store steps, growth bars) as a full-bleed background.
+/* Round 29/30: About hero = the cream scene (blush wall neutralised to the palette grey in Round 30) (laptop, store steps, growth bars) as a full-bleed background.
    The copy sits on the empty cream left side, so this one hero is light: ink text, deep-green primary, dark outline secondary.
    On phones the scene sits on top (right part in view) and the copy follows on cream. */
 html body.interior-page .page-hero.akh-about-hero:not(#akh-x):not(#akh-y):not(#akh-z) {
   position: relative; display: flex; align-items: center; min-height: clamp(480px, 44vw, 660px);
   /* The scene is sized to the hero's height and anchored bottom-right, so its empty cream side sits behind the copy. */
-  background: linear-gradient(90deg, #efdfd5 0%, #efdfd5 22%, rgb(239 223 213 / 80%) 34%, rgb(239 223 213 / 0%) 48%),
-              url("../images/about-us/about-hero-scene.webp") right bottom / auto 86% no-repeat, #efdfd5 !important;
+  background: linear-gradient(180deg, #e5e4dd 0%, #e5e4dd 14%, rgb(229 228 221 / 0%) 26%),
+              linear-gradient(90deg, #e5e4dd 0%, #e5e4dd 22%, rgb(229 228 221 / 80%) 34%, rgb(229 228 221 / 0%) 48%),
+              url("../images/about-us/about-hero-scene-neutral.webp") right bottom / auto 86% no-repeat, #e5e4dd !important;
   color: var(--akh-ink) !important;
 }
 html body.interior-page .page-hero.akh-about-hero .page-hero-copy:not(#akh-x) { position: relative; z-index: 1; width: var(--page-width) !important; }
@@ -1656,8 +1657,9 @@ html body.interior-page .page-hero.akh-about-hero a.btn2:not(#akh-x):not(#akh-y)
 html body.interior-page .page-hero.akh-about-hero a.btn2:hover:not(#akh-x):not(#akh-y):not(#akh-z) { border-color: var(--akh-ink) !important; background: rgb(255 255 255 / 70%) !important; }
 @media (max-width: 1100px) {
   html body.interior-page .page-hero.akh-about-hero:not(#akh-x):not(#akh-y):not(#akh-z) {
-    background: linear-gradient(90deg, #efdfd5 0%, #efdfd5 34%, rgb(239 223 213 / 85%) 46%, rgb(239 223 213 / 0%) 62%),
-                url("../images/about-us/about-hero-scene.webp") right bottom / auto 74% no-repeat, #efdfd5 !important;
+    background: linear-gradient(180deg, #e5e4dd 0%, #e5e4dd 26%, rgb(229 228 221 / 0%) 36%),
+                linear-gradient(90deg, #e5e4dd 0%, #e5e4dd 34%, rgb(229 228 221 / 85%) 46%, rgb(229 228 221 / 0%) 62%),
+                url("../images/about-us/about-hero-scene-neutral.webp") right bottom / auto 74% no-repeat, #e5e4dd !important;
   }
   html body.interior-page .page-hero.akh-about-hero .page-hero-copy > h1:not(#akh-x):not(#akh-y) { max-width: 440px !important; }
   html body.interior-page .page-hero.akh-about-hero .page-hero-copy > p:not(#akh-x):not(#akh-y) { max-width: 420px !important; }
@@ -1666,7 +1668,37 @@ html body.interior-page .page-hero.akh-about-hero a.btn2:hover:not(#akh-x):not(#
   html body.interior-page .page-hero.akh-about-hero .page-hero-copy > :is(h1, p):not(#akh-x):not(#akh-y) { max-width: 600px !important; }
   html body.interior-page .page-hero.akh-about-hero:not(#akh-x):not(#akh-y):not(#akh-z) {
     display: block; min-height: 0; padding-top: calc(clamp(240px, 62vw, 420px) + 8px) !important;
-    background: linear-gradient(180deg, rgb(239 223 213 / 0%) 0, rgb(239 223 213 / 0%) calc(clamp(240px, 62vw, 420px) - 60px), #efdfd5 clamp(240px, 62vw, 420px)),
-                url("../images/about-us/about-hero-scene.webp") 88% 0 / auto clamp(240px, 62vw, 420px) no-repeat, #efdfd5 !important;
+    background: linear-gradient(180deg, rgb(229 228 221 / 0%) 0, rgb(229 228 221 / 0%) calc(clamp(240px, 62vw, 420px) - 60px), #e5e4dd clamp(240px, 62vw, 420px)),
+                url("../images/about-us/about-hero-scene-neutral.webp") 88% 0 / auto clamp(240px, 62vw, 420px) no-repeat, #e5e4dd !important;
   }
+}
+
+/* ===== Round 30: footer. Links in two short groups (Services, Company) beside Direct contact, so a new link adds
+   one row to its group instead of stretching the whole footer; the newsletter becomes a slim full-width band. ===== */
+html body .site-footer--r20 .site-footer-grid:not(#akh-x):not(#akh-y) {
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, .9fr) minmax(0, .8fr) minmax(0, 1fr); padding: 40px 0 36px;
+}
+html body .site-footer--r20 .site-newsletter--band:not(#akh-x):not(#akh-y) {
+  display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(280px, 1fr) auto; align-items: center; gap: 16px clamp(24px, 3vw, 40px);
+  margin: 0 0 32px; padding: 22px 26px !important;
+}
+html body .site-footer--r20 .site-newsletter--band .site-newsletter-copy > p:not(#akh-x) { margin: 0 !important; color: #c8ccd0 !important; font-size: 14.5px !important; line-height: 1.55; }
+html body .site-footer--r20 .site-newsletter--band .site-newsletter-copy h3:not(#akh-x) { margin: 0 0 6px; }
+html body .site-footer--r20 .site-newsletter--band .site-newsletter-form form:not(#akh-x) { display: flex; align-items: center; gap: 6px; margin: 0; padding: 5px 5px 5px 16px; border: 1px solid #4a4f54; border-radius: 12px; background: #1E2124; }
+html body .site-footer--r20 .site-newsletter--band .site-newsletter-form form:focus-within { border-color: #3DBE5A; }
+html body .site-footer--r20 .site-newsletter--band .site-newsletter-resource:not(#akh-x) { margin: 0; padding: 0 0 0 clamp(20px, 2.4vw, 32px); border-top: 0; border-left: 1px solid #353a3f; align-self: stretch; max-width: 230px; }
+@media (min-width: 641px) { html body .site-footer--r20 .site-newsletter--band:not(#akh-x):not(#akh-y) { padding-right: 26px !important; } }
+@media (max-width: 1100px) {
+  html body .site-footer--r20 .site-footer-grid:not(#akh-x):not(#akh-y) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  html body .site-footer--r20 .site-footer-grid > .site-footer-about { grid-column: 1 / -1; }
+  html body .site-footer--r20 .site-newsletter--band:not(#akh-x):not(#akh-y) { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  html body .site-footer--r20 .site-newsletter--band .site-newsletter-resource:not(#akh-x) { grid-column: 1 / -1; max-width: none; padding: 14px 0 0; border-left: 0; border-top: 1px solid #353a3f; }
+}
+@media (max-width: 760px) {
+  html body .site-footer--r20 .site-newsletter--band:not(#akh-x):not(#akh-y) { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 640px) {
+  html body .site-footer--r20 .site-footer-grid:not(#akh-x):not(#akh-y) { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 20px; padding: 32px 0 28px; }
+  html body .site-footer--r20 .site-footer-grid > .site-footer-direct { grid-column: 1 / -1; }
+  html body .site-footer--r20 .site-newsletter--band:not(#akh-x):not(#akh-y) { padding: 20px !important; margin-bottom: 24px; }
 }

@@ -184,8 +184,8 @@
     if (has(q, ['about', 'who are you', 'who is akh', 'company', 'founder', 'team', 'office', 'offices', 'based', 'located', 'location', 'history', 'mission', 'experience'])) {
       return ['AKH IT Solutions has over a decade of experience helping businesses in every industry with software, apps and AI that pay for themselves. Our head office is in Romford, UK, with teams in Sri Lanka and India.', 'About AKH', 'about-us'];
     }
-    if (has(q, ['retailweave'])) {
-      return ['RetailWeave is the retail operations platform built by AKH: orders, stock, returns, sellers and finance in one place. Join the waitlist to try it first.', 'Join the waitlist', 'service/artificial-intelligence#retailweave'];
+    if (has(q, ['retailview', 'retail view', 'retailweave'])) {
+      return ['RetailView is the retail operations platform built by AKH: orders, stock, returns, sellers and finance in one place. Join the waitlist to try it first.', 'Join the waitlist', 'service/artificial-intelligence#retailview'];
     }
     if (has(q, ['staff', 'staffing', 'developer', 'developers', 'frontend', 'front-end', 'backend', 'back-end', 'specialist', 'specialists', 'talent', 'hire', 'hiring', 'contractor', 'contractors'])) {
       return ['We can add vetted developers and specialists to your team in days, not months, from 1 week, without the cost of a long hire.', 'See staffing', 'services#tech-staffing'];
